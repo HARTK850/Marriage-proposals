@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>קטלוג פריטים</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="light-mode">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">קטלוג</span>
+      </div>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link active">תצוגה</a>
+        <a href="admin.html" class="nav-link">ניהול</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="favoritesToggle" title="מועדפים">
+          ♡ <span id="favCount">0</span>
+        </button>
+        <button class="icon-btn" id="darkModeToggle" title="מצב כהה">◑</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">גלה את הקולקציה</h1>
+      <p class="hero-sub">עיין, חפש וסמן מועדפים</p>
+    </div>
+    <div class="hero-bg"></div>
+  </section>
+
+  <!-- Controls -->
+  <div class="controls-bar">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="searchInput" placeholder="חיפוש לפי כותרת, תיאור או תגית..." class="search-input" />
+      <button class="clear-btn" id="clearSearch" style="display:none">✕</button>
+    </div>
+    <div class="filter-wrap">
+      <select id="tagFilter" class="filter-select">
+        <option value="">כל התגיות</option>
+      </select>
+      <button class="filter-btn" id="favsOnlyBtn">★ מועדפים בלבד</button>
+    </div>
+    <div class="view-toggle">
+      <button class="view-btn active" id="gridView">⊞</button>
+      <button class="view-btn" id="listView">☰</button>
+    </div>
+  </div>
+
+  <!-- Results count -->
+  <div class="results-info" id="resultsInfo"></div>
+
+  <!-- Items grid -->
+  <main class="items-section">
+    <div class="items-grid" id="itemsGrid">
+      <!-- Skeleton loaders -->
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+    <div class="empty-state" id="emptyState" style="display:none">
+      <div class="empty-icon">◌</div>
+      <p>לא נמצאו פריטים</p>
+      <small>נסה לשנות את החיפוש או הסינון</small>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="itemModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-img-wrap">
+        <img id="modalImg" src="" alt="" loading="lazy" />
+      </div>
+      <div class="modal-body">
+        <div class="modal-tags" id="modalTags"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-meta" id="modalMeta"></div>
+        <button class="fav-btn" id="modalFav">♡ הוסף למועדפים</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>פאנל ניהול | קטלוג</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="light-mode">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">קטלוג</span>
+      </div>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link">תצוגה</a>
+        <a href="admin.html" class="nav-link active">ניהול</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="darkModeToggle" title="מצב כהה">◑</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar Form -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <h2 id="formTitle">➕ פריט חדש</h2>
+        <button class="text-btn" id="resetFormBtn" style="display:none">ביטול עריכה</button>
+      </div>
+
+      <form id="itemForm" class="item-form" novalidate>
+        <input type="hidden" id="editId" />
+
+        <div class="field-group">
+          <label for="fieldTitle">כותרת <span class="required">*</span></label>
+          <input type="text" id="fieldTitle" placeholder="שם הפריט" maxlength="100" />
+          <span class="field-error" id="errTitle"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="fieldDesc">תיאור <span class="required">*</span></label>
+          <textarea id="fieldDesc" placeholder="תיאור מפורט..." rows="4" maxlength="1000"></textarea>
+          <span class="field-error" id="errDesc"></span>
+          <span class="char-count" id="descCount">0/1000</span>
+        </div>
+
+        <div class="field-group">
+          <label for="fieldImage">קישור תמונה</label>
+          <input type="url" id="fieldImage" placeholder="https://example.com/image.jpg" />
+          <div class="img-preview" id="imgPreview" style="display:none">
+            <img id="previewImg" src="" alt="תצוגה מקדימה" />
+          </div>
+          <span class="field-error" id="errImage"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="fieldTags">תגיות</label>
+          <div class="tags-input-wrap">
+            <div class="tags-list" id="tagsList"></div>
+            <input type="text" id="fieldTags" placeholder="הוסף תגית ולחץ Enter" />
+          </div>
+          <small class="field-hint">לחץ Enter או פסיק להוספת תגית</small>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" id="submitBtn">
+            <span class="btn-text">שמור פריט</span>
+            <span class="btn-loader" style="display:none">⟳</span>
+          </button>
+          <button type="button" class="btn-secondary" id="clearFormBtn">נקה טופס</button>
+        </div>
+      </form>
+    </aside>
+
+    <!-- Main Table -->
+    <main class="admin-main">
+      <div class="admin-top-bar">
+        <h1 class="admin-title">ניהול פריטים</h1>
+        <div class="admin-search-wrap">
+          <input type="text" id="adminSearch" placeholder="חיפוש..." class="admin-search" />
+        </div>
+        <div class="admin-stats" id="adminStats">טוען...</div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="items-table" id="adminTable">
+          <thead>
+            <tr>
+              <th>תמונה</th>
+              <th>כותרת</th>
+              <th>תיאור</th>
+              <th>תגיות</th>
+              <th>נוצר</th>
+              <th>פעולות</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <tr class="skeleton-row"><td colspan="6"><div class="skeleton-line"></div></td></tr>
+            <tr class="skeleton-row"><td colspan="6"><div class="skeleton-line"></div></td></tr>
+            <tr class="skeleton-row"><td colspan="6"><div class="skeleton-line"></div></td></tr>
+          </tbody>
+        </table>
+        <div class="empty-table" id="emptyTable" style="display:none">
+          <div class="empty-icon">◌</div>
+          <p>אין פריטים במסד הנתונים</p>
+          <small>השתמש בטופס משמאל להוספת פריט ראשון</small>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Delete Confirm Dialog -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal-box confirm-box">
+      <h3>מחיקת פריט</h3>
+      <p>האם אתה בטוח שברצונך למחוק את "<span id="deleteItemName"></span>"?</p>
+      <p class="confirm-warning">⚠️ פעולה זו אינה הפיכה</p>
+      <div class="confirm-actions">
+        <button class="btn-danger" id="confirmDelete">כן, מחק</button>
+        <button class="btn-secondary" id="cancelDelete">ביטול</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
