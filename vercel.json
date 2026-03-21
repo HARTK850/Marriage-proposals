@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/**/*.js": {
-      "runtime": "@vercel/node"
+      "runtime": "nodejs18.x"
     }
   },
   "routes": [
@@ -19,7 +19,7 @@
       "dest": "/admin.html"
     },
     {
-      "src": "/:file(css|js|html|ico|png|jpg|svg|webp|woff|woff2)",
+      "src": "/:file(html|css|js|ico|png|jpg|jpeg|svg|webp|woff|woff2|ttf|eot)",
       "dest": "/:file"
     },
     {
