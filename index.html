@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yemot AI Studio | Ultimate Edition v3.0</title>
+    <title>Yemot AI Studio | Ultimate Edition</title>
     
+    <!-- פונטים וספריות חיצוניות -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tokyo-night-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/ini.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
+    <!-- הגדרות Tailwind מתקדמות -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -26,828 +25,1488 @@
                     },
                     colors: {
                         yemot: {
-                            dark: '#020617',
-                            light: '#0f172a',
+                            dark: '#0f172a',
+                            light: '#1e293b',
                             accent: '#38bdf8',
-                            primary: '#3b82f6',
-                            success: '#10b981',
+                            primary: '#0ea5e9',
+                            success: '#22c55e',
                             warning: '#f59e0b',
-                            danger: '#ef4444',
-                            chat: '#1e293b'
+                            danger: '#ef4444'
                         },
                         glass: { 
                             100: 'rgba(255, 255, 255, 0.05)', 
                             200: 'rgba(255, 255, 255, 0.1)',
-                            dark: 'rgba(2, 6, 23, 0.8)' 
-                        }
+                            dark: 'rgba(15, 23, 42, 0.7)' 
+                        },
+                        neon: { blue: '#00f0ff', purple: '#8a2be2', pink: '#ff007a' }
                     },
                     animation: {
                         'spin-slow': 'spin 3s linear infinite',
                         'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'fade-in': 'fadeIn 0.3s ease-out',
-                        'slide-left': 'slideLeft 0.4s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.4s ease-out',
                     },
                     keyframes: {
-                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-                        slideLeft: { '0%': { transform: 'translateX(20px)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' } }
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
                     }
                 }
             }
         }
     </script>
 
-    <style>
-        :root {
-            --bg-main: #020617;
-            --panel-bg: rgba(15, 23, 42, 0.6);
-            --accent: #38bdf8;
-        }
+    <!-- עיצוב CSS מותאם אישית (Massive Custom CSS) -->
+<style>
+:root {
+    --bg-main: #020617;
+    --bg-panel: rgba(30, 41, 59, 0.6);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
 
-        body {
-            background-color: var(--bg-main);
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
-            color: #f8fafc;
-            min-height: 100vh;
-        }
+/* בסיס */
+html, body {
+    height: 100%;
+}
 
-        .glass-panel {
-            background: var(--panel-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
+body {
+    background-color: var(--bg-main);
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+    color: var(--text-main);
 
-        .sidebar-item.active {
-            background: linear-gradient(to left, rgba(56, 189, 248, 0.1), transparent);
-            border-right: 3px solid var(--accent);
-            color: white;
-        }
+    min-height: 100vh;
 
-        .chat-bubble-ai {
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 20px 20px 20px 4px;
-        }
+    display: flex;
+    flex-direction: row;
+}
 
-        .chat-bubble-user {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px 20px 4px 20px;
-        }
+/* תיקון Flex כללי */
+* {
+    min-width: 0;
+}
 
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+/* Glassmorphism */
+.glass-panel {
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
 
-        #editor-container {
-            font-family: 'JetBrains Mono', monospace;
-            background: #0d1117;
-        }
+.glass-button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
 
-        /* מניעת בחירה בטקסט במקומות מסוימים */
-        .no-select { user-select: none; }
-        
-        /* אפקטים של ניאון */
-        .neon-glow {
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-        }
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
 
-        .neon-border {
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-        }
-    </style>
+.glass-input {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+/* Sidebar */
+aside {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar-item {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-item::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #38bdf8;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-item.active {
+    background: linear-gradient(to left, rgba(56, 189, 248, 0.1), transparent);
+    color: white;
+}
+
+.sidebar-item.active::before {
+    transform: scaleY(1);
+}
+
+.sidebar-item:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Main layout */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* אזור תוכן */
+#main-content-area {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Loader */
+.loader-ring {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.loader-ring:after {
+    content: " ";
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 4px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: loader-ring 1.2s linear infinite;
+}
+
+@keyframes loader-ring {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Steps */
+.step-active {
+    border-color: #38bdf8;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    transform: scale(1.02);
+}
+
+.step-completed {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.05);
+}
+
+.step-inactive {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+/* Editor */
+#editor-container {
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+#editor-wrapper {
+    min-height: 300px;
+}
+
+.code-header {
+    background: #1e1e1e;
+    border-bottom: 1px solid #333;
+}
+
+/* Tables */
+.yemot-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.yemot-table th {
+    background: rgba(255,255,255,0.05);
+    padding: 1rem;
+    text-align: right;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.yemot-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-main);
+}
+
+.yemot-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+}
+
+/* Modals */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+
 </head>
-<body class="flex flex-col h-screen overflow-hidden">
+<body class="flex h-screen overflow-hidden text-sm md:text-base">
 
-    <div id="login-overlay" class="fixed inset-0 z-[1000] flex items-center justify-center bg-slate-950/90 backdrop-blur-md">
-        <div class="glass-panel p-8 rounded-3xl w-full max-w-md animate-slide-up relative">
-            <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-blue-600 rounded-2xl flex items-center justify-center shadow-2xl rotate-3">
-                <i data-lucide="cpu" class="w-12 h-12 text-white"></i>
-            </div>
+    <!-- ==========================================
+         אזור 1: מסך התחברות (MFA) - מתוך הקוד המקורי
+         ========================================== -->
+    <div id="login-overlay" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#020617] transition-opacity duration-500">
+        
+        <!-- אלמנטים גרפיים ברקע -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+            <div class="absolute w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] -top-40 -right-40 animate-pulse-fast"></div>
+            <div class="absolute w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[100px] bottom-0 left-0"></div>
+        </div>
 
-            <div class="text-center mt-8 mb-8">
-                <h1 class="text-2xl font-bold tracking-tight">ברוכים הבאים ל-Yemot AI</h1>
-                <p class="text-slate-400 text-sm mt-1">ניהול מערכת IVR מבוסס בינה מלאכותית</p>
-            </div>
-
-            <div id="login-form-content" class="space-y-4">
-                <div class="space-y-1">
-                    <label class="text-xs font-semibold text-slate-400 mr-1">מספר מערכת</label>
-                    <input type="text" id="sys-user" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all font-mono" placeholder="077...">
+        <div class="glass-panel p-10 rounded-3xl w-full max-w-md relative z-10 shadow-2xl shadow-blue-900/20 border-t border-white/20 animate-slide-up">
+            
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mx-auto flex items-center justify-center mb-6 shadow-lg shadow-blue-500/30 transform rotate-3 hover:rotate-0 transition-transform">
+                    <i data-lucide="cpu" class="w-10 h-10 text-white"></i>
                 </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-semibold text-slate-400 mr-1">סיסמה</label>
-                    <input type="password" id="sys-pass" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all font-mono" placeholder="••••••••">
-                </div>
-                <button onclick="attemptLogin()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-2 mt-4">
-                    <span>התחברות</span>
-                    <i data-lucide="log-in" class="w-5 h-5"></i>
-                </button>
-                <div id="login-err" class="text-red-400 text-xs text-center hidden"></div>
+                <h1 class="text-3xl font-extrabold tracking-tight text-white mb-2">YEMOT AI <span class="text-blue-400">STUDIO</span></h1>
+                <p class="text-slate-400 text-sm">התחברות מאובטחת למערכת ניהול</p>
             </div>
 
-            <div id="mfa-form-content" class="hidden space-y-6">
-                <div class="text-center">
-                    <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-500/10 rounded-full mb-3">
-                        <i data-lucide="shield-check" class="w-6 h-6 text-blue-400"></i>
+            <!-- פאנל התחברות ראשוני -->
+            <div id="loginPanel" class="space-y-5">
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-slate-300 ml-1">מספר מערכת</label>
+                    <div class="relative">
+                        <i data-lucide="hash" class="absolute right-4 top-3.5 w-5 h-5 text-slate-500"></i>
+                        <input type="text" id="username" class="w-full glass-input rounded-xl py-3 pr-12 pl-4 text-left font-mono" placeholder="077...">
                     </div>
-                    <p class="text-sm text-slate-300">נדרש אימות דו-שלבי</p>
                 </div>
-                
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="sendMfa('SMS')" class="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-xl border border-slate-700 transition-all flex flex-col items-center gap-2">
-                        <i data-lucide="message-square" class="w-5 h-5 text-blue-400"></i>
-                        <span class="text-xs">SMS</span>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-slate-300 ml-1">סיסמה</label>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute right-4 top-3.5 w-5 h-5 text-slate-500"></i>
+                        <input type="password" id="password" class="w-full glass-input rounded-xl py-3 pr-12 pl-4 text-left font-mono" placeholder="••••••••">
+                    </div>
+                </div>
+                <button onclick="handleLogin()" class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex justify-center items-center gap-2 mt-6">
+                    <span>התחבר למערכת</span>
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </button>
+                <div id="login-error" class="hidden mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center"></div>
+            </div>
+
+            <!-- פאנל אימות דו שלבי (MFA) -->
+            <div id="mfaPanel" class="hidden space-y-5 animate-fade-in">
+                <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 mb-6">
+                    <p class="text-blue-300 text-sm text-center leading-relaxed">
+                        נדרש אימות דו-שלבי. בחר כיצד תרצה לקבל את קוד האימות:
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="sendMfaCode('SMS')" class="glass-button py-4 rounded-xl flex flex-col items-center gap-3">
+                        <i data-lucide="message-square" class="w-6 h-6 text-blue-400"></i>
+                        <span class="font-medium text-sm">שלח ב-SMS</span>
                     </button>
-                    <button onclick="sendMfa('VOICE')" class="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-xl border border-slate-700 transition-all flex flex-col items-center gap-2">
-                        <i data-lucide="phone-call" class="w-5 h-5 text-blue-400"></i>
-                        <span class="text-xs">שיחה קולית</span>
+                    <button onclick="sendMfaCode('EMAIL')" class="glass-button py-4 rounded-xl flex flex-col items-center gap-3">
+                        <i data-lucide="mail" class="w-6 h-6 text-purple-400"></i>
+                        <span class="font-medium text-sm">שלח במייל</span>
+                    </button>
+                    <button onclick="sendMfaCode('PHONE')" class="glass-button py-4 rounded-xl flex flex-col items-center gap-3 col-span-2">
+                        <i data-lucide="phone-call" class="w-6 h-6 text-green-400"></i>
+                        <span class="font-medium text-sm">קבל שיחה קולית</span>
                     </button>
                 </div>
 
-                <div id="mfa-input-area" class="hidden space-y-3 pt-4 border-t border-slate-800">
-                    <input type="text" id="mfa-code" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-center text-xl tracking-[0.5em] font-bold focus:outline-none focus:border-blue-500" placeholder="000000">
-                    <button onclick="validateMfa()" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition-all">
-                        אימות קוד
+                <div id="codeValidation" class="hidden mt-8 space-y-4 pt-6 border-t border-white/10">
+                    <label class="text-sm font-medium text-slate-300 text-center block">הזן את הקוד שקיבלת:</label>
+                    <input type="text" id="mfaCodeInput" class="w-full glass-input rounded-xl py-4 text-center text-2xl tracking-widest font-mono font-bold text-white placeholder-slate-600" placeholder="000000" maxlength="6">
+                    <button onclick="handleValidateCode()" class="w-full py-4 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-green-500/25">
+                        אמת קוד והיכנס
                     </button>
                 </div>
+                <div id="mfa-error" class="hidden mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center"></div>
+                <button onclick="resetLogin()" class="w-full mt-4 text-slate-400 hover:text-white text-sm">חזור להתחברות</button>
+            </div>
+            
+            <!-- לודר -->
+            <div id="loadingOverlay" class="absolute inset-0 bg-[#020617]/80 backdrop-blur-sm rounded-3xl hidden flex-col items-center justify-center z-50">
+                <div class="loader-ring"></div>
+                <p class="mt-4 text-blue-400 font-medium" id="loadingText">מתחבר לשרת...</p>
             </div>
         </div>
     </div>
 
-    <div id="app-container" class="flex flex-1 overflow-hidden blur-sm pointer-events-none">
-        
-        <aside class="w-72 glass-panel border-l border-white/5 flex flex-col z-50">
-            <div class="p-6">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-                        <i data-lucide="rocket" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <div>
-                        <h2 class="font-bold text-lg leading-none">Yemot Studio</h2>
-                        <span class="text-[10px] text-blue-400 uppercase tracking-widest font-bold">Pro Edition</span>
-                    </div>
-                </div>
 
-                <nav class="space-y-1">
-                    <button onclick="switchTab('dashboard')" class="sidebar-item active w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium">
-                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                        <span>לוח בקרה</span>
-                    </button>
-                    <button onclick="switchTab('extensions')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium text-slate-400">
-                        <i data-lucide="folder-tree" class="w-4 h-4"></i>
-                        <span>מנהל שלוחות</span>
-                    </button>
-                    <button onclick="switchTab('ai-studio')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium text-slate-400">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-blue-400"></i>
-                        <span>סטודיו AI & צ'אט</span>
-                    </button>
-                    <button onclick="switchTab('audio-studio')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium text-slate-400">
-                        <i data-lucide="mic-2" class="w-4 h-4"></i>
-                        <span>קריינות AI (TTS)</span>
-                    </button>
-                    <button onclick="switchTab('api-developer')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium text-slate-400">
-                        <i data-lucide="code-2" class="w-4 h-4"></i>
-                        <span>מפתח API</span>
-                    </button>
-                </nav>
+    <!-- ==========================================
+         אזור 2: ממשק המערכת הראשי
+         ========================================== -->
+    
+    <!-- סרגל צד -->
+    <aside class="w-72 glass-panel border-l border-r-0 border-t-0 border-b-0 flex flex-col z-20 shrink-0">
+        <!-- לוגו -->
+        <div class="h-20 border-b border-white/10 flex items-center px-6 gap-4 bg-black/20">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <i data-lucide="cpu" class="w-6 h-6 text-white"></i>
             </div>
+            <div>
+                <h2 class="font-bold text-lg tracking-wide text-white">Yemot AI</h2>
+                <p class="text-xs text-blue-400 font-mono" id="sidebar-system-number">לא מחובר</p>
+            </div>
+        </div>
 
-            <div class="mt-auto p-6 border-t border-white/5">
-                <div class="bg-slate-900/50 rounded-2xl p-4 border border-white/5">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div id="status-indicator" class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                        <span class="text-xs text-slate-400">מחובר למערכת</span>
-                    </div>
-                    <div id="sys-info" class="text-sm font-mono text-slate-200">077-XXXXXXX</div>
+        <!-- תפריט ניווט -->
+        <nav class="flex-1 py-6 px-4 space-y-2 overflow-y-auto">
+            <p class="px-4 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">ניהול ופיתוח</p>
+            
+            <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="sidebar-item active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
+                <i data-lucide="layout-dashboard" class="w-5 h-5"></i> <span>לוח בקרה</span>
+            </button>
+            
+            <button onclick="switchTab('lab')" id="tab-btn-lab" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
+                <i data-lucide="flask-conical" class="w-5 h-5 text-purple-400"></i> 
+                <span class="flex-1 text-right">מעבדת AI אוטונומית</span>
+                <span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30">PRO</span>
+            </button>
+            
+            <button onclick="switchTab('files')" id="tab-btn-files" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
+                <i data-lucide="folder-tree" class="w-5 h-5"></i> <span>סייר קבצים</span>
+            </button>
+            
+            <p class="px-4 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 mt-8">מאגרי מידע</p>
+            
+            <button onclick="switchTab('messages')" id="tab-btn-messages" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
+                <i data-lucide="book-open" class="w-5 h-5"></i> <span>הודעות מערכת (M1000)</span>
+            </button>
+            
+            <button onclick="switchTab('settings')" id="tab-btn-settings" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 mt-auto">
+                <i data-lucide="settings" class="w-5 h-5"></i> <span>הגדרות וחיבורים</span>
+            </button>
+        </nav>
+
+        <!-- פרופיל תחתון -->
+        <div class="p-4 border-t border-white/10 bg-black/20">
+            <div class="flex items-center gap-3 px-2">
+                <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
+                    <i data-lucide="user" class="w-4 h-4 text-slate-400"></i>
                 </div>
-                <button onclick="logout()" class="w-full flex items-center justify-center gap-2 mt-4 text-xs text-slate-500 hover:text-red-400 transition-colors">
-                    <i data-lucide="log-out" class="w-3 h-3"></i>
-                    <span>התנתקות</span>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-white">מנהל מערכת</p>
+                    <p class="text-xs text-green-400 flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> מחובר
+                    </p>
+                </div>
+                <button onclick="logout()" class="text-slate-500 hover:text-red-400 transition-colors" title="התנתק">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
                 </button>
             </div>
-        </aside>
+        </div>
+    </aside>
 
-        <main class="flex-1 flex flex-col relative overflow-hidden">
+    <!-- תוכן ראשי -->
+    <main class="flex-1 flex flex-col h-full bg-[#020617] relative overflow-hidden">
+        
+        <!-- Header עליון -->
+        <header class="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-900/40 backdrop-blur-md z-10">
+            <h2 id="page-title" class="text-2xl font-bold text-white flex items-center gap-3">
+                <i data-lucide="layout-dashboard" class="text-blue-400"></i> לוח בקרה
+            </h2>
+            <div class="flex items-center gap-4">
+                <div id="global-status" class="px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 flex items-center gap-2 text-sm text-slate-300 shadow-inner">
+                    <i data-lucide="activity" class="w-4 h-4 text-slate-400"></i>
+                    <span>מערכת מוכנה</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- אזור התוכן המתחלף -->
+        <div class="flex-1 overflow-y-auto p-8 relative scroll-smooth" id="main-content-area">
             
-            <header class="h-16 flex items-center justify-between px-8 border-b border-white/5 bg-slate-950/20 backdrop-blur-sm z-40">
-                <div class="flex items-center gap-4">
-                    <h1 id="page-title" class="text-lg font-bold">לוח בקרה</h1>
+            <!-- ---------------------------------------
+                 טאב 1: לוח בקרה (Dashboard)
+                 --------------------------------------- -->
+            <section id="tab-dashboard" class="space-y-8 animate-fade-in max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-blue-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-slate-400 text-sm font-medium mb-1">מספר מערכת</p>
+                                <h3 class="text-2xl font-bold font-mono text-white" id="dash-sys-num">---</h3>
+                            </div>
+                            <div class="p-3 bg-blue-500/10 rounded-lg text-blue-400">
+                                <i data-lucide="hash" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-purple-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-slate-400 text-sm font-medium mb-1">סטטוס API</p>
+                                <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-green-500"></span> מחובר ופעיל
+                                </h3>
+                            </div>
+                            <div class="p-3 bg-purple-500/10 rounded-lg text-purple-400">
+                                <i data-lucide="zap" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-pink-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-slate-400 text-sm font-medium mb-1">פריסות אוטונומיות</p>
+                                <h3 class="text-2xl font-bold text-white" id="dash-deploy-count">0</h3>
+                            </div>
+                            <div class="p-3 bg-pink-500/10 rounded-lg text-pink-400">
+                                <i data-lucide="rocket" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="flex items-center gap-3">
-                    <div class="flex items-center bg-slate-900 rounded-full px-3 py-1.5 border border-white/5 gap-2">
-                        <i data-lucide="coins" class="w-4 h-4 text-yellow-500"></i>
-                        <span id="credit-balance" class="text-xs font-bold">טוען...</span>
+
+                <div class="glass-panel rounded-2xl overflow-hidden">
+                    <div class="px-6 py-4 border-b border-white/10 bg-black/20 flex justify-between items-center">
+                        <h3 class="font-bold text-lg">ברוך הבא ל-Yemot AI Ultimate</h3>
                     </div>
-                    <button class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-slate-700 transition-all border border-white/10">
-                        <i data-lucide="bell" class="w-5 h-5"></i>
-                    </button>
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border-2 border-white/10"></div>
+                    <div class="p-6 text-slate-300 leading-relaxed space-y-4">
+                        <p>מערכת זו פותחה כדי לאפשר ניהול מלא ופיתוח אוטומטי של מערכות ימות המשיח. כאן תוכל:</p>
+                        <ul class="list-disc list-inside space-y-2 text-slate-400 ml-4">
+                            <li>לנהל את כל הקבצים והשלוחות במערכת שלך.</li>
+                            <li>לגשת למאגר המידע העצום של ימות המשיח (הודעות מערכת והגדרות שונות).</li>
+                            <li><strong class="text-purple-400">להשתמש במעבדת ה-AI האוטונומית:</strong> לבקש מהבינה המלאכותית לכתוב קוד API, לפרוס אותו ל-Vercel דרך GitHub, ולהגדיר את השלוחה בימות המשיח - הכל בלחיצת כפתור אחת!</li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-xl flex gap-4">
+                            <i data-lucide="info" class="text-blue-400 mt-1"></i>
+                            <p class="text-sm">כדי להתחיל להשתמש בפריסה אוטונומית, ודא שהגדרת את חיבורי ה-GitHub וה-Gemini שלך בלשונית "הגדרות וחיבורים".</p>
+                        </div>
+                    </div>
                 </div>
-            </header>
+            </section>
 
-            <div id="content-viewport" class="flex-1 overflow-y-auto custom-scrollbar p-8">
+
+            <!-- ---------------------------------------
+                 טאב 2: מעבדת AI אוטונומית (Lab)
+                 --------------------------------------- -->
+            <section id="tab-lab" class="hidden animate-fade-in max-w-7xl mx-auto flex flex-col h-full space-y-6">
                 
-                <section id="tab-dashboard" class="tab-content space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div class="glass-panel p-6 rounded-3xl border-r-4 border-blue-500">
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">סה"כ שלוחות</p>
-                            <h3 id="stat-ext-count" class="text-3xl font-black mt-2">--</h3>
-                            <div class="flex items-center gap-1 text-green-400 text-xs mt-2">
-                                <i data-lucide="trending-up" class="w-3 h-3"></i>
-                                <span>12% החודש</span>
-                            </div>
-                        </div>
-                        <div class="glass-panel p-6 rounded-3xl border-r-4 border-purple-500">
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">קבצי שמע</p>
-                            <h3 id="stat-audio-count" class="text-3xl font-black mt-2">--</h3>
-                            <div class="flex items-center gap-1 text-blue-400 text-xs mt-2">
-                                <i data-lucide="database" class="w-3 h-3"></i>
-                                <span>2.4 GB בשימוש</span>
-                            </div>
-                        </div>
-                        <div class="glass-panel p-6 rounded-3xl border-r-4 border-emerald-500">
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">קריאות API (היום)</p>
-                            <h3 class="text-3xl font-black mt-2">1,402</h3>
-                            <div class="flex items-center gap-1 text-emerald-400 text-xs mt-2">
-                                <i data-lucide="zap" class="w-3 h-3"></i>
-                                <span>זמן תגובה: 45ms</span>
-                            </div>
-                        </div>
-                        <div class="glass-panel p-6 rounded-3xl border-r-4 border-yellow-500">
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">דקות שיחה</p>
-                            <h3 class="text-3xl font-black mt-2">85,291</h3>
-                            <div class="flex items-center gap-1 text-yellow-400 text-xs mt-2">
-                                <i data-lucide="clock" class="w-3 h-3"></i>
-                                <span>שיא: 14:00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="glass-panel p-6 rounded-3xl min-h-[400px]">
-                            <h4 class="font-bold mb-4 flex items-center gap-2">
-                                <i data-lucide="activity" class="w-5 h-5 text-blue-500"></i>
-                                פעילות אחרונה במערכת
-                            </h4>
-                            <div id="recent-logs" class="space-y-3">
-                                <div class="flex items-center justify-center h-64 text-slate-500 text-sm italic">
-                                    טוען נתונים...
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glass-panel p-6 rounded-3xl min-h-[400px]">
-                            <h4 class="font-bold mb-4 flex items-center gap-2">
-                                <i data-lucide="info" class="w-5 h-5 text-purple-500"></i>
-                                חדשות ועדכונים (ימות המשיח)
-                            </h4>
-                            <div class="space-y-4">
-                                <div class="p-4 bg-slate-900/40 rounded-2xl border border-white/5">
-                                    <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded uppercase font-bold">חדש</span>
-                                    <h5 class="font-bold mt-2">מודול API 2.0 שוחרר</h5>
-                                    <p class="text-xs text-slate-400 mt-1">אפשרות חדשה לביצוע פעולות אסינכרוניות בתוך שלוחות ה-API...</p>
-                                </div>
-                                <div class="p-4 bg-slate-900/40 rounded-2xl border border-white/5 opacity-60">
-                                    <span class="text-[10px] bg-slate-500/20 text-slate-400 px-2 py-0.5 rounded uppercase font-bold">עדכון</span>
-                                    <h5 class="font-bold mt-2">שיפור במנוע ה-TTS</h5>
-                                    <p class="text-xs text-slate-400 mt-1">שיפור משמעותי באיכות הקריינות הקולית בעברית.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="tab-ai-studio" class="tab-content hidden h-full flex flex-col gap-6">
-                    <div class="flex flex-col lg:flex-row gap-6 h-full">
+                <!-- אזור כתיבת פרומפט -->
+                <div class="glass-panel p-6 rounded-2xl border border-purple-500/30 shadow-[0_0_30px_rgba(139,92,246,0.1)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                    <h2 class="text-2xl font-bold mb-2">מה נבנה היום?</h2>
+                    <p class="text-slate-400 mb-6 text-sm">תאר את הלוגיקה (לדוגמה: תבנה API שבודק אם המספר מזוהה ומשמיע הודעה), והמערכת תכתוב את הקוד, תפרוס אותו ותגדיר את השלוחה.</p>
+                    
+                    <div class="relative">
+                        <textarea id="ai-prompt-input" rows="3" class="w-full glass-input rounded-xl p-4 pr-16 text-lg resize-none font-sans" placeholder="לדוגמה: צור API שמבקש להקיש תעודת זהות, בודק אם היא תקינה (אלגוריתם ספרת ביקורת), ומחזיר למשתמש הודעת הצלחה או שגיאה."></textarea>
                         
-                        <div class="flex-1 glass-panel rounded-3xl flex flex-col overflow-hidden relative border-t-4 border-blue-500">
-                            <div class="p-4 border-b border-white/5 bg-slate-900/30 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                                        <i data-lucide="bot" class="w-5 h-5 text-white"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-sm">Yemot AI Expert</h4>
-                                        <div class="flex items-center gap-1.5">
-                                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                                            <span class="text-[10px] text-slate-400">Gemini 2.5 Flash Online</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button onclick="clearChat()" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1">
-                                    <i data-lucide="trash-2" class="w-3 h-3"></i>
-                                    ניקוי צ'אט
-                                </button>
-                            </div>
-
-                            <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
-                                <div class="chat-bubble-ai p-4 max-w-[85%] animate-fade-in">
-                                    <p class="text-sm leading-relaxed">שלום! אני מומחה המערכות של ימות המשיח. איך אוכל לעזור לך היום?</p>
-                                    <p class="text-xs text-blue-400 mt-2 font-bold italic">נסה לשאול: "צור לי תפריט בחירה פשוט לשלוחה 1" או "איך אני מגדיר שלוחת API?"</p>
-                                </div>
-                            </div>
-
-                            <div class="p-4 bg-slate-900/50 border-t border-white/5">
-                                <div class="relative">
-                                    <textarea id="ai-input" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 pr-12 focus:outline-none focus:border-blue-500 transition-all text-sm resize-none custom-scrollbar" rows="3" placeholder="כתוב כאן את הבקשה שלך... (למשל: תגדיר לי שלוחת מכירות עם הקלטה)"></textarea>
-                                    <button onclick="sendAiMessage()" class="absolute left-3 bottom-3 w-10 h-10 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center transition-all shadow-lg shadow-blue-900/20">
-                                        <i data-lucide="send" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full lg:w-96 flex flex-col gap-6">
-                            <div class="glass-panel p-6 rounded-3xl">
-                                <h4 class="font-bold text-sm mb-4 flex items-center gap-2">
-                                    <i data-lucide="settings-2" class="w-4 h-4 text-blue-400"></i>
-                                    הגדרות צ'אט
-                                </h4>
-                                <div class="space-y-4">
-                                    <div class="space-y-1">
-                                        <label class="text-[10px] font-bold text-slate-500 uppercase">מטרה נוכחית</label>
-                                        <select id="ai-target" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none">
-                                            <option value="general">ייעוץ כללי</option>
-                                            <option value="ext-config">הגדרת שלוחה (ext.ini)</option>
-                                            <option value="api-dev">פיתוח API (Node.js/PHP)</option>
-                                            <option value="tts-script">כתיבת תסריט קריינות</option>
-                                        </select>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label class="text-[10px] font-bold text-slate-500 uppercase">שלוחה ליעד</label>
-                                        <input type="text" id="target-ext" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono" placeholder="למשל: 1/5">
-                                    </div>
-                                    <div class="flex items-center justify-between p-3 bg-blue-500/5 border border-blue-500/10 rounded-xl mt-2">
-                                        <span class="text-xs">ביצוע אוטומטי במערכת</span>
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" id="auto-apply" class="sr-only peer">
-                                            <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="glass-panel p-6 rounded-3xl flex-1 overflow-hidden flex flex-col">
-                                <h4 class="font-bold text-sm mb-4 flex items-center gap-2">
-                                    <i data-lucide="history" class="w-4 h-4 text-purple-400"></i>
-                                    הנחיות אחרונות
-                                </h4>
-                                <div id="prompt-history" class="space-y-2 overflow-y-auto custom-scrollbar pr-1">
-                                    <div class="p-3 bg-slate-900/30 rounded-xl border border-white/5 hover:border-blue-500/30 transition-all cursor-pointer group">
-                                        <p class="text-[11px] text-slate-400 line-clamp-2">"צור שלוחת תפריט שמפנה לשלוחות 1, 2 ו-3 עם הודעת ברוכים הבאים"</p>
-                                        <div class="flex items-center justify-between mt-2">
-                                            <span class="text-[9px] text-slate-600">לפני שעה</span>
-                                            <i data-lucide="arrow-left" class="w-3 h-3 text-slate-600 group-hover:text-blue-400"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                            </div>
+                        <div class="absolute bottom-4 left-4 flex gap-2">
+                            <input type="text" id="deploy-folder-target" placeholder="שלוחת יעד (למשל: 1/5)" class="glass-input rounded-lg px-3 py-2 text-sm w-32 font-mono text-center border-purple-500/50">
+                            
+                            <button onclick="startAutonomousDeployment()" id="btn-deploy" class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 transition-all shadow-lg shadow-purple-500/25">
+                                <span>צור ופרוס</span>
+                                <i data-lucide="wand-2" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                <section id="tab-audio-studio" class="tab-content hidden space-y-6">
-                    <div class="max-w-4xl mx-auto glass-panel p-8 rounded-[40px] border-t-4 border-emerald-500">
-                        <div class="text-center mb-8">
-                            <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i data-lucide="mic-2" class="w-8 h-8 text-emerald-500"></i>
-                            </div>
-                            <h2 class="text-2xl font-black">מחולל קריינות AI (TTS)</h2>
-                            <p class="text-slate-400">הפוך טקסט לקבצי שמע איכותיים למערכת שלך</p>
+                <!-- מד התקדמות פריסה (Steps) -->
+                <div id="deployment-steps" class="grid grid-cols-1 md:grid-cols-4 gap-4 hidden">
+                    <div id="step-1" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-1">
+                            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
                         </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="space-y-6">
-                                <div class="space-y-2">
-                                    <label class="text-xs font-bold text-slate-400 mr-1 uppercase">הטקסט לקריינות</label>
-                                    <textarea id="tts-text" class="w-full bg-slate-900 border border-slate-800 rounded-2xl px-4 py-4 focus:outline-none focus:border-emerald-500 transition-all text-sm h-48 custom-scrollbar" placeholder="הקלד כאן את ההודעה שברצונך להקליט..."></textarea>
-                                </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="space-y-2">
-                                        <label class="text-xs font-bold text-slate-400 mr-1 uppercase">בחירת קול</label>
-                                        <select id="tts-voice" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-3 text-sm focus:outline-none">
-                                            <option value="he-il-standard-a">אביב (גבר)</option>
-                                            <option value="he-il-standard-b">נועה (אישה)</option>
-                                            <option value="gemini-flash-1">Gemini 2.5 (איכות גבוהה)</option>
-                                        </select>
-                                    </div>
-                                    <div class="space-y-2">
-                                        <label class="text-xs font-bold text-slate-400 mr-1 uppercase">מהירות</label>
-                                        <input type="range" min="0.5" max="2" step="0.1" value="1" class="w-full mt-4 h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="space-y-6 flex flex-col justify-center">
-                                <div class="bg-slate-900/50 rounded-3xl p-6 border border-white/5 flex flex-col items-center gap-4">
-                                    <div id="tts-preview-placeholder" class="text-center">
-                                        <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-2 opacity-30">
-                                            <i data-lucide="play" class="w-6 h-6"></i>
-                                        </div>
-                                        <p class="text-xs text-slate-500">לחץ על יצירה כדי לשמוע</p>
-                                    </div>
-                                    <audio id="tts-audio-player" class="hidden w-full h-10 mt-2" controls></audio>
-                                </div>
-
-                                <div class="space-y-4">
-                                    <button onclick="generateTts()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-900/20 transition-all flex items-center justify-center gap-3 group">
-                                        <i data-lucide="sparkles" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
-                                        <span>צור קובץ שמע</span>
-                                    </button>
-                                    
-                                    <div class="flex gap-3">
-                                        <div class="flex-1 space-y-1">
-                                            <input type="text" id="tts-filename" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm font-mono text-center" placeholder="M1000">
-                                        </div>
-                                        <button onclick="uploadTtsToSystem()" class="flex-[2] bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50" disabled>
-                                            <i data-lucide="upload-cloud" class="w-4 h-4"></i>
-                                            <span>שמור למערכת</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h4 class="font-bold text-sm">כתיבת קוד AI</h4>
                     </div>
-                </section>
+                    <div id="step-2" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-2">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">שמירה ב-GitHub</h4>
+                    </div>
+                    <div id="step-3" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-3">
+                            <i data-lucide="cloud-lightning" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">פריסה ב-Vercel</h4>
+                    </div>
+                    <div id="step-4" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-4">
+                            <i data-lucide="phone-call" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">עדכון שלוחה (ימות)</h4>
+                    </div>
+                </div>
 
-                <section id="tab-api-developer" class="tab-content hidden h-full flex flex-col gap-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center gap-4">
-                            <div class="flex bg-slate-900 p-1 rounded-xl border border-white/5">
-                                <button class="px-4 py-1.5 rounded-lg text-xs font-bold bg-slate-800">Node.js</button>
-                                <button class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-300">PHP</button>
-                                <button class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-300">Python</button>
-                            </div>
-                            <span class="text-[10px] text-slate-500 font-mono">yemot-api-v2.js</span>
+                <!-- אזור עורך הקוד (Monaco) -->
+                <div id="editor-wrapper" class="flex-1 glass-panel rounded-2xl flex flex-col overflow-hidden min-h-[400px] border border-white/10 opacity-50 pointer-events-none transition-opacity">
+                    <div class="code-header px-4 py-2 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="file-json" class="w-4 h-4 text-yellow-400"></i>
+                            <span class="text-sm font-mono text-slate-300">api/yemot-handler.js</span>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="testApiCode()" class="px-4 py-2 bg-yellow-600/20 text-yellow-500 rounded-xl text-xs font-bold border border-yellow-600/20 hover:bg-yellow-600/30 transition-all">
-                                הרץ טסט
-                            </button>
-                            <button onclick="saveApiCode()" class="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-blue-900/20 hover:bg-blue-500 transition-all">
-                                שמירה ופרסום
+                            <button onclick="copyEditorCode()" class="p-1 hover:bg-white/10 rounded text-slate-400 hover:text-white" title="העתק קוד">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
                             </button>
                         </div>
                     </div>
+                    <div id="monaco-editor-container" class="flex-1 w-full bg-[#1e1e1e]"></div>
+                </div>
+
+            </section>
+
+
+            <!-- ---------------------------------------
+                 טאב 3: סייר קבצים (ימות המשיח)
+                 --------------------------------------- -->
+            <section id="tab-files" class="hidden animate-fade-in max-w-7xl mx-auto">
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-[700px]">
                     
-                    <div class="flex-1 flex gap-4 overflow-hidden">
-                        <div id="editor-wrapper" class="flex-1 glass-panel rounded-3xl overflow-hidden border border-white/5 flex flex-col">
-                            <div class="bg-[#1e1e1e] px-4 py-2 border-b border-white/5 flex items-center justify-between">
-                                <span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Code Editor</span>
-                                <i data-lucide="maximize-2" class="w-3 h-3 text-slate-600 cursor-pointer"></i>
-                            </div>
-                            <div id="editor-container" class="flex-1 relative">
-                                <textarea id="code-editor" class="absolute inset-0 w-full h-full bg-[#0d1117] text-slate-300 p-6 font-mono text-sm focus:outline-none resize-none custom-scrollbar" spellcheck="false">/*
- * שלוחת API לדוגמה - ימות המשיח
- * AI Studio Generated
- */
-
-const yemot = require('yemot-api-v2');
-
-module.exports = async (req, res) => {
-    const call = yemot.parse(req.body);
-    
-    // ברוכים הבאים
-    call.play('M1000'); 
-    
-    // קבלת נתונים מהמחייג
-    const pin = await call.read('M1001', { min: 4, max: 4 });
-    
-    if (pin === '1234') {
-        call.play('M1002'); // הצלחה
-    } else {
-        call.play('M1003'); // שגיאה
-    }
-    
-    res.send(call.response());
-};</textarea>
+                    <!-- סרגל כלים קבצים -->
+                    <div class="p-4 border-b border-white/10 bg-black/20 flex justify-between items-center">
+                        <div class="flex items-center gap-4">
+                            <button onclick="navigateUp()" class="p-2 glass-button rounded-lg text-slate-300 hover:text-white disabled:opacity-50">
+                                <i data-lucide="corner-right-up" class="w-5 h-5"></i>
+                            </button>
+                            <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-900/50 rounded-lg border border-white/10 font-mono text-sm" id="current-path-display">
+                                <i data-lucide="folder" class="w-4 h-4 text-blue-400"></i>
+                                <span>/</span>
                             </div>
                         </div>
-
-                        <div class="w-80 glass-panel rounded-3xl p-6 border border-white/5 flex flex-col">
-                            <h4 class="font-bold text-sm mb-4 flex items-center gap-2">
-                                <i data-lucide="help-circle" class="w-4 h-4 text-blue-400"></i>
-                                סיוע בכתיבת קוד
-                            </h4>
-                            <div class="flex-1 space-y-4 overflow-y-auto custom-scrollbar pr-1">
-                                <button class="w-full p-3 bg-slate-900/50 rounded-xl border border-white/5 text-right text-xs hover:bg-slate-800 transition-all">
-                                    <p class="font-bold text-blue-400">אימות משתמש</p>
-                                    <p class="text-slate-500 mt-1">הוסף לוגיקה לבדיקת טוקן משתמש מול מסד נתונים</p>
-                                </button>
-                                <button class="w-full p-3 bg-slate-900/50 rounded-xl border border-white/5 text-right text-xs hover:bg-slate-800 transition-all">
-                                    <p class="font-bold text-emerald-400">שליחת SMS</p>
-                                    <p class="text-slate-500 mt-1">הוסף פקודה לשליחת הודעת טקסט בסיום שיחה</p>
-                                </button>
-                                <button class="w-full p-3 bg-slate-900/50 rounded-xl border border-white/5 text-right text-xs hover:bg-slate-800 transition-all">
-                                    <p class="font-bold text-purple-400">חיבור ל-Google Sheets</p>
-                                    <p class="text-slate-500 mt-1">שמירת נתוני השיחה ישירות לגיליון אלקטרוני</p>
-                                </button>
-                            </div>
-                            <div class="mt-4 p-3 bg-blue-500/10 rounded-xl border border-blue-500/20">
-                                <p class="text-[10px] text-blue-300 leading-relaxed">
-                                    השתמש ב-AI כדי להסביר את הקוד או למצוא באגים. סמן חלק מהקוד ולחץ על "שאל את ה-AI".
-                                </p>
-                            </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="loadFolder('/')" class="p-2 glass-button rounded-lg text-slate-300 hover:text-white" title="רענן">
+                                <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                            </button>
                         </div>
                     </div>
-                </section>
 
+                    <!-- רשימת קבצים -->
+                    <div class="flex-1 overflow-y-auto p-2" id="file-list-container">
+                        <!-- תוכן דינמי של קבצים יתווסף כאן -->
+                        <div class="flex flex-col items-center justify-center h-full text-slate-500">
+                            <i data-lucide="folder-search" class="w-12 h-12 mb-4 opacity-50"></i>
+                            <p>טוען נתונים...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ---------------------------------------
+                 טאב 4: מאגר מידע - הודעות מערכת
+                 --------------------------------------- -->
+            <section id="tab-messages" class="hidden animate-fade-in max-w-7xl mx-auto space-y-6">
+                <div class="glass-panel p-6 rounded-2xl flex justify-between items-center gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold">מאגר הודעות מערכת (M1000)</h2>
+                        <p class="text-slate-400 text-sm mt-1">חיפוש בכל הודעות המערכת והקודים של ימות המשיח. מבוסס על קבצי ההגדרות המקוריים.</p>
+                    </div>
+                    <div class="relative w-72">
+                        <i data-lucide="search" class="absolute right-3 top-3 text-slate-400"></i>
+                        <input type="text" id="msg-search" onkeyup="filterMessages()" class="w-full glass-input rounded-xl py-2.5 pr-10 pl-4" placeholder="חפש קוד או טקסט (למשל M1001)...">
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl overflow-hidden shadow-xl border border-white/10">
+                    <div class="max-h-[600px] overflow-y-auto custom-scrollbar">
+                        <table class="yemot-table">
+                            <thead>
+                                <tr>
+                                    <th class="w-32">קוד הודעה</th>
+                                    <th>תוכן ההודעה (מתוך הקובץ המקורי)</th>
+                                    <th class="w-24 text-center">פעולה</th>
+                                </tr>
+                            </thead>
+                            <tbody id="messages-table-body">
+                                <!-- יאוכלס מתוך ה-JSON הענק -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ---------------------------------------
+                 טאב 5: הגדרות וחיבורים
+                 --------------------------------------- -->
+            <section id="tab-settings" class="hidden animate-fade-in max-w-3xl mx-auto space-y-6 pb-20">
+                <h2 class="text-2xl font-bold mb-6">הגדרות סביבת עבודה</h2>
+
+                <!-- Gemini API -->
+                <div class="glass-panel p-6 rounded-2xl space-y-4 border-l-4 border-purple-500">
+                    <h3 class="font-bold flex items-center gap-2 text-purple-400">
+                        <i data-lucide="sparkles"></i> מפתח Gemini AI
+                    </h3>
+                    <p class="text-sm text-slate-400">נדרש עבור מעבדת ה-AI האוטונומית ליצירת קוד.</p>
+                    <input type="password" id="cfg-gemini" class="w-full glass-input rounded-xl p-3" placeholder="AIzaSy...">
+                </div>
+
+                <!-- GitHub Settings -->
+                <div class="glass-panel p-6 rounded-2xl space-y-4 border-l-4 border-slate-500">
+                    <h3 class="font-bold flex items-center gap-2 text-slate-300">
+                        <i data-lucide="github"></i> הגדרות פריסה ל-GitHub
+                    </h3>
+                    <p class="text-sm text-slate-400">ה-AI ידחוף את הקוד ל-Repository זה, ומשם Vercel יפרוס אותו אוטומטית.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">GitHub Personal Access Token (עם הרשאות repo)</label>
+                            <input type="password" id="cfg-gh-token" class="w-full glass-input rounded-xl p-3" placeholder="ghp_...">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">שם ה-Repository (פורמט: username/repo-name)</label>
+                            <input type="text" id="cfg-gh-repo" class="w-full glass-input rounded-xl p-3 font-mono text-left" dir="ltr" placeholder="my-user/yemot-api-funcs">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">נתיב פנימי לפונקציות (ברירת מחדל ל-Vercel: api)</label>
+                            <input type="text" id="cfg-gh-path" class="w-full glass-input rounded-xl p-3 font-mono text-left" dir="ltr" value="api" placeholder="api">
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="saveSettings()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25">
+                    שמור הגדרות
+                </button>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- מודאל הודעות / הצלחה -->
+    <div id="global-modal" class="fixed inset-0 modal-overlay hidden items-center justify-center p-4 opacity-0 transition-opacity">
+        <div class="glass-panel p-8 rounded-3xl max-w-md w-full text-center transform scale-95 transition-transform" id="modal-content">
+            <div id="modal-icon-container" class="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6">
+                <i id="modal-icon" class="w-10 h-10"></i>
             </div>
+            <h3 id="modal-title" class="text-2xl font-bold mb-2">כותרת</h3>
+            <p id="modal-body" class="text-slate-400 mb-8 leading-relaxed">טקסט תיאור</p>
+            
+            <div id="modal-extra" class="mb-6 hidden"></div>
 
-            <footer class="h-8 bg-slate-950/80 border-t border-white/5 flex items-center justify-between px-6 text-[10px] text-slate-500 z-40 font-mono uppercase tracking-widest">
-                <div class="flex items-center gap-4">
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span>
-                        <span>API Engine: v2.4.1</span>
-                    </div>
-                    <span>Latency: 24ms</span>
-                </div>
-                <div>
-                    &copy; 2024 Yemot AI Studio - All Rights Reserved
-                </div>
-            </footer>
-
-        </main>
+            <button onclick="closeModal()" class="w-full py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all">סגור</button>
+        </div>
     </div>
 
+
+    <!-- ==========================================
+         אזור 3: קוד JavaScript (הלוגיקה המלאה)
+         ========================================== -->
     <script>
-        // --- מצב אפליקציה ---
-        let state = {
-            isLoggedIn: false,
-            token: localStorage.getItem('yemot_token') || '',
-            systemNumber: '',
-            currentTab: 'dashboard',
-            balance: 0,
-            extensions: []
+        /**
+         * -----------------------------------------------------------------
+         * מאגרי מידע מוטמעים - IVR Data Dictionary (Massive Scale)
+         * מבוסס על "הגדרות במערכות IVR.txt" שהועלה.
+         * -----------------------------------------------------------------
+         */
+        const IVR_MESSAGES = [
+            { code: "M0000", text: "הודעת ברוכים הבאים - הודעה ראשונה בשלוחה" },
+            { code: "M0003", text: "ניתן להיכנס ממספר ישראלי בלבד" },
+            { code: "M0010", text: "כותרת הקובץ היא" },
+            { code: "M0011", text: "כותרת השידור היא" },
+            { code: "M0012", text: "לשמיעת כמות המספרים השונים ששמעו הודעה זו הקישו 1, לבדיקה האם מספר מסוים שמע את ההודעה הקישו 2, לחזרה הקישו כוכבית" },
+            { code: "M0013", text: "כמות המספרים השונים ששמעו את ההודעה היא" },
+            { code: "M0014", text: "אנא הקישו מספר טלפון, לסיום הקישו סולמית" },
+            { code: "M0015", text: "מספר הטלפון שהוקש לא שמע את ההודעה" },
+            { code: "M0016", text: "מספר הטלפון שהוקש שמע את ההודעה" },
+            { code: "M0099", text: "הודעה אחרונה בשלוחה" },
+            { code: "M0100", text: "להקלטת כותרת לקובץ, הקישו 1, להמשך ללא הקלטת כותרת הקישו 2" },
+            { code: "M1001", text: "לא הוקשה בחירה" },
+            { code: "M1002", text: "הבחירה שגויה" },
+            { code: "M1003", text: "אנא המתן" },
+            { code: "M1004", text: "שגיאה במערכת" },
+            { code: "M1010", text: "לשמיעת ההודעה שוב הקישו 1, לאישור הקישו 2" },
+            { code: "M1020", text: "הקלטתך נשמרה בהצלחה" },
+            { code: "M1034", text: "לאישור הקישו 1, להקשה מחודשת 2." },
+            { code: "M1100", text: "אין הודעות בשלוחה זו" },
+            { code: "M1419", text: "נא הקישו הסכום לחיוב" },
+            { code: "M1420", text: "שקלים חדשים" },
+            { code: "M1421", text: "הסכום חייב להיות גדול מ 0 שקלים, אנא נסו שנית" },
+            { code: "M1422", text: "אנא הקישו את מספר כרטיס האשראי משמאל לימין ובסיום הקישו סולמית" },
+            { code: "M1423", text: "תוקף הכרטיס שגוי - יש להקיש תוקף ב4 ספרות" },
+            { code: "M1424", text: "נא הקישו את תוקף הכרטיס בארבע ספרות" },
+            { code: "M1425", text: "קיימת שגיאת התחברות עם השרת, אנא נסו מחדש בעוד מספר דקות" },
+            { code: "M1428", text: "נא הקישו את 3 הספרות בגב הכרטיס" },
+            { code: "M1429", text: "אנא הקישו את מספר תעודת הזהות של בעל הכרטיס" },
+            { code: "M1599", text: "עיסקה זו תחוייב בפריסה של" },
+            { code: "M1600", text: "אנא הקש מספר תשלומים וסולמית לסיום" },
+            { code: "M2000", text: "שלוחת השמעת קבצים" },
+            { code: "M3000", text: "שלוחת תפריט" },
+            { code: "M4000", text: "שלוחת ניתוב" },
+            // מילוי של עוד הגדרות שיהוו בסיס נתונים ל-AI
+        ];
+
+        // AI System Prompt - העברת ההוראות מהקובץ שהועלה לתוך ה-AI
+        const AI_SYSTEM_PROMPT = `
+אתה מומחה טכני למערכות IVR של "ימות המשיח" ומפתח מומחה ב-Node.js עבור Vercel Serverless Functions.
+תפקידך לכתוב פונקציות API (מודול type=api של ימות המשיח).
+
+דרישות קוד חובה (Vercel Node.js):
+1. הקוד חייב להיות בתוך פונקציית handler שייצאה כברירת מחדל: \`export default async function handler(req, res) { ... }\`
+2. הבקשות של ימות המשיח מגיעות בדרך כלל ב-GET או POST (תמוך בשניהם על ידי קריאת \`req.query\` או \`req.body\`).
+3. עליך להחזיר תשובה בפורמט טקסט רגיל (text/plain) ולא JSON.
+4. פורמט התשובה לימות המשיח בנוי משורות של פקודות:
+   לדוגמה:
+   id_list_message=t-ברוכים הבאים למערכת ה-API
+   read=t-הקישו תעודת זהות=id,no,1,1,9,9,Yes
+5. פרמטרים שמקבלים מימות:
+   ApiPhone - הטלפון של המחייג
+   ApiDID - המספר שאליו חייגו
+   ApiExtension - השלוחה הנוכחית
+6. פקודות נפוצות להחזרה:
+   id_list_message=... (להשמעת הודעה)
+   read=... (קבלת הקשות)
+   go_to_folder=... (מעבר לשלוחה)
+   disconnect=... (ניתוק)
+   
+משימתך: כתוב אך ורק את קוד ה-JavaScript. אל תוסיף הסברים. אל תשתמש ב-Markdown של \`\`\`javascript, החזר טקסט נקי לחלוטין שאפשר לשמור ישירות כקובץ .js.
+`;
+
+        /**
+         * -----------------------------------------------------------------
+         * ניהול מצב (State Management)
+         * -----------------------------------------------------------------
+         */
+        const state = {
+            token: localStorage.getItem('yemot_token') || null,
+            systemNumber: localStorage.getItem('yemot_system') || null,
+            currentPath: '/',
+            editor: null,
+            configs: {
+                gemini: localStorage.getItem('cfg_gemini') || '',
+                ghToken: localStorage.getItem('cfg_gh_token') || '',
+                ghRepo: localStorage.getItem('cfg_gh_repo') || '',
+                ghPath: localStorage.getItem('cfg_gh_path') || 'api',
+            }
         };
 
-        // --- אתחול Lucide ---
-        lucide.createIcons();
-
-        // --- פונקציות API בסיסיות (מהקובץ ששלחת) ---
-        async function realApi(action, params = {}) {
-            const url = 'https://www.call2all.co.il/ym/api/' + action;
-            const formData = new URLSearchParams();
+        // אתחול האפליקציה
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            populateMessagesTable();
+            loadSettingsToUI();
             
-            for (const key in params) {
-                formData.append(key, params[key]);
+            if (state.token) {
+                // המשתמש מחובר, נסה לבדוק אם הטוקן תקין
+                verifySession();
+            } else {
+                // הצג מסך התחברות
+                document.getElementById('login-overlay').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('login-overlay').style.opacity = '1';
+                }, 50);
             }
+        });
 
+
+        /**
+         * -----------------------------------------------------------------
+         * מערכת התחברות ו-API של ימות המשיח (MFA + Base Logic)
+         * -----------------------------------------------------------------
+         */
+        
+        async function yemotApiCall(action, params = {}) {
+            params.token = state.token;
+            const queryParams = new URLSearchParams(params).toString();
+            const url = `https://www.call2all.co.il/ym/api/${action}?${queryParams}`;
+            
             try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    body: formData
-                });
-                return await response.json();
+                const response = await fetch(url);
+                const data = await response.json();
+                return data;
             } catch (error) {
-                console.error('API Error:', error);
-                return { responseStatus: 'EXCEPTION', message: error.message };
+                console.error(`API Error (${action}):`, error);
+                throw error;
             }
         }
 
-        // --- לוגיקת כניסה ו-MFA ---
-        async function attemptLogin() {
-            const user = document.getElementById('sys-user').value;
-            const pass = document.getElementById('sys-pass').value;
-            const errEl = document.getElementById('login-err');
-
+        async function handleLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const errDiv = document.getElementById('login-error');
+            
             if (!user || !pass) {
-                errEl.innerText = "נא להזין מספר מערכת וסיסמה";
-                errEl.classList.remove('hidden');
+                showLoginError('יש להזין מספר מערכת וסיסמה');
                 return;
             }
 
-            const res = await realApi('Login', { username: user, password: pass });
+            showLoading(true, "מאמת פרטים מול ימות המשיח...");
+            errDiv.classList.add('hidden');
+
+            try {
+                const response = await fetch(`https://www.call2all.co.il/ym/api/Login?username=${user}&password=${pass}`);
+                const data = await response.json();
+                
+                showLoading(false);
+
+                if (data.responseStatus === 'OK') {
+                    state.token = data.token;
+                    state.systemNumber = user;
+                    
+                    if (data.mfa === 'MFA_REQUIRE') {
+                        document.getElementById('loginPanel').classList.add('hidden');
+                        document.getElementById('mfaPanel').classList.remove('hidden');
+                        lucide.createIcons();
+                    } else {
+                        completeLogin(user, data.token);
+                    }
+                } else {
+                    showLoginError(data.message || 'שגיאת התחברות');
+                }
+            } catch (err) {
+                showLoading(false);
+                showLoginError('שגיאת תקשורת עם השרת');
+            }
+        }
+
+        async function sendMfaCode(type) {
+            showLoading(true, "שולח קוד אימות...");
+            document.getElementById('mfa-error').classList.add('hidden');
+
+            try {
+                const response = await fetch(`https://www.call2all.co.il/ym/api/MFASession?token=${state.token}&action=sendMfa&mfaType=${type}`);
+                const data = await response.json();
+                
+                showLoading(false);
+                if (data.responseStatus === 'OK') {
+                    document.getElementById('codeValidation').classList.remove('hidden');
+                } else {
+                    showMfaError('שגיאה בשליחת הקוד: ' + (data.message || ''));
+                }
+            } catch (err) {
+                showLoading(false);
+                showMfaError('שגיאת תקשורת');
+            }
+        }
+
+        async function handleValidateCode() {
+            const code = document.getElementById('mfaCodeInput').value;
+            if (!code) {
+                showMfaError('יש להזין קוד');
+                return;
+            }
+
+            showLoading(true, "מאמת קוד...");
+            try {
+                const response = await fetch(`https://www.call2all.co.il/ym/api/MFASession?token=${state.token}&action=validMFA&mfaCode=${code}&mfaRememberMe=false`);
+                const data = await response.json();
+                showLoading(false);
+
+                if (data.mfa_valid_status === 'VALID') {
+                    completeLogin(state.systemNumber, state.token);
+                } else {
+                    showMfaError('קוד שגוי או פג תוקף');
+                }
+            } catch (err) {
+                showLoading(false);
+                showMfaError('שגיאת תקשורת');
+            }
+        }
+
+        function completeLogin(sysNum, token) {
+            localStorage.setItem('yemot_token', token);
+            localStorage.setItem('yemot_system', sysNum);
+            state.token = token;
+            state.systemNumber = sysNum;
             
-            if (res.responseStatus === 'OK') {
-                state.token = res.token;
-                state.systemNumber = user;
-                checkMfaStatus();
-            } else {
-                errEl.innerText = "שגיאה: " + (res.message || "פרטים שגויים");
-                errEl.classList.remove('hidden');
-            }
-        }
-
-        async function checkMfaStatus() {
-            const res = await realApi('GetTokenGeneralDetails', { token: state.token });
+            // עדכון UI
+            document.getElementById('sidebar-system-number').textContent = sysNum;
+            document.getElementById('dash-sys-num').textContent = sysNum;
             
-            if (res.mfa_required) {
-                document.getElementById('login-form-content').classList.add('hidden');
-                document.getElementById('mfa-form-content').classList.remove('hidden');
-            } else {
-                finalizeLogin();
-            }
-        }
-
-        async function sendMfa(type) {
-            const res = await realApi('MFASession', {
-                token: state.token,
-                action: 'sendMFA',
-                mfaType: type
-            });
-
-            if (res.responseStatus === 'OK') {
-                document.getElementById('mfa-input-area').classList.remove('hidden');
-                alert("קוד נשלח בהצלחה!");
-            }
-        }
-
-        async function validateMfa() {
-            const code = document.getElementById('mfa-code').value;
-            const res = await realApi('MFASession', {
-                token: state.token,
-                action: 'validMFA',
-                mfaCode: code
-            });
-
-            if (res.mfa_valid_status === 'VALID') {
-                finalizeLogin();
-            } else {
-                alert("קוד שגוי, נסה שוב");
-            }
-        }
-
-        function finalizeLogin() {
-            localStorage.setItem('yemot_token', state.token);
-            state.isLoggedIn = true;
-            
-            // הסרת מסך הכניסה עם אנימציה
+            // העלמת מסך ההתחברות באנימציה
             const overlay = document.getElementById('login-overlay');
-            overlay.classList.add('opacity-0');
+            overlay.style.opacity = '0';
             setTimeout(() => {
                 overlay.style.display = 'none';
-                document.getElementById('app-container').classList.remove('blur-sm', 'pointer-events-none');
-                initializeDashboard();
+                initMonaco(); // אתחול העורך רק אחרי כניסה
+                switchTab('dashboard');
+                updateGlobalStatus('מערכת מוכנה', 'green');
             }, 500);
         }
 
-        // --- ניהול טאבים ---
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-            
-            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active', 'text-white'));
-            const activeItem = document.querySelector(`button[onclick="switchTab('${tabId}')"]`);
-            activeItem.classList.add('active');
-            
-            document.getElementById('page-title').innerText = activeItem.innerText.trim();
-            state.currentTab = tabId;
-
-            // עדכון Lucide אם נוספו אלמנטים
-            lucide.createIcons();
-        }
-
-        // --- לוגיקת AI STUDIO & CHAT ---
-        async function sendAiMessage() {
-            const inputEl = document.getElementById('ai-input');
-            const message = inputEl.value.trim();
-            if (!message) return;
-
-            // הוספת הודעת משתמש לצ'אט
-            addChatMessage('user', message);
-            inputEl.value = '';
-
-            // אנימציית "טוען..."
-            const aiLoadingBubble = addChatMessage('ai', '<div class="flex gap-1"><span class="w-1 h-1 bg-blue-500 rounded-full animate-bounce"></span><span class="w-1 h-1 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></span><span class="w-1 h-1 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></span></div>');
-
-            // כאן תתבצע הפנייה ל-API של ג'מיני (מדמה כאן תגובה)
-            setTimeout(() => {
-                aiLoadingBubble.remove();
-                let response = "";
-                const target = document.getElementById('ai-target').value;
-                
-                if (target === 'ext-config') {
-                    response = `בטח! הנה הגדרות ה-ext.ini עבור השלוחה שביקשת:\n\n\`\`\`ini\ntype=menu\ntitle=ברוכים הבאים\nsay_menu_options=yes\next.1=playfile\next.2=record\n\`\`\`\nהאם תרצה שאעדכן את השלוחה ${document.getElementById('target-ext').value || '1'} עכשיו?`;
-                } else if (target === 'api-dev') {
-                    response = "בניתי עבורך שלד בסיסי לשלוחת API ב-Node.js. תוכל לראות אותו בטאב 'מפתח API'. הוא כולל לוגיקה לקבלת הקלטות מהמשתמש.";
+        async function verifySession() {
+            try {
+                const res = await yemotApiCall('GetSession');
+                if (res.responseStatus === 'OK') {
+                    completeLogin(state.systemNumber, state.token);
                 } else {
-                    response = "הבנתי את הבקשה. אני מנתח את הגדרות המערכת שלך כדי לתת לך את הפתרון המדויק ביותר מתוך קבצי התיעוד של ימות המשיח.";
+                    logout();
                 }
-                
-                addChatMessage('ai', response);
-            }, 1500);
-        }
-
-        function addChatMessage(type, text) {
-            const container = document.getElementById('chat-messages');
-            const bubble = document.createElement('div');
-            bubble.className = type === 'user' ? 'chat-bubble-user p-4 max-w-[85%] self-end mr-auto animate-slide-left' : 'chat-bubble-ai p-4 max-w-[85%] animate-fade-in';
-            
-            // תמיכה בקוד עם Highlight.js
-            if (text.includes('```')) {
-                const formatted = text.replace(/```(\w+)?\n([\s\S]+?)\n```/g, (match, lang, code) => {
-                    return `<pre><code class="language-${lang || 'javascript'} rounded-lg mt-2">${code}</code></pre>`;
-                });
-                bubble.innerHTML = formatted;
-            } else {
-                bubble.innerHTML = `<p class="text-sm leading-relaxed">${text}</p>`;
+            } catch(e) {
+                logout();
             }
-
-            container.appendChild(bubble);
-            container.scrollTop = container.scrollHeight;
-            
-            // צביעת הקוד
-            bubble.querySelectorAll('pre code').forEach((el) => {
-                hljs.highlightElement(el);
-            });
-
-            return bubble;
-        }
-
-        function clearChat() {
-            document.getElementById('chat-messages').innerHTML = '';
-            addChatMessage('ai', 'הצ\'אט נוקה. איך אני יכול לעזור שוב?');
-        }
-
-        // --- לוגיקת TTS (קריינות) ---
-        async function generateTts() {
-            const text = document.getElementById('tts-text').value;
-            const voice = document.getElementById('tts-voice').value;
-            const btn = document.querySelector('button[onclick="generateTts()"]');
-            
-            if (!text) return alert("אנא הזן טקסט");
-
-            btn.disabled = true;
-            btn.innerHTML = '<i class="w-5 h-5 animate-spin"></i> <span>מייצר שמע...</span>';
-
-            // כאן מתבצעת הפנייה ל-API (סימולציה)
-            setTimeout(() => {
-                const player = document.getElementById('tts-audio-player');
-                const placeholder = document.getElementById('tts-preview-placeholder');
-                
-                // בגרסה אמיתית כאן יהיה ה-Blob מה-API
-                placeholder.classList.add('hidden');
-                player.classList.remove('hidden');
-                player.src = "[https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3](https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3)"; // דוגמה
-                
-                document.querySelector('button[onclick="uploadTtsToSystem()"]').disabled = false;
-                
-                btn.disabled = false;
-                btn.innerHTML = '<i data-lucide="sparkles" class="w-5 h-5"></i> <span>צור קובץ שמע</span>';
-                lucide.createIcons();
-            }, 2000);
-        }
-
-        // --- אתחול נתונים (דאשבורד) ---
-        async function initializeDashboard() {
-            document.getElementById('sys-info').innerText = "מערכת: " + state.systemNumber;
-            
-            // קבלת יתרה
-            const balanceRes = await realApi('GetCredit', { token: state.token });
-            if (balanceRes.responseStatus === 'OK') {
-                document.getElementById('credit-balance').innerText = balanceRes.credit + " ש\"ח";
-            }
-
-            // קבלת רשימת שלוחות בסיסית
-            const extRes = await realApi('GetIVRStructure', { token: state.token });
-            if (extRes.responseStatus === 'OK') {
-                const count = Object.keys(extRes.folders || {}).length;
-                document.getElementById('stat-ext-count').innerText = count || "24";
-            }
-
-            // עדכון לוגים מדומים
-            const logsContainer = document.getElementById('recent-logs');
-            logsContainer.innerHTML = `
-                <div class="flex items-center gap-3 p-3 bg-slate-900/30 rounded-2xl border border-white/5">
-                    <div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
-                        <i data-lucide="phone-incoming" class="w-4 h-4 text-blue-400"></i>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-xs font-bold">שיחה נכנסת חדשה</p>
-                        <p class="text-[10px] text-slate-500">ממספר: 050-1234567 • לשלוחה: 0</p>
-                    </div>
-                    <span class="text-[10px] text-slate-600 font-mono">14:22</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 bg-slate-900/30 rounded-2xl border border-white/5">
-                    <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                        <i data-lucide="save" class="w-4 h-4 text-emerald-400"></i>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-xs font-bold">עדכון הגדרות</p>
-                        <p class="text-[10px] text-slate-500">שלוחה 1/5 עודכנה ע"י ה-AI</p>
-                    </div>
-                    <span class="text-[10px] text-slate-600 font-mono">13:45</span>
-                </div>
-            `;
-            lucide.createIcons();
         }
 
         function logout() {
             localStorage.removeItem('yemot_token');
+            localStorage.removeItem('yemot_system');
             location.reload();
         }
 
-        // בדיקת טוקן קיים בטעינה
-        window.onload = () => {
-            if (state.token) {
-                finalizeLogin();
+        // עזרי ממשק למסך התחברות
+        function showLoading(show, text = "") {
+            const loader = document.getElementById('loadingOverlay');
+            if (show) {
+                document.getElementById('loadingText').innerText = text;
+                loader.classList.remove('hidden');
+                loader.classList.add('flex');
+            } else {
+                loader.classList.add('hidden');
+                loader.classList.remove('flex');
             }
-        };
+        }
+        function showLoginError(msg) {
+            const el = document.getElementById('login-error');
+            el.innerText = msg;
+            el.classList.remove('hidden');
+        }
+        function showMfaError(msg) {
+            const el = document.getElementById('mfa-error');
+            el.innerText = msg;
+            el.classList.remove('hidden');
+        }
+        function resetLogin() {
+            document.getElementById('mfaPanel').classList.add('hidden');
+            document.getElementById('loginPanel').classList.remove('hidden');
+            document.getElementById('codeValidation').classList.add('hidden');
+            document.getElementById('mfaCodeInput').value = '';
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('mfa-error').classList.add('hidden');
+        }
+
+
+        /**
+         * -----------------------------------------------------------------
+         * ניהול טאבים וניווט במערכת (UI Manager)
+         * -----------------------------------------------------------------
+         */
+        function switchTab(tabId) {
+            // הסתר את כל הטאבים
+            document.querySelectorAll('main > div > section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            // נקה אקטיביות מהתפריט הצדדי
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active', 'text-white');
+                item.classList.add('text-slate-300');
+            });
+
+            // הפעל את הטאב הנבחר
+            const targetSec = document.getElementById(`tab-${tabId}`);
+            if(targetSec) targetSec.classList.remove('hidden');
+            
+            const targetBtn = document.getElementById(`tab-btn-${tabId}`);
+            if(targetBtn) {
+                targetBtn.classList.add('active', 'text-white');
+                targetBtn.classList.remove('text-slate-300');
+            }
+
+            // עדכון כותרת עליונה
+            const titles = {
+                'dashboard': '<i data-lucide="layout-dashboard" class="text-blue-400"></i> לוח בקרה',
+                'lab': '<i data-lucide="flask-conical" class="text-purple-400"></i> מעבדת AI אוטונומית',
+                'files': '<i data-lucide="folder-tree" class="text-yellow-400"></i> סייר קבצים מתקדם',
+                'messages': '<i data-lucide="book-open" class="text-green-400"></i> מאגר הודעות (M1000)',
+                'settings': '<i data-lucide="settings" class="text-slate-400"></i> הגדרות וחיבורים'
+            };
+            document.getElementById('page-title').innerHTML = titles[tabId];
+            lucide.createIcons();
+
+            // טעינת נתונים ספציפיים לטאב
+            if (tabId === 'files' && document.getElementById('file-list-container').children.length <= 1) {
+                loadFolder('/');
+            }
+        }
+
+        function updateGlobalStatus(text, color) {
+            const badge = document.getElementById('global-status');
+            const colorMap = {
+                'green': 'bg-green-500/20 text-green-400 border-green-500/30',
+                'blue': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+                'purple': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+                'red': 'bg-red-500/20 text-red-400 border-red-500/30',
+            };
+            
+            badge.className = `px-4 py-1.5 rounded-full flex items-center gap-2 text-sm shadow-inner transition-colors duration-300 ${colorMap[color] || colorMap['blue']}`;
+            badge.innerHTML = `<i data-lucide="${color === 'green' ? 'check-circle' : 'activity'}" class="w-4 h-4"></i> <span>${text}</span>`;
+            lucide.createIcons();
+        }
+
+
+        /**
+         * -----------------------------------------------------------------
+         * סייר קבצים (ימות המשיח) - לוגיקה
+         * -----------------------------------------------------------------
+         */
+        async function loadFolder(path) {
+            const container = document.getElementById('file-list-container');
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full text-slate-500">
+                    <div class="loader-ring mb-4"></div>
+                    <p>טוען תיקייה...</p>
+                </div>
+            `;
+            
+            try {
+                const res = await yemotApiCall('GetIVR2Dir', { path: path });
+                state.currentPath = path;
+                updatePathDisplay(path);
+
+                if (res.responseStatus === 'OK' && res.files) {
+                    renderFiles(res.files);
+                } else {
+                    container.innerHTML = `<div class="p-4 text-red-400 text-center">שגיאה בטעינת התיקייה</div>`;
+                }
+            } catch (e) {
+                container.innerHTML = `<div class="p-4 text-red-400 text-center">שגיאת תקשורת</div>`;
+            }
+        }
+
+        function updatePathDisplay(path) {
+            const display = document.getElementById('current-path-display');
+            display.innerHTML = `
+                <i data-lucide="folder" class="w-4 h-4 text-blue-400"></i>
+                <span>${path}</span>
+            `;
+            lucide.createIcons();
+        }
+
+        function navigateUp() {
+            if (state.currentPath === '/') return;
+            const parts = state.currentPath.split('/').filter(p => p);
+            parts.pop();
+            const parent = '/' + parts.join('/');
+            loadFolder(parent || '/');
+        }
+
+        function renderFiles(files) {
+            const container = document.getElementById('file-list-container');
+            if (files.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-slate-500">התיקייה ריקה</div>`;
+                return;
+            }
+
+            // מיון: תיקיות קודם, אח"כ קבצים אלפביתית
+            files.sort((a, b) => {
+                if(a.fileType === 'DIR' && b.fileType !== 'DIR') return -1;
+                if(a.fileType !== 'DIR' && b.fileType === 'DIR') return 1;
+                return a.name.localeCompare(b.name);
+            });
+
+            let html = '<div class="space-y-1">';
+            files.forEach(f => {
+                const isDir = f.fileType === 'DIR';
+                const icon = isDir ? 'folder' : (f.name.endsWith('.ini') ? 'settings' : (f.name.endsWith('.wav') ? 'volume-2' : 'file-text'));
+                const iconColor = isDir ? 'text-yellow-400 fill-yellow-400/20' : 'text-slate-400';
+                
+                html += `
+                    <div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer border border-transparent hover:border-white/10"
+                         onclick="${isDir ? `loadFolder('${state.currentPath === '/' ? '' : state.currentPath}/${f.name}')` : `downloadFile('${f.name}')`}">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="${icon}" class="w-5 h-5 ${iconColor}"></i>
+                            <span class="text-slate-200 font-medium">${f.name}</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                            ${!isDir ? `<span>${f.size || ''}</span>` : ''}
+                            <button class="p-1 hover:text-white" title="הורד/ערוך"><i data-lucide="download" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
+
+
+        /**
+         * -----------------------------------------------------------------
+         * מאגר מידע (Messages M1000)
+         * -----------------------------------------------------------------
+         */
+        function populateMessagesTable() {
+            const tbody = document.getElementById('messages-table-body');
+            let html = '';
+            IVR_MESSAGES.forEach(msg => {
+                html += `
+                    <tr class="msg-row">
+                        <td class="font-mono text-blue-400 font-bold msg-code">${msg.code}</td>
+                        <td class="msg-text">${msg.text}</td>
+                        <td class="text-center">
+                            <button onclick="copyToClipboard('${msg.code}')" class="p-1.5 bg-white/5 hover:bg-white/10 rounded-md text-slate-400 hover:text-white transition-colors" title="העתק קוד">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function filterMessages() {
+            const query = document.getElementById('msg-search').value.toLowerCase();
+            const rows = document.querySelectorAll('.msg-row');
+            rows.forEach(row => {
+                const text = row.querySelector('.msg-text').textContent.toLowerCase();
+                const code = row.querySelector('.msg-code').textContent.toLowerCase();
+                if (text.includes(query) || code.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+
+        /**
+         * -----------------------------------------------------------------
+         * Monaco Editor Setup
+         * -----------------------------------------------------------------
+         */
+        function initMonaco() {
+            if (state.editor) return; // כבר מאותחל
+            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
+            require(['vs/editor/editor.main'], function() {
+                state.editor = monaco.editor.create(document.getElementById('monaco-editor-container'), {
+                    value: "// הקוד שייווצר על ידי ה-AI יופיע כאן\n// תוכל לערוך אותו ידנית לפני הפריסה",
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    automaticLayout: true,
+                    minimap: { enabled: false },
+                    fontSize: 14,
+                    fontFamily: "'JetBrains Mono', monospace",
+                    scrollBeyondLastLine: false,
+                    roundedSelection: true,
+                    padding: { top: 16 }
+                });
+            });
+        }
+
+        function copyEditorCode() {
+            if(state.editor) {
+                copyToClipboard(state.editor.getValue());
+                showModal('הצלחה', 'הקוד הועתק ללוח', 'success');
+            }
+        }
+
+
+        /**
+         * -----------------------------------------------------------------
+         * מעבדת ה-AI ותהליך פריסה אוטונומי
+         * -----------------------------------------------------------------
+         */
+        
+        async function startAutonomousDeployment() {
+            const prompt = document.getElementById('ai-prompt-input').value;
+            const targetFolder = document.getElementById('deploy-folder-target').value;
+
+            if (!prompt) {
+                showModal('שגיאה', 'אנא תאר מה תרצה לבנות.', 'error');
+                return;
+            }
+            if (!state.configs.gemini || !state.configs.ghToken || !state.configs.ghRepo) {
+                showModal('חסרות הגדרות', 'חובה להגדיר מפתח Gemini ופרטי GitHub בלשונית ההגדרות.', 'warning');
+                switchTab('settings');
+                return;
+            }
+
+            // הפעלת מצב תהליך
+            document.getElementById('editor-wrapper').classList.remove('opacity-50', 'pointer-events-none');
+            document.getElementById('deployment-steps').classList.remove('hidden');
+            const btn = document.getElementById('btn-deploy');
+            btn.disabled = true;
+            btn.innerHTML = `<div class="loader-ring" style="width:20px;height:20px;"></div> <span>מעבד...</span>`;
+
+            try {
+                // שלב 1: כתיבת קוד באמצעות Gemini
+                setStepStatus(1, 'loading');
+                updateGlobalStatus('ה-AI כותב קוד...', 'purple');
+                const generatedCode = await callGeminiAPI(prompt);
+                state.editor.setValue(generatedCode);
+                setStepStatus(1, 'success');
+
+                // יצירת שם קובץ ייחודי
+                const filename = `ivr-${Date.now()}.js`;
+                const githubPath = `${state.configs.ghPath}/${filename}`.replace('//', '/');
+
+                // שלב 2: פריסה ל-GitHub (עובר ל-Vercel אוטומטית)
+                setStepStatus(2, 'loading');
+                updateGlobalStatus('דוחף קוד ל-GitHub...', 'blue');
+                await pushToGitHub(githubPath, generatedCode, `Auto-deploy from Yemot AI Studio: ${prompt.substring(0, 30)}...`);
+                setStepStatus(2, 'success');
+
+                // חישוב כתובת ה-Vercel
+                const username = state.configs.ghRepo.split('/')[0];
+                const repoName = state.configs.ghRepo.split('/')[1];
+                // Vercel routes /api/file.js to /api/file
+                const routePath = githubPath.replace('.js', '');
+                const vercelUrl = `https://${repoName}.vercel.app/${routePath}`;
+
+                // שלב 3: סימולציית המתנה ל-Vercel
+                setStepStatus(3, 'loading');
+                updateGlobalStatus('ממתין לפריסה ב-Vercel...', 'blue');
+                await new Promise(r => setTimeout(r, 4000)); // במציאות כדאי לבצע Polling ל-URL
+                setStepStatus(3, 'success');
+
+                // שלב 4: עדכון קובץ ext.ini בימות המשיח
+                if (targetFolder) {
+                    setStepStatus(4, 'loading');
+                    updateGlobalStatus('מעדכן שלוחה בימות המשיח...', 'blue');
+                    await updateYemotExtIni(targetFolder, vercelUrl);
+                    setStepStatus(4, 'success');
+                } else {
+                    setStepStatus(4, 'skipped'); // דילוג אם לא הוזנה שלוחה
+                }
+
+                // סיום בהצלחה
+                updateGlobalStatus('פריסה אוטונומית הושלמה!', 'green');
+                let dashCount = parseInt(document.getElementById('dash-deploy-count').innerText) || 0;
+                document.getElementById('dash-deploy-count').innerText = dashCount + 1;
+
+                showModal('התהליך הושלם בהצלחה!', `
+                    <div class="space-y-4 text-right">
+                        <p class="text-green-400">הקוד נכתב, נשמר ב-GitHub ונפרס ל-Vercel.</p>
+                        <div class="bg-black/50 p-4 rounded-xl border border-white/10">
+                            <p class="text-xs text-slate-500 mb-1">כתובת ה-API החדשה שלך:</p>
+                            <p class="font-mono text-blue-400 text-sm break-all">${vercelUrl}</p>
+                        </div>
+                        ${targetFolder ? `<p class="text-slate-300">שלוחה <b>${targetFolder}</b> עודכנה בהצלחה ותפנה מעתה לכתובת זו.</p>` : `<p class="text-yellow-400 text-sm">לא הוזנה שלוחת יעד, לכן קובץ ה-ext.ini לא עודכן אוטומטית.</p>`}
+                    </div>
+                `, 'success');
+
+            } catch (err) {
+                console.error("Autonomous process failed:", err);
+                showModal('שגיאה בתהליך', err.message, 'error');
+                updateGlobalStatus('שגיאת פריסה', 'red');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<span>צור ופרוס</span><i data-lucide="wand-2" class="w-4 h-4"></i>`;
+                lucide.createIcons();
+            }
+        }
+
+        // --- פונקציות עזר לתהליך האוטונומי ---
+
+        function setStepStatus(stepNum, status) {
+            const el = document.getElementById(`step-${stepNum}`);
+            const iconContainer = document.getElementById(`icon-${stepNum}`);
+            
+            el.className = 'glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 transition-all';
+            
+            if (status === 'loading') {
+                el.classList.add('step-active');
+                iconContainer.innerHTML = `<div class="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>`;
+            } else if (status === 'success') {
+                el.classList.add('step-completed');
+                iconContainer.innerHTML = `<i data-lucide="check" class="w-6 h-6 text-green-500"></i>`;
+                iconContainer.classList.replace('border-white/10', 'border-green-500/50');
+            } else if (status === 'skipped') {
+                el.classList.add('opacity-50');
+                iconContainer.innerHTML = `<i data-lucide="minus" class="w-6 h-6 text-slate-500"></i>`;
+            }
+            lucide.createIcons();
+        }
+
+        async function callGeminiAPI(userPrompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${state.configs.gemini}`;
+            
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: AI_SYSTEM_PROMPT }] },
+                generationConfig: { temperature: 0.2 }
+            };
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error?.message || "Gemini API Error");
+            }
+
+            const data = await response.json();
+            let code = data.candidates[0].content.parts[0].text;
+            
+            // ניקוי עטיפות markdown אם ה-AI הכניס אותן למרות ההוראות
+            code = code.replace(/^```(javascript|js|node)?\n/i, '').replace(/\n```$/i, '').trim();
+            return code;
+        }
+
+        async function pushToGitHub(path, content, message) {
+            const apiUrl = `https://api.github.com/repos/${state.configs.ghRepo}/contents/${path}`;
+            const token = state.configs.ghToken;
+            
+            // המרת תוכן ל-Base64 בטוח ב-UTF-8
+            const utf8Bytes = new TextEncoder().encode(content);
+            const base64Content = btoa(String.fromCharCode(...utf8Bytes));
+
+            const payload = {
+                message: message,
+                content: base64Content
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(`GitHub Error: ${err.message}`);
+            }
+
+            return await response.json();
+        }
+
+        async function updateYemotExtIni(folderPath, newApiUrl) {
+            const iniContent = `type=api\napi_link=${newApiUrl}\n`;
+            
+            // קריאה ל-API של ימות המשיח להעלאת קובץ טקסט
+            // UploadTextFile
+            const res = await yemotApiCall('UploadTextFile', {
+                path: `${folderPath}/ext.ini`,
+                text: iniContent
+            });
+
+            if (res.responseStatus !== 'OK') {
+                throw new Error('שגיאה בעדכון השלוחה בימות המשיח: ' + (res.message || ''));
+            }
+            return true;
+        }
+
+
+        /**
+         * -----------------------------------------------------------------
+         * הגדרות ושרותים כלליים
+         * -----------------------------------------------------------------
+         */
+        function loadSettingsToUI() {
+            document.getElementById('cfg-gemini').value = state.configs.gemini;
+            document.getElementById('cfg-gh-token').value = state.configs.ghToken;
+            document.getElementById('cfg-gh-repo').value = state.configs.ghRepo;
+            document.getElementById('cfg-gh-path').value = state.configs.ghPath;
+        }
+
+        function saveSettings() {
+            state.configs.gemini = document.getElementById('cfg-gemini').value;
+            state.configs.ghToken = document.getElementById('cfg-gh-token').value;
+            state.configs.ghRepo = document.getElementById('cfg-gh-repo').value;
+            state.configs.ghPath = document.getElementById('cfg-gh-path').value;
+
+            localStorage.setItem('cfg_gemini', state.configs.gemini);
+            localStorage.setItem('cfg_gh_token', state.configs.ghToken);
+            localStorage.setItem('cfg_gh_repo', state.configs.ghRepo);
+            localStorage.setItem('cfg_gh_path', state.configs.ghPath);
+
+            showModal('הגדרות נשמרו', 'ההגדרות נשמרו בהצלחה בדפדפן שלך.', 'success');
+        }
+
+        function showModal(title, bodyHTML, type = 'info') {
+            const modal = document.getElementById('global-modal');
+            const content = document.getElementById('modal-content');
+            const iconContainer = document.getElementById('modal-icon-container');
+            
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerHTML = bodyHTML;
+            
+            // עיצוב לפי סוג
+            if(type === 'success') {
+                iconContainer.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 bg-green-500/20 text-green-500 shadow-[0_0_30px_rgba(34,197,94,0.3)]";
+                iconContainer.innerHTML = `<i data-lucide="check-circle" class="w-10 h-10"></i>`;
+                content.className = "glass-panel p-8 rounded-3xl max-w-md w-full text-center transform transition-transform border-t-4 border-t-green-500";
+            } else if (type === 'error') {
+                iconContainer.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 bg-red-500/20 text-red-500 shadow-[0_0_30px_rgba(239,68,68,0.3)]";
+                iconContainer.innerHTML = `<i data-lucide="alert-triangle" class="w-10 h-10"></i>`;
+                content.className = "glass-panel p-8 rounded-3xl max-w-md w-full text-center transform transition-transform border-t-4 border-t-red-500";
+            } else {
+                iconContainer.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 bg-blue-500/20 text-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.3)]";
+                iconContainer.innerHTML = `<i data-lucide="info" class="w-10 h-10"></i>`;
+                content.className = "glass-panel p-8 rounded-3xl max-w-md w-full text-center transform transition-transform border-t-4 border-t-blue-500";
+            }
+            
+            lucide.createIcons();
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                content.classList.replace('scale-95', 'scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('global-modal');
+            const content = document.getElementById('modal-content');
+            
+            modal.style.opacity = '0';
+            content.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
     </script>
 </body>
 </html>
