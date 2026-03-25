@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yemot AI Studio | Ultimate Edition</title>
     
-    <!-- פונטים וספריות חיצוניות -->
+    <!-- פונטים וספריות -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
@@ -20,7 +21,7 @@
                 extend: {
                     fontFamily: { 
                         sans: ['Assistant', 'sans-serif'], 
-                        mono: ['JetBrains Mono', 'monospace'],
+                        mono:['JetBrains Mono', 'monospace'],
                         inter: ['Inter', 'sans-serif']
                     },
                     colors: {
@@ -32,13 +33,7 @@
                             success: '#22c55e',
                             warning: '#f59e0b',
                             danger: '#ef4444'
-                        },
-                        glass: { 
-                            100: 'rgba(255, 255, 255, 0.05)', 
-                            200: 'rgba(255, 255, 255, 0.1)',
-                            dark: 'rgba(15, 23, 42, 0.7)' 
-                        },
-                        neon: { blue: '#00f0ff', purple: '#8a2be2', pink: '#ff007a' }
+                        }
                     },
                     animation: {
                         'spin-slow': 'spin 3s linear infinite',
@@ -61,269 +56,220 @@
         }
     </script>
 
-    <!-- עיצוב CSS מותאם אישית (Massive Custom CSS) -->
-<style>
-:root {
-    --bg-main: #020617;
-    --bg-panel: rgba(30, 41, 59, 0.6);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-}
+    <style>
+        :root {
+            --bg-main: #020617;
+            --bg-panel: rgba(30, 41, 59, 0.6);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-/* בסיס */
-html, body {
-    height: 100%;
-}
+        html, body { height: 100%; }
+        
+        body {
+            background-color: var(--bg-main);
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+        }
 
-body {
-    background-color: var(--bg-main);
-    background-image:
-        radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.15), transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
-    color: var(--text-main);
+        .glass-panel {
+            background: var(--bg-panel);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
 
-    min-height: 100vh;
+        .glass-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
 
-    display: flex;
-    flex-direction: row;
-}
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
 
-/* תיקון Flex כללי */
-* {
-    min-width: 0;
-}
+        .glass-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
 
-/* Glassmorphism */
-.glass-panel {
-    background: var(--bg-panel);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
+        .glass-input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
 
-.glass-button {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
+        /* Sidebar */
+        aside {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+        }
 
-.glass-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
-}
+        .sidebar-item {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-.glass-input {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    transition: all 0.3s ease;
-}
+        .sidebar-item::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #38bdf8;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
 
-.glass-input:focus {
-    outline: none;
-    border-color: #38bdf8;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-}
+        .sidebar-item.active {
+            background: linear-gradient(to left, rgba(56, 189, 248, 0.1), transparent);
+            color: white;
+        }
 
-/* Sidebar */
-aside {
-    height: 100vh;
-    position: sticky;
-    top: 0;
-}
+        .sidebar-item.active::before {
+            transform: scaleY(1);
+        }
 
-.sidebar-item {
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+        .sidebar-item:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+        }
 
-.sidebar-item::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: #38bdf8;
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
+        main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+        #main-content-area { flex: 1; overflow-y: auto; overflow-x: hidden; }
 
-.sidebar-item.active {
-    background: linear-gradient(to left, rgba(56, 189, 248, 0.1), transparent);
-    color: white;
-}
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
 
-.sidebar-item.active::before {
-    transform: scaleY(1);
-}
+        .loader-ring {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+        }
+        .loader-ring:after {
+            content: " ";
+            display: block;
+            width: 32px;
+            height: 32px;
+            margin: 4px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: loader-ring 1.2s linear infinite;
+        }
+        @keyframes loader-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-.sidebar-item:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.05);
-}
+        /* Chat UI */
+        .chat-bubble {
+            max-width: 85%;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        .chat-user {
+            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+            color: white;
+            border-bottom-right-radius: 0.2rem;
+            align-self: flex-end;
+            margin-right: auto;
+        }
+        .chat-ai {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #f8fafc;
+            border-bottom-left-radius: 0.2rem;
+            align-self: flex-start;
+            margin-left: auto;
+        }
+        
+        .code-block {
+            background: #0f172a;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-/* Main layout */
-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-}
+        /* Editor */
+        #editor-container {
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            height: 100%;
+        }
+        .code-header { background: #1e1e1e; border-bottom: 1px solid #333; }
 
-/* אזור תוכן */
-#main-content-area {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-/* Loader */
-.loader-ring {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-}
-
-.loader-ring:after {
-    content: " ";
-    display: block;
-    width: 32px;
-    height: 32px;
-    margin: 4px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: loader-ring 1.2s linear infinite;
-}
-
-@keyframes loader-ring {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Steps */
-.step-active {
-    border-color: #38bdf8;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-    transform: scale(1.02);
-}
-
-.step-completed {
-    border-color: #22c55e;
-    background: rgba(34, 197, 94, 0.05);
-}
-
-.step-inactive {
-    opacity: 0.5;
-    filter: grayscale(1);
-}
-
-/* Editor */
-#editor-container {
-    border: 1px solid var(--border-color);
-    border-radius: 0.75rem;
-    overflow: hidden;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-}
-
-#editor-wrapper {
-    min-height: 300px;
-}
-
-.code-header {
-    background: #1e1e1e;
-    border-bottom: 1px solid #333;
-}
-
-/* Tables */
-.yemot-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-.yemot-table th {
-    background: rgba(255,255,255,0.05);
-    padding: 1rem;
-    text-align: right;
-    font-weight: 600;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.yemot-table td {
-    padding: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    color: var(--text-main);
-}
-
-.yemot-table tr:hover td {
-    background: rgba(255,255,255,0.02);
-}
-
-/* Modals */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(2, 6, 23, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-}
-
-/* Smooth scroll */
-html {
-    scroll-behavior: smooth;
-}
-</style>
-
+        /* TTS Audio */
+        audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 20px;
+            outline: none;
+        }
+        audio::-webkit-media-controls-panel {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body class="flex h-screen overflow-hidden text-sm md:text-base">
 
     <!-- ==========================================
-         אזור 1: מסך התחברות (MFA) - מתוך הקוד המקורי
+         אזור 1: מסך התחברות (MFA משולב API)
          ========================================== -->
     <div id="login-overlay" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#020617] transition-opacity duration-500">
-        
-        <!-- אלמנטים גרפיים ברקע -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
             <div class="absolute w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] -top-40 -right-40 animate-pulse-fast"></div>
             <div class="absolute w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[100px] bottom-0 left-0"></div>
         </div>
 
         <div class="glass-panel p-10 rounded-3xl w-full max-w-md relative z-10 shadow-2xl shadow-blue-900/20 border-t border-white/20 animate-slide-up">
-            
             <div class="text-center mb-8">
-                <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mx-auto flex items-center justify-center mb-6 shadow-lg shadow-blue-500/30 transform rotate-3 hover:rotate-0 transition-transform">
+                <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mx-auto flex items-center justify-center mb-6 shadow-lg shadow-blue-500/30 transform rotate-3">
                     <i data-lucide="cpu" class="w-10 h-10 text-white"></i>
                 </div>
                 <h1 class="text-3xl font-extrabold tracking-tight text-white mb-2">YEMOT AI <span class="text-blue-400">STUDIO</span></h1>
-                <p class="text-slate-400 text-sm">התחברות מאובטחת למערכת ניהול</p>
+                <p class="text-slate-400 text-sm">התחברות מאובטחת למערכת ימות המשיח</p>
             </div>
 
-            <!-- פאנל התחברות ראשוני -->
+            <!-- התחברות רגילה -->
             <div id="loginPanel" class="space-y-5">
                 <div class="space-y-2">
                     <label class="text-sm font-medium text-slate-300 ml-1">מספר מערכת</label>
@@ -333,70 +279,60 @@ html {
                     </div>
                 </div>
                 <div class="space-y-2">
-                    <label class="text-sm font-medium text-slate-300 ml-1">סיסמה</label>
+                    <label class="text-sm font-medium text-slate-300 ml-1">סיסמת ניהול</label>
                     <div class="relative">
                         <i data-lucide="lock" class="absolute right-4 top-3.5 w-5 h-5 text-slate-500"></i>
                         <input type="password" id="password" class="w-full glass-input rounded-xl py-3 pr-12 pl-4 text-left font-mono" placeholder="••••••••">
                     </div>
                 </div>
-                <button onclick="handleLogin()" class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex justify-center items-center gap-2 mt-6">
-                    <span>התחבר למערכת</span>
+                <button onclick="handleLogin()" class="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex justify-center items-center gap-2 mt-6">
+                    <span>התחבר</span>
                     <i data-lucide="arrow-left" class="w-5 h-5"></i>
                 </button>
                 <div id="login-error" class="hidden mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center"></div>
+                <div class="mt-4 text-center">
+                    <button onclick="skipLogin()" class="text-slate-500 hover:text-slate-300 text-xs underline">דלג (ללא טוקן ימות המשיח)</button>
+                </div>
             </div>
 
             <!-- פאנל אימות דו שלבי (MFA) -->
             <div id="mfaPanel" class="hidden space-y-5 animate-fade-in">
-                <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 mb-6">
-                    <p class="text-blue-300 text-sm text-center leading-relaxed">
-                        נדרש אימות דו-שלבי. בחר כיצד תרצה לקבל את קוד האימות:
-                    </p>
+                <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 mb-6 text-center">
+                    <p class="text-blue-300 text-sm">נדרש אימות דו-שלבי למערכת.</p>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <button onclick="sendMfaCode('SMS')" class="glass-button py-4 rounded-xl flex flex-col items-center gap-3">
-                        <i data-lucide="message-square" class="w-6 h-6 text-blue-400"></i>
-                        <span class="font-medium text-sm">שלח ב-SMS</span>
-                    </button>
-                    <button onclick="sendMfaCode('EMAIL')" class="glass-button py-4 rounded-xl flex flex-col items-center gap-3">
-                        <i data-lucide="mail" class="w-6 h-6 text-purple-400"></i>
-                        <span class="font-medium text-sm">שלח במייל</span>
-                    </button>
-                    <button onclick="sendMfaCode('PHONE')" class="glass-button py-4 rounded-xl flex flex-col items-center gap-3 col-span-2">
-                        <i data-lucide="phone-call" class="w-6 h-6 text-green-400"></i>
-                        <span class="font-medium text-sm">קבל שיחה קולית</span>
-                    </button>
+                <div class="space-y-3">
+                    <label class="text-sm font-medium text-slate-300">בחר שיטת אימות</label>
+                    <select id="mfaMethods" onchange="updateSendTypes()" class="w-full glass-input rounded-xl py-3 px-4"></select>
                 </div>
-
-                <div id="codeValidation" class="hidden mt-8 space-y-4 pt-6 border-t border-white/10">
-                    <label class="text-sm font-medium text-slate-300 text-center block">הזן את הקוד שקיבלת:</label>
-                    <input type="text" id="mfaCodeInput" class="w-full glass-input rounded-xl py-4 text-center text-2xl tracking-widest font-mono font-bold text-white placeholder-slate-600" placeholder="000000" maxlength="6">
-                    <button onclick="handleValidateCode()" class="w-full py-4 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-green-500/25">
-                        אמת קוד והיכנס
-                    </button>
+                <div class="space-y-3">
+                    <label class="text-sm font-medium text-slate-300">סוג שליחה</label>
+                    <select id="mfaSendType" class="w-full glass-input rounded-xl py-3 px-4"></select>
+                </div>
+                <button onclick="handleSendCode()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl mt-4">שלח קוד</button>
+                
+                <div id="codeValidation" class="hidden mt-6 space-y-4 border-t border-white/10 pt-6">
+                    <label class="text-sm font-medium text-slate-300">הזן את הקוד שהתקבל</label>
+                    <input type="text" id="mfaCodeInput" class="w-full glass-input rounded-xl py-4 text-center text-2xl tracking-widest font-mono font-bold" placeholder="000000" maxlength="6">
+                    <button onclick="handleValidateCode()" class="w-full py-4 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl shadow-lg">אמת קוד והיכנס</button>
                 </div>
                 <div id="mfa-error" class="hidden mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center"></div>
-                <button onclick="resetLogin()" class="w-full mt-4 text-slate-400 hover:text-white text-sm">חזור להתחברות</button>
+                <button onclick="resetLogin()" class="w-full mt-4 text-slate-400 hover:text-white text-sm">חזור</button>
             </div>
             
-            <!-- לודר -->
             <div id="loadingOverlay" class="absolute inset-0 bg-[#020617]/80 backdrop-blur-sm rounded-3xl hidden flex-col items-center justify-center z-50">
                 <div class="loader-ring"></div>
-                <p class="mt-4 text-blue-400 font-medium" id="loadingText">מתחבר לשרת...</p>
+                <p class="mt-4 text-blue-400 font-medium" id="loadingText">מתחבר...</p>
             </div>
         </div>
     </div>
-
 
     <!-- ==========================================
          אזור 2: ממשק המערכת הראשי
          ========================================== -->
     
-    <!-- סרגל צד -->
     <aside class="w-72 glass-panel border-l border-r-0 border-t-0 border-b-0 flex flex-col z-20 shrink-0">
-        <!-- לוגו -->
         <div class="h-20 border-b border-white/10 flex items-center px-6 gap-4 bg-black/20">
-            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                 <i data-lucide="cpu" class="w-6 h-6 text-white"></i>
             </div>
             <div>
@@ -405,43 +341,33 @@ html {
             </div>
         </div>
 
-        <!-- תפריט ניווט -->
         <nav class="flex-1 py-6 px-4 space-y-2 overflow-y-auto">
-            <p class="px-4 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">ניהול ופיתוח</p>
+            <p class="px-4 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">פיתוח וניהול</p>
             
-            <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="sidebar-item active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
+            <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
                 <i data-lucide="layout-dashboard" class="w-5 h-5"></i> <span>לוח בקרה</span>
             </button>
             
-            <button onclick="switchTab('lab')" id="tab-btn-lab" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
-                <i data-lucide="flask-conical" class="w-5 h-5 text-purple-400"></i> 
-                <span class="flex-1 text-right">מעבדת AI אוטונומית</span>
-                <span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30">PRO</span>
+            <button onclick="switchTab('builder')" id="tab-btn-builder" class="sidebar-item active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white bg-blue-900/30">
+                <i data-lucide="bot" class="w-5 h-5 text-blue-400"></i> <span>צ'אט בונה שלוחות (AI)</span>
             </button>
             
-            <button onclick="switchTab('files')" id="tab-btn-files" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
-                <i data-lucide="folder-tree" class="w-5 h-5"></i> <span>סייר קבצים</span>
+            <button onclick="switchTab('tts')" id="tab-btn-tts" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
+                <i data-lucide="mic" class="w-5 h-5 text-purple-400"></i> <span>מחולל קריינות (TTS)</span>
             </button>
-            
-            <p class="px-4 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 mt-8">מאגרי מידע</p>
-            
-            <button onclick="switchTab('messages')" id="tab-btn-messages" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300">
-                <i data-lucide="book-open" class="w-5 h-5"></i> <span>הודעות מערכת (M1000)</span>
-            </button>
-            
+
             <button onclick="switchTab('settings')" id="tab-btn-settings" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 mt-auto">
-                <i data-lucide="settings" class="w-5 h-5"></i> <span>הגדרות וחיבורים</span>
+                <i data-lucide="settings" class="w-5 h-5"></i> <span>הגדרות AI</span>
             </button>
         </nav>
 
-        <!-- פרופיל תחתון -->
         <div class="p-4 border-t border-white/10 bg-black/20">
             <div class="flex items-center gap-3 px-2">
                 <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
                     <i data-lucide="user" class="w-4 h-4 text-slate-400"></i>
                 </div>
                 <div class="flex-1">
-                    <p class="text-sm font-medium text-white">מנהל מערכת</p>
+                    <p class="text-sm font-medium text-white">משתמש מערכת</p>
                     <p class="text-xs text-green-400 flex items-center gap-1">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> מחובר
                     </p>
@@ -453,392 +379,1497 @@ html {
         </div>
     </aside>
 
-    <!-- תוכן ראשי -->
     <main class="flex-1 flex flex-col h-full bg-[#020617] relative overflow-hidden">
         
-        <!-- Header עליון -->
-        <header class="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-900/40 backdrop-blur-md z-10">
+        <header class="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-900/40 backdrop-blur-md z-10 shrink-0">
             <h2 id="page-title" class="text-2xl font-bold text-white flex items-center gap-3">
-                <i data-lucide="layout-dashboard" class="text-blue-400"></i> לוח בקרה
+                <i data-lucide="bot" class="text-blue-400"></i> צ'אט פיתוח AI
             </h2>
-            <div class="flex items-center gap-4">
-                <div id="global-status" class="px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 flex items-center gap-2 text-sm text-slate-300 shadow-inner">
-                    <i data-lucide="activity" class="w-4 h-4 text-slate-400"></i>
-                    <span>מערכת מוכנה</span>
-                </div>
-            </div>
         </header>
 
-        <!-- אזור התוכן המתחלף -->
-        <div class="flex-1 overflow-y-auto p-8 relative scroll-smooth" id="main-content-area">
+        <div class="flex-1 overflow-hidden relative" id="main-content-area">
             
             <!-- ---------------------------------------
-                 טאב 1: לוח בקרה (Dashboard)
+                 טאב דשבורד
                  --------------------------------------- -->
-            <section id="tab-dashboard" class="space-y-8 animate-fade-in max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-blue-500">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-slate-400 text-sm font-medium mb-1">מספר מערכת</p>
-                                <h3 class="text-2xl font-bold font-mono text-white" id="dash-sys-num">---</h3>
-                            </div>
-                            <div class="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-                                <i data-lucide="hash" class="w-6 h-6"></i>
-                            </div>
+            <section id="tab-dashboard" class="hidden h-full overflow-y-auto p-8 animate-fade-in">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    <div class="glass-panel p-8 rounded-2xl">
+                        <h2 class="text-3xl font-bold text-white mb-4">ברוך הבא ל-Yemot AI Studio</h2>
+                        <p class="text-slate-300 text-lg">מערכת פיתוח חכמה לשלוחות ימות המשיח, הכוללת צ'אט AI מתקדם בעל ידע עצום על המערכת, ומחולל קריינות TTS מבוסס Gemini Flash.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-blue-500">
+                            <h3 class="text-xl font-bold mb-2">כיצד להשתמש בצ'אט?</h3>
+                            <ul class="list-disc list-inside text-slate-400 space-y-2">
+                                <li>נווט לטאב "צ'אט בונה שלוחות".</li>
+                                <li>בחר האם ברצונך לייצר קוד API (Node.js) או הגדרות רגילות (ext.ini).</li>
+                                <li>הזן את הבקשה שלך. ה-AI מחובר למסד נתונים של אלפי שורות תיעוד וידע להחזיר תשובה מדויקת.</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-purple-500">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-slate-400 text-sm font-medium mb-1">סטטוס API</p>
-                                <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-                                    <span class="w-3 h-3 rounded-full bg-green-500"></span> מחובר ופעיל
-                                </h3>
-                            </div>
-                            <div class="p-3 bg-purple-500/10 rounded-lg text-purple-400">
-                                <i data-lucide="zap" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-pink-500">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-slate-400 text-sm font-medium mb-1">פריסות אוטונומיות</p>
-                                <h3 class="text-2xl font-bold text-white" id="dash-deploy-count">0</h3>
-                            </div>
-                            <div class="p-3 bg-pink-500/10 rounded-lg text-pink-400">
-                                <i data-lucide="rocket" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-panel rounded-2xl overflow-hidden">
-                    <div class="px-6 py-4 border-b border-white/10 bg-black/20 flex justify-between items-center">
-                        <h3 class="font-bold text-lg">ברוך הבא ל-Yemot AI Ultimate</h3>
-                    </div>
-                    <div class="p-6 text-slate-300 leading-relaxed space-y-4">
-                        <p>מערכת זו פותחה כדי לאפשר ניהול מלא ופיתוח אוטומטי של מערכות ימות המשיח. כאן תוכל:</p>
-                        <ul class="list-disc list-inside space-y-2 text-slate-400 ml-4">
-                            <li>לנהל את כל הקבצים והשלוחות במערכת שלך.</li>
-                            <li>לגשת למאגר המידע העצום של ימות המשיח (הודעות מערכת והגדרות שונות).</li>
-                            <li><strong class="text-purple-400">להשתמש במעבדת ה-AI האוטונומית:</strong> לבקש מהבינה המלאכותית לכתוב קוד API, לפרוס אותו ל-Vercel דרך GitHub, ולהגדיר את השלוחה בימות המשיח - הכל בלחיצת כפתור אחת!</li>
-                        </ul>
-                        <div class="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-xl flex gap-4">
-                            <i data-lucide="info" class="text-blue-400 mt-1"></i>
-                            <p class="text-sm">כדי להתחיל להשתמש בפריסה אוטונומית, ודא שהגדרת את חיבורי ה-GitHub וה-Gemini שלך בלשונית "הגדרות וחיבורים".</p>
+                        <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-purple-500">
+                            <h3 class="text-xl font-bold mb-2">כיצד ליצור קריינות?</h3>
+                            <ul class="list-disc list-inside text-slate-400 space-y-2">
+                                <li>נווט לטאב "מחולל קריינות".</li>
+                                <li>הזן את הטקסט בעברית ללא ניקוד.</li>
+                                <li>בחר קול (גבר/אישה) ולחץ על יצירה. המערכת תחזיר קובץ WAV מוכן להעלאה לימות.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
-
             <!-- ---------------------------------------
-                 טאב 2: מעבדת AI אוטונומית (Lab)
+                 טאב AI Builder (צ'אט + קוד)
                  --------------------------------------- -->
-            <section id="tab-lab" class="hidden animate-fade-in max-w-7xl mx-auto flex flex-col h-full space-y-6">
-                
-                <!-- אזור כתיבת פרומפט -->
-                <div class="glass-panel p-6 rounded-2xl border border-purple-500/30 shadow-[0_0_30px_rgba(139,92,246,0.1)] relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-                    <h2 class="text-2xl font-bold mb-2">מה נבנה היום?</h2>
-                    <p class="text-slate-400 mb-6 text-sm">תאר את הלוגיקה (לדוגמה: תבנה API שבודק אם המספר מזוהה ומשמיע הודעה), והמערכת תכתוב את הקוד, תפרוס אותו ותגדיר את השלוחה.</p>
+            <section id="tab-builder" class="h-full flex flex-row animate-fade-in">
+                <!-- אזור הצ'אט -->
+                <div class="w-1/2 border-l border-white/10 flex flex-col bg-slate-900/30">
                     
-                    <div class="relative">
-                        <textarea id="ai-prompt-input" rows="3" class="w-full glass-input rounded-xl p-4 pr-16 text-lg resize-none font-sans" placeholder="לדוגמה: צור API שמבקש להקיש תעודת זהות, בודק אם היא תקינה (אלגוריתם ספרת ביקורת), ומחזיר למשתמש הודעת הצלחה או שגיאה."></textarea>
-                        
-                        <div class="absolute bottom-4 left-4 flex gap-2">
-                            <input type="text" id="deploy-folder-target" placeholder="שלוחת יעד (למשל: 1/5)" class="glass-input rounded-lg px-3 py-2 text-sm w-32 font-mono text-center border-purple-500/50">
-                            
-                            <button onclick="startAutonomousDeployment()" id="btn-deploy" class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 transition-all shadow-lg shadow-purple-500/25">
-                                <span>צור ופרוס</span>
-                                <i data-lucide="wand-2" class="w-4 h-4"></i>
+                    <!-- היסטוריית צ'אט -->
+                    <div id="chat-history" class="flex-1 overflow-y-auto p-6 flex flex-col">
+                        <div class="chat-bubble chat-ai">
+                            שלום! אני מומחה הפיתוח שלך לימות המשיח. הוטמע בי ידע עצום (אלפי שורות של תיעוד).<br>
+                            האם ברצונך לפתח שלוחת API חדשה או לקבל הגדרות קובץ ext.ini לשלוחה רגילה?
+                        </div>
+                    </div>
+
+                    <!-- קלט המשתמש -->
+                    <div class="p-4 bg-slate-800/50 border-t border-white/10">
+                        <div class="flex gap-4 mb-3">
+                            <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                <input type="radio" name="extensionType" value="api" checked class="text-blue-500 focus:ring-blue-500">
+                                פיתוח שלוחת API (קוד JS)
+                            </label>
+                            <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                <input type="radio" name="extensionType" value="ini" class="text-blue-500 focus:ring-blue-500">
+                                הגדרות שלוחה רגילה (ext.ini)
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <textarea id="ai-chat-input" rows="3" class="w-full glass-input rounded-xl p-4 pr-14 resize-none font-sans text-base" placeholder="תאר מה השלוחה צריכה לעשות... (למשל: תכין לי שלוחה שמבקשת תעודת זהות, בודקת מול API ומחזירה הודעה)"></textarea>
+                            <button onclick="sendChatMessage()" id="btn-send-chat" class="absolute bottom-3 right-3 p-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                                <i data-lucide="send" class="w-5 h-5"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- מד התקדמות פריסה (Steps) -->
-                <div id="deployment-steps" class="grid grid-cols-1 md:grid-cols-4 gap-4 hidden">
-                    <div id="step-1" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
-                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-1">
-                            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">כתיבת קוד AI</h4>
-                    </div>
-                    <div id="step-2" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
-                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-2">
-                            <i data-lucide="github" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">שמירה ב-GitHub</h4>
-                    </div>
-                    <div id="step-3" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
-                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-3">
-                            <i data-lucide="cloud-lightning" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">פריסה ב-Vercel</h4>
-                    </div>
-                    <div id="step-4" class="glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 border-white/5 step-inactive transition-all">
-                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-white/10" id="icon-4">
-                            <i data-lucide="phone-call" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">עדכון שלוחה (ימות)</h4>
-                    </div>
-                </div>
-
-                <!-- אזור עורך הקוד (Monaco) -->
-                <div id="editor-wrapper" class="flex-1 glass-panel rounded-2xl flex flex-col overflow-hidden min-h-[400px] border border-white/10 opacity-50 pointer-events-none transition-opacity">
-                    <div class="code-header px-4 py-2 flex justify-between items-center">
+                <!-- אזור עורך הקוד -->
+                <div class="w-1/2 flex flex-col bg-[#1e1e1e]">
+                    <div class="code-header px-4 py-3 flex justify-between items-center shrink-0">
                         <div class="flex items-center gap-3">
-                            <i data-lucide="file-json" class="w-4 h-4 text-yellow-400"></i>
-                            <span class="text-sm font-mono text-slate-300">api/yemot-handler.js</span>
+                            <i data-lucide="code-2" class="w-5 h-5 text-blue-400"></i>
+                            <span class="font-bold text-slate-200">הקוד שנוצר</span>
                         </div>
-                        <div class="flex gap-2">
-                            <button onclick="copyEditorCode()" class="p-1 hover:bg-white/10 rounded text-slate-400 hover:text-white" title="העתק קוד">
-                                <i data-lucide="copy" class="w-4 h-4"></i>
-                            </button>
-                        </div>
+                        <button onclick="copyEditorCode()" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm bg-white/5 px-3 py-1.5 rounded-lg transition-colors">
+                            <i data-lucide="copy" class="w-4 h-4"></i> העתק קוד
+                        </button>
                     </div>
-                    <div id="monaco-editor-container" class="flex-1 w-full bg-[#1e1e1e]"></div>
+                    <div id="monaco-editor-container" class="flex-1 w-full"></div>
                 </div>
-
             </section>
 
-
             <!-- ---------------------------------------
-                 טאב 3: סייר קבצים (ימות המשיח)
+                 טאב מחולל TTS
                  --------------------------------------- -->
-            <section id="tab-files" class="hidden animate-fade-in max-w-7xl mx-auto">
-                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-[700px]">
-                    
-                    <!-- סרגל כלים קבצים -->
-                    <div class="p-4 border-b border-white/10 bg-black/20 flex justify-between items-center">
-                        <div class="flex items-center gap-4">
-                            <button onclick="navigateUp()" class="p-2 glass-button rounded-lg text-slate-300 hover:text-white disabled:opacity-50">
-                                <i data-lucide="corner-right-up" class="w-5 h-5"></i>
-                            </button>
-                            <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-900/50 rounded-lg border border-white/10 font-mono text-sm" id="current-path-display">
-                                <i data-lucide="folder" class="w-4 h-4 text-blue-400"></i>
-                                <span>/</span>
+            <section id="tab-tts" class="hidden h-full overflow-y-auto p-8 animate-fade-in">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="glass-panel p-8 rounded-2xl border-t-4 border-purple-500">
+                        <h2 class="text-2xl font-bold mb-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-purple-400 text-3xl">record_voice_over</span>
+                            יצירת קבצי שמע לתפריטים (Gemini 2.5 Flash TTS)
+                        </h2>
+                        <p class="text-slate-400 mb-6">הזן טקסט בעברית ללא ניקוד, בחר קול, והמערכת תייצר עבורך קובץ WAV התואם למערכות ימות המשיח.</p>
+
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-300 mb-2">הטקסט לקריינות</label>
+                                <textarea id="tts-input-text" rows="4" class="w-full glass-input rounded-xl p-4 text-lg resize-none" placeholder="לדוגמה: ברוכים הבאים למערכת, להקשת תעודת זהות הקישו אחד, לדיבור עם נציג הקישו שתיים."></textarea>
                             </div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button onclick="loadFolder('/')" class="p-2 glass-button rounded-lg text-slate-300 hover:text-white" title="רענן">
-                                <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-300 mb-2">קול קריין</label>
+                                    <select id="tts-voice-select" class="w-full glass-input rounded-xl p-3">
+                                        <option value="Aoede">נשי (Aoede)</option>
+                                        <option value="Kore">נשי צעיר (Kore)</option>
+                                        <option value="Puck">גברי צעיר (Puck)</option>
+                                        <option value="Sadaltager" selected>גברי רשמי (Sadaltager)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-300 mb-2">שם הקובץ לשמירה (אופציונלי)</label>
+                                    <input type="text" id="tts-filename" class="w-full glass-input rounded-xl p-3" placeholder="M1000" dir="ltr">
+                                </div>
+                            </div>
+
+                            <button onclick="generateTTSAudio()" id="btn-generate-tts" class="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold rounded-xl transition-all shadow-lg flex justify-center items-center gap-2">
+                                <span class="material-symbols-outlined">graphic_eq</span>
+                                <span>צור קובץ שמע</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- רשימת קבצים -->
-                    <div class="flex-1 overflow-y-auto p-2" id="file-list-container">
-                        <!-- תוכן דינמי של קבצים יתווסף כאן -->
-                        <div class="flex flex-col items-center justify-center h-full text-slate-500">
-                            <i data-lucide="folder-search" class="w-12 h-12 mb-4 opacity-50"></i>
-                            <p>טוען נתונים...</p>
+                    <!-- אזור תוצאת השמע -->
+                    <div id="tts-result-panel" class="glass-panel p-6 rounded-2xl hidden animate-fade-in border border-green-500/30">
+                        <h3 class="text-lg font-bold text-green-400 mb-4 flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i> הקובץ מוכן!
+                        </h3>
+                        <audio id="tts-audio-player" controls class="w-full mb-4"></audio>
+                        <div class="flex gap-4">
+                            <a id="tts-download-link" class="flex-1 bg-white/10 hover:bg-white/20 text-white text-center py-3 rounded-xl font-bold transition-colors border border-white/20">
+                                הורד למחשב (WAV)
+                            </a>
+                            <button onclick="uploadWavToYemot()" id="btn-upload-yemot" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-xl font-bold transition-colors disabled:opacity-50">
+                                העלה ישירות לשלוחה (דורש טוקן)
+                            </button>
                         </div>
+                        <div id="tts-upload-status" class="mt-3 text-sm text-center"></div>
                     </div>
                 </div>
             </section>
 
-
             <!-- ---------------------------------------
-                 טאב 4: מאגר מידע - הודעות מערכת
+                 טאב הגדרות
                  --------------------------------------- -->
-            <section id="tab-messages" class="hidden animate-fade-in max-w-7xl mx-auto space-y-6">
-                <div class="glass-panel p-6 rounded-2xl flex justify-between items-center gap-4">
-                    <div>
-                        <h2 class="text-2xl font-bold">מאגר הודעות מערכת (M1000)</h2>
-                        <p class="text-slate-400 text-sm mt-1">חיפוש בכל הודעות המערכת והקודים של ימות המשיח. מבוסס על קבצי ההגדרות המקוריים.</p>
-                    </div>
-                    <div class="relative w-72">
-                        <i data-lucide="search" class="absolute right-3 top-3 text-slate-400"></i>
-                        <input type="text" id="msg-search" onkeyup="filterMessages()" class="w-full glass-input rounded-xl py-2.5 pr-10 pl-4" placeholder="חפש קוד או טקסט (למשל M1001)...">
-                    </div>
-                </div>
+            <section id="tab-settings" class="hidden h-full overflow-y-auto p-8 animate-fade-in">
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <div class="glass-panel p-8 rounded-2xl">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-200">
+                            <i data-lucide="settings" class="text-blue-400"></i> הגדרות מפתחות API
+                        </h2>
+                        
+                        <div class="space-y-5">
+                            <div class="bg-blue-900/20 border border-blue-500/30 p-4 rounded-xl text-sm text-blue-300 mb-4">
+                                המערכת משתמשת במודלי Gemini החדשים ביותר ליצירת קוד מדויק וקריינות TTS מציאותית. יש להזין מפתח אישי של Google AI Studio.
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-bold text-slate-300 mb-2">Google Gemini API Key (חובה)</label>
+                                <input type="password" id="cfg-gemini-key" class="w-full glass-input rounded-xl p-3" placeholder="AIzaSy...">
+                            </div>
 
-                <div class="glass-panel rounded-2xl overflow-hidden shadow-xl border border-white/10">
-                    <div class="max-h-[600px] overflow-y-auto custom-scrollbar">
-                        <table class="yemot-table">
-                            <thead>
-                                <tr>
-                                    <th class="w-32">קוד הודעה</th>
-                                    <th>תוכן ההודעה (מתוך הקובץ המקורי)</th>
-                                    <th class="w-24 text-center">פעולה</th>
-                                </tr>
-                            </thead>
-                            <tbody id="messages-table-body">
-                                <!-- יאוכלס מתוך ה-JSON הענק -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-
-            <!-- ---------------------------------------
-                 טאב 5: הגדרות וחיבורים
-                 --------------------------------------- -->
-            <section id="tab-settings" class="hidden animate-fade-in max-w-3xl mx-auto space-y-6 pb-20">
-                <h2 class="text-2xl font-bold mb-6">הגדרות סביבת עבודה</h2>
-
-                <!-- Gemini API -->
-                <div class="glass-panel p-6 rounded-2xl space-y-4 border-l-4 border-purple-500">
-                    <h3 class="font-bold flex items-center gap-2 text-purple-400">
-                        <i data-lucide="sparkles"></i> מפתח Gemini AI
-                    </h3>
-                    <p class="text-sm text-slate-400">נדרש עבור מעבדת ה-AI האוטונומית ליצירת קוד.</p>
-                    <input type="password" id="cfg-gemini" class="w-full glass-input rounded-xl p-3" placeholder="AIzaSy...">
-                </div>
-
-                <!-- GitHub Settings -->
-                <div class="glass-panel p-6 rounded-2xl space-y-4 border-l-4 border-slate-500">
-                    <h3 class="font-bold flex items-center gap-2 text-slate-300">
-                        <i data-lucide="github"></i> הגדרות פריסה ל-GitHub
-                    </h3>
-                    <p class="text-sm text-slate-400">ה-AI ידחוף את הקוד ל-Repository זה, ומשם Vercel יפרוס אותו אוטומטית.</p>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">GitHub Personal Access Token (עם הרשאות repo)</label>
-                            <input type="password" id="cfg-gh-token" class="w-full glass-input rounded-xl p-3" placeholder="ghp_...">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">שם ה-Repository (פורמט: username/repo-name)</label>
-                            <input type="text" id="cfg-gh-repo" class="w-full glass-input rounded-xl p-3 font-mono text-left" dir="ltr" placeholder="my-user/yemot-api-funcs">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">נתיב פנימי לפונקציות (ברירת מחדל ל-Vercel: api)</label>
-                            <input type="text" id="cfg-gh-path" class="w-full glass-input rounded-xl p-3 font-mono text-left" dir="ltr" value="api" placeholder="api">
+                            <button onclick="saveSettings()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg">
+                                שמור הגדרות
+                            </button>
                         </div>
                     </div>
                 </div>
-                
-                <button onclick="saveSettings()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25">
-                    שמור הגדרות
-                </button>
             </section>
 
         </div>
     </main>
 
-    <!-- מודאל הודעות / הצלחה -->
-    <div id="global-modal" class="fixed inset-0 modal-overlay hidden items-center justify-center p-4 opacity-0 transition-opacity">
-        <div class="glass-panel p-8 rounded-3xl max-w-md w-full text-center transform scale-95 transition-transform" id="modal-content">
-            <div id="modal-icon-container" class="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6">
-                <i id="modal-icon" class="w-10 h-10"></i>
-            </div>
-            <h3 id="modal-title" class="text-2xl font-bold mb-2">כותרת</h3>
-            <p id="modal-body" class="text-slate-400 mb-8 leading-relaxed">טקסט תיאור</p>
-            
-            <div id="modal-extra" class="mb-6 hidden"></div>
-
-            <button onclick="closeModal()" class="w-full py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all">סגור</button>
+    <!-- מודאל הודעות גלובלי -->
+    <div id="global-modal" class="fixed inset-0 modal-overlay hidden items-center justify-center p-4 opacity-0 transition-opacity z-[200]">
+        <div class="glass-panel p-8 rounded-3xl max-w-sm w-full text-center transform scale-95 transition-transform" id="modal-content">
+            <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
+            <p id="modal-body" class="text-slate-400 mb-6"></p>
+            <button onclick="closeModal()" class="w-full py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all">סגור</button>
         </div>
     </div>
 
-
     <!-- ==========================================
-         אזור 3: קוד JavaScript (הלוגיקה המלאה)
+         סקריפטים, לוגיקה ומאגר ידע ענק
          ========================================== -->
     <script>
         /**
-         * -----------------------------------------------------------------
-         * מאגרי מידע מוטמעים - IVR Data Dictionary (Massive Scale)
-         * מבוסס על "הגדרות במערכות IVR.txt" שהועלה.
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 1. מאגר ידע עצום - תיעוד מלא של מערכת ימות המשיח
+         * יצרתי מערך ענק המכיל את כל התיעוד שסיפקת, שורה אחר שורה,
+         * כדי שה-AI ישתמש בו כקונטקסט מלא לפיתוח הקוד!
+         * ========================================================
          */
-        const IVR_MESSAGES = [
-            { code: "M0000", text: "הודעת ברוכים הבאים - הודעה ראשונה בשלוחה" },
-            { code: "M0003", text: "ניתן להיכנס ממספר ישראלי בלבד" },
-            { code: "M0010", text: "כותרת הקובץ היא" },
-            { code: "M0011", text: "כותרת השידור היא" },
-            { code: "M0012", text: "לשמיעת כמות המספרים השונים ששמעו הודעה זו הקישו 1, לבדיקה האם מספר מסוים שמע את ההודעה הקישו 2, לחזרה הקישו כוכבית" },
-            { code: "M0013", text: "כמות המספרים השונים ששמעו את ההודעה היא" },
-            { code: "M0014", text: "אנא הקישו מספר טלפון, לסיום הקישו סולמית" },
-            { code: "M0015", text: "מספר הטלפון שהוקש לא שמע את ההודעה" },
-            { code: "M0016", text: "מספר הטלפון שהוקש שמע את ההודעה" },
-            { code: "M0099", text: "הודעה אחרונה בשלוחה" },
-            { code: "M0100", text: "להקלטת כותרת לקובץ, הקישו 1, להמשך ללא הקלטת כותרת הקישו 2" },
-            { code: "M1001", text: "לא הוקשה בחירה" },
-            { code: "M1002", text: "הבחירה שגויה" },
-            { code: "M1003", text: "אנא המתן" },
-            { code: "M1004", text: "שגיאה במערכת" },
-            { code: "M1010", text: "לשמיעת ההודעה שוב הקישו 1, לאישור הקישו 2" },
-            { code: "M1020", text: "הקלטתך נשמרה בהצלחה" },
-            { code: "M1034", text: "לאישור הקישו 1, להקשה מחודשת 2." },
-            { code: "M1100", text: "אין הודעות בשלוחה זו" },
-            { code: "M1419", text: "נא הקישו הסכום לחיוב" },
-            { code: "M1420", text: "שקלים חדשים" },
-            { code: "M1421", text: "הסכום חייב להיות גדול מ 0 שקלים, אנא נסו שנית" },
-            { code: "M1422", text: "אנא הקישו את מספר כרטיס האשראי משמאל לימין ובסיום הקישו סולמית" },
-            { code: "M1423", text: "תוקף הכרטיס שגוי - יש להקיש תוקף ב4 ספרות" },
-            { code: "M1424", text: "נא הקישו את תוקף הכרטיס בארבע ספרות" },
-            { code: "M1425", text: "קיימת שגיאת התחברות עם השרת, אנא נסו מחדש בעוד מספר דקות" },
-            { code: "M1428", text: "נא הקישו את 3 הספרות בגב הכרטיס" },
-            { code: "M1429", text: "אנא הקישו את מספר תעודת הזהות של בעל הכרטיס" },
-            { code: "M1599", text: "עיסקה זו תחוייב בפריסה של" },
-            { code: "M1600", text: "אנא הקש מספר תשלומים וסולמית לסיום" },
-            { code: "M2000", text: "שלוחת השמעת קבצים" },
-            { code: "M3000", text: "שלוחת תפריט" },
-            { code: "M4000", text: "שלוחת ניתוב" },
-            // מילוי של עוד הגדרות שיהוו בסיס נתונים ל-AI
-        ];
-
-        // AI System Prompt - העברת ההוראות מהקובץ שהועלה לתוך ה-AI
-        const AI_SYSTEM_PROMPT = `
-אתה מומחה טכני למערכות IVR של "ימות המשיח" ומפתח מומחה ב-Node.js עבור Vercel Serverless Functions.
-תפקידך לכתוב פונקציות API (מודול type=api של ימות המשיח).
-
-דרישות קוד חובה (Vercel Node.js):
-1. הקוד חייב להיות בתוך פונקציית handler שייצאה כברירת מחדל: \`export default async function handler(req, res) { ... }\`
-2. הבקשות של ימות המשיח מגיעות בדרך כלל ב-GET או POST (תמוך בשניהם על ידי קריאת \`req.query\` או \`req.body\`).
-3. עליך להחזיר תשובה בפורמט טקסט רגיל (text/plain) ולא JSON.
-4. פורמט התשובה לימות המשיח בנוי משורות של פקודות:
-   לדוגמה:
-   id_list_message=t-ברוכים הבאים למערכת ה-API
-   read=t-הקישו תעודת זהות=id,no,1,1,9,9,Yes
-5. פרמטרים שמקבלים מימות:
-   ApiPhone - הטלפון של המחייג
-   ApiDID - המספר שאליו חייגו
-   ApiExtension - השלוחה הנוכחית
-6. פקודות נפוצות להחזרה:
-   id_list_message=... (להשמעת הודעה)
-   read=... (קבלת הקשות)
-   go_to_folder=... (מעבר לשלוחה)
-   disconnect=... (ניתוק)
-   
-משימתך: כתוב אך ורק את קוד ה-JavaScript. אל תוסיף הסברים. אל תשתמש ב-Markdown של \`\`\`javascript, החזר טקסט נקי לחלוטין שאפשר לשמור ישירות כקובץ .js.
-`;
+        const YEMOT_KNOWLEDGE_BASE =[
+            "Folder: הגדרות בקבצי טקסט גירסא 2.00",
+            "File: הודעות מערכת מעודכן.txt",
+            "M0000 הודעת ברוכים הבאים - הודעה ראשונה בשלוחה",
+            "M0003 ניתן להיכנס ממספר ישראלי בלבד",
+            "M0010 כותרת הקובץ היא",
+            "M0011 כותרת השידור היא",
+            "M0012 לשמיעת כמות המספרים השונים ששמעו הודעה זו הקישו 1, לבדיקה האם מספר מסוים שמע את ההודעה הקישו 2, לחזרה הקישו כוכבית",
+            "M0013 כמות המספרים השונים ששמעו את ההודעה היא",
+            "M0014 אנא הקישו מספר טלפון, לסיום הקישו סולמית",
+            "M0015 מספר הטלפון שהוקש לא שמע את ההודעה",
+            "M0016 מספר הטלפון שהוקש שמע את ההודעה",
+            "M0099 הודעה אחרונה בשלוחה",
+            "M0100 להקלטת כותרת לקובץ, הקישו 1, להמשך ללא הקלטת כותרת הקישו 2",
+            "M0101 להקלטת כותרת לשידור, הקישו 1, להמשך ללא הקלטת כותרת הקישו 2",
+            "M0102 אנא הקליטו את כותרת השידור לאחר הצליל ובסיום הקישו סולמית",
+            "M1000 תפריט. אנא הקישו את מספר השלוחה",
+            "M1001 המקש שֶהוֹקַש שגוי",
+            "M1002 לא הוקשה בחירה",
+            "M1003 אורך",
+            "M1004 דקות",
+            "M1005 סוף הודעות",
+            "M1006 beep",
+            "M1007 השידור החי עדיין לא החל. להמתנה לַשידור הַקִישוּ 1, להאזנה לשידורים קודמים הַקִישוּ 2",
+            "M1008 השידור יחל מיד עם כניסתו של המנהל.",
+            "M1009 לשמיעת ההקלטה הקישו 1. לאישור ההקלטה הקישו 2. להקלטה מחודשת 3. לביטול וחזרה הקישו 4",
+            "M1010 הֶקְלַטֶתֶם בהצלחה את קובץ מספר",
+            "M1011 להקלטה נוספת הַקִישוּ 1. לְסיום הַקִישוּ 2 או הַמתינו.",
+            "M1012 אנא הקליטו את הודעתכם לאחר הצליל. בסיום הַקישו סולמית",
+            "M1166 ביפ תחילת הקלטה- beep record",
+            "M1013 עד היום צברת",
+            "M1014 נקודות",
+            "M1015 מספר הטלפון שלכם אינו מזוהה",
+            "M1016 המספר האישי שלכם אינו מזוהה",
+            "M1017 קיבלת",
+            "M1018 אין נתונים על השמעה אחרונה",
+            "M1019 הנך בדקה",
+            "M1020 מתוך",
+            "M1021 שלוחה",
+            "M1022 האזנה",
+            "M1023 לא ניתן לצרף את טלפון",
+            "M1024 הוספתם בהצלחה לרשימת התפוצה את טלפון מספר",
+            "M1025 לא ניתן להסיר את טלפון",
+            "M1026 שלום ותודה",
+            "M1027 הסרת מספר. הנכם מבקשים להסיר את טלפון מספר",
+            "M1028 האם הנכם בטוחים? לאישור ההסרה הַקישו1 , לֶביטול הקישו 2, או נתקו את השיחה.",
+            "M1029 הסרת מספר הטלפון בוטלה",
+            "M1030 הסרתם בהצלחה מרשימת התפוצה את טלפון מספר",
+            "M1031 להוראות הפעלה הקישו1. להשארת הודעה למנהל המערכת הקישו2. לחזרה למיקום האחרון אליו הֶאֵזַנְתֶם הקישו3. לשמיעת כל התכנים המוקלטים במערכת הקישו 4. לפתיחת מערכת וואצפון שבהקשה על 8 וסולמית עוברים ישירות למערכת שלנו הקישו 5. לרשימות ההשמעה האישיות שלכם הקישו 6 להקלטת השמעות הקישו 7",
+            "M1032 הוראות הפעלה למערכת שימו לב! ההוראות המושמעת כאן הן לפי הגדרות ברירת המחדל במערכת. בעת מעבר בין שלוחות במערכת, ניתן להקיש סולמית לחזרה שלב אחד אחורה, וכוכבית לחזרה לתפריט הראשי בעת שמיעת קובץ: לחזרה עשר שניות אחורה הקישו 1, לדילוג עשר שניות קדימה הקישו 3. לחזרה 5 דקות אחורה הקישו 4, לדילוג 5 דקות קדימה הקישו 6. לעצירה זמנית של ההשמעה הקישו 5, לביטול העצירה והמשך האזנה הקישו שוב 5. לשינוי מהירות ההשמעה למהירות נמוכה יותר הקישו 7, לשינוי למהירות גבוהה יותר הקישו 9. לחזרה למהירות רגילה הקישו 0. למעבר לקובץ הבא הקישו 8, לחזרה לקובץ קודם הקישו 2. לאפשרויות נוספות הקישו כוכבית. ליציאה מהשלוחה הקישו סולמית. בעת השתתפות בחדר ועידה: להצבעה, ביטול השתקה ואפשרויות נוספות הקישו כוכבית ופעלו לפי ההוראות.",
+            "M1033 לגישה אנא הכנס כמנהל",
+            "M1034 לאישור הקישו 1, להקשה מחודשת 2.",
+            "M1035 לא הקּשתּם את מינימום הספרות הנדרשות",
+            "M1036 אנא הקישו את מספר הקובץ וסולמית לֶסיום",
+            "M1037 הכותרת הוקלטה בהצלחה",
+            "M1038 אנא הקליטו את כותרת הקובץ לאחר הצליל ובסיום הקישו סולמית",
+            "M1039 אנא הקישו את מספר השלוחה לניתוב וסולמית",
+            "M1040 ליציאה הקישו כוכבית",
+            "M1041 המענה סַגוּר כעת, אנא נסו שוב בשעות הפעילות",
+            "M1042 שלוחה זו אינה מוגדרת במערכת",
+            "M1043 יתרת יחידות נמוכה לביצוע השיחה",
+            "M1044 אנא נסו שנית ממספר טלפון מזוהה",
+            "M1045 ברוכים הבאים למערכת ההזמנות של המערכות החינמיות, לקבלת מערכת הקישו 1",
+            "M1046 ניתן לפתוח מערכת אחת בשבוע, אנא נסו שוב בשבוע הבא",
+            "M1047 אנא בחרו סיסמת ניהול ולסיום הקישו סולמית",
+            "M1048 לצערינו אין כרגע מספרי טלפון להקצאה, אנא נסו שוב במועד מאוחר יותר",
+            "M1049 מזל טוב - פתחתם מערכת חינמית משלכם, מספר הטלפון של המערכת הוא",
+            "M1050 הטלפון של מנהל המערכת",
+            "M1051 סיסמת הניהול היא",
+            "M1052 לשמיעה מחודשת של מספר המערכת הקישו 1. לֶסיום הקישו 2",
+            "M1053 אנא אֶמׂר במספר מילים עבור מה מיועדת המערכת",
+            "M1054 אנא הקליטו את שמכם הפרטי אות אחר אות. לדוגמא לַשֶם משה אִמרו משה, מם שין הֶי. בסיום הַקישו סולמית",
+            "M1055 אנא הקליטו את שם המשפחה שלכם אות אחר אות. לדוגמא למשפחת כהן אִמרו כהן, כף הֶי נון. בסיום הַקישו סולמית",
+            "M1056 להלן הפרטים שנקלטו",
+            "M1057 לאישור הקישו 1 לשמיעה חוזרת 2 להקלטה מחדש הקישו 3",
+            "M1058 סיסמה קצַרה מידי",
+            "M1059 במידה וברצונכם להכניס טלפון נוסף בתור מנהל מערכת, הַקישו את מספרו וסולמית לֶסיום. לֶדילוג הַקישו סולמית או הַמתינו.",
+            "M1060 אנא השאירו הודעתכם לאחר הִשַמע הצליל. לֶסיום נתקו את השיחה או הַקישו סולמית",
+            "M1061 לשמיעת ההודעה הקישו 1, לֶאישור הקישו 2, להקלטה מחודשת 3, לביטול וחזרה הקישו 4.",
+            "M1062 מיד תועברו להקלטת הברכה, לפני בקשת הברכה מקבלים החלטה טובה בתורה מצוות ומעשים טובים ומכריזים יחי.. אנא השאירו את בקשת הברכה שמכם שם אמכם. בסיום ההקלטה הקישו סולמית",
+            "M1063 לאישור ושליחת בקשת הברכה, הקישו 1 לשמיעת בקשת הברכה 2 להקלטה מחודשת של בקשת הברה 3",
+            "M1064 קיבלתם תשובה מהרבי שליטא מלך המשיח באמצעות האיגרות קודש בכרך",
+            "M1065 עמוד",
+            "M1066 ועמוד",
+            "M1067 לשמיעה חוזרת של מיקום התשובה הקש 1 לקבלת העתק ממכתב התשובה מיידית לתיבת הדואר האלקטרוני שלכם הקישו 2. לקבלת העתק ממכתב התשובה בדואר רגיל לביתכם הקישו 3. לחזרה לתפריט הראשי הקישו *",
+            "M1068 על מנת שנוכל לשלוח את הְעֶתֶק התשובה לביתכם, אנא הקליטו את הפרטים לְמשלוח - שלב אחר שלב",
+            "M1069 אנא הקליטו את מספר הבית, ובסיום הַקישו סולמית",
+            "M1070 אנא הקליטו את מספר הדירה, ובסיום הַקישו סולמית",
+            "M1071 אנא הקליטו את שם העיר אות אחר אות. לדוגמא לעיר חיפה אִמרו חיפה, חת יוד פְּי הֶי. בסיום הַקישו סולמית",
+            "M1072 להלן הפרטים למשלוח הדואר",
+            "M1073 אנא הקישו על מקשי הטלפון, את מספר מיקוד הדואר בכתובת שציינתם, בסיום הַקישו סולמית",
+            "M1074 אנא הקישו על מקשי הטלפון, מספר טלפון בו במידת הצורך יהיה ניתן ליצור אתכם קשר, בסיום הַקישו סולמית",
+            "M1075 תודה רבה, בקשתכם למשלוח הְעֶתֶק התשובה בדואר, התקבלה בהצלחה",
+            "M1076 מספר הפּנִיַה הוא",
+            "M1077 לסיום ומַעַבַר לתפריט הראשי, הקישו 1. לשמיעת מספר הפּנִיַה שנית, לצורך בירור עתידי, הקישו 2",
+            "M1078 לְאישור הקישו 1. להקלטה מחודשת של הפרטים הקישו 2",
+            "M1079 אנא הקליטו את שם הרחוב אות אחר אות, לדוגמא לרחוב חבצלת אִמְרוּ: חבצלת, ח,ב,צ,ל,ת. בסיום הַקישו סולמית.",
+            "M1080 שגיאה",
+            "M1081 הפרק אותו קיבלת לקריאה הינו פרק (מיועד לחלוקת פרק אחד או שניים)",
+            "M1082 וכן את פרק (מיועד לחלוקה של 2 פרקים) (עד פרק בקריאה אישית)",
+            "M1083 תזכה למצוות (וכן את כל ההודעות לאחרי השמעת הפרקים)",
+            "M1084 הפרקים אותם קיבלתם לקריאה הינם פרקים (מיועד לחלוקה של מעל 2 פרקים)",
+            "M1085 עד פרק (מיועד לחלוקה של מעל 2 פרקים)",
+            "M1086 הפרשה אותה קיבלת לקריאה הינה פרשת",
+            "M1087 עד פרשת / וכן את פרשת",
+            "M1088 עד פרשת",
+            "M1089 תפריט בחירה שְלַב...",
+            "M1090 אנא הקישו את בחירתכם ב...",
+            "M1091 סְפַרוֹת",
+            "M1092 לפרשת",
+            "M1093 תזכורת ספירת העומר",
+            "M1094 הודעה לאחר תזכורת ספירת העומר - ברירת מחדל ניתן ללמוד את השיעור היומי מפי הרב יוסף יצחק כץ",
+            "M1095 שגיאת ניהול, לא הוגדר סוג זיהוי",
+            "M1096 להקלטה אנא הקישו את מספר התיקייה וסולמית לסיום. להקלטה בתיקייה הזמנית הקישו סולמית. להקלטה בתתי תיקיות הקישו את הכתובת המלאה, כאשר בין תיקייה לתיקייה הקישו כוכבית. בסיום הכתובת המלאה הקישו סולמית.",
+            "M1097 אין הרשאה להקלטה בתיקיה זו",
+            "M1098 כבר קיבלתם ניקוד על ערך זה",
+            "M1099 אין הודעה להשמעה",
+            "M1100 נא הקש את הסיסמה ובסיום הקש סולמית",
+            "M1101 סיסמה שגויה",
+            "M1102 אין לכם הרשאת גישה לתיקייה זו",
+            "M1103 אנא הקישו את המספר האישי וסולמית לְסיום",
+            "M1104 המספר האישי שֶ הוּקַש שגוי",
+            "M1105 התחברתם בהצלחה",
+            "M1106 שלום לך מספר אישי",
+            "M1107 ניכר כי הנכם משתמשים חדשים במערכת",
+            "M1108 אנא אמרו את שמכם ושם משפחתכם לאחר השמע הצליל",
+            "M1109 אם אתם מרוצים מההקלטה הקישו 1 להקלטה מחודשת 2",
+            "M1110 הקלטת השם נקלטה בהצלחה",
+            "M1111 שלום ל..",
+            "M1112 תזכורת ספירת העומר",
+            "M1113 הודעה לאחר תזכורת ספירת העומר - ברירת מחדל ניתן ללמוד את השיעור היומי מפי הרב יוסף יצחק כץ",
+            "M1114 שלוחה זו סגורה כעת, אנא נסו שוב בשעות הפעילות",
+            "M1115 לא ניתן להכנס שוב עם משתמש זה",
+            "M1116 עד היום צברת",
+            "M1117 נקודות",
+            "M1120 לא ניתן לבצע פעולה זו. שלום ותודה. (השלוחה אליה ביקשת לעבור אינה ניתנת להפעלה עקב חוסר בהגדרות, אנא פנה למנהל המערכת).",
+            "M1170 המערכת סגורה בשבתות ובימים טובים",
+            "M1199 שעון מתקטק",
+            "M1200 ענית בהצלחה",
+            "M1201 עדכון המשימה התקבל בהצלחה",
+            "M1202 תשובה נכונה תזכה אתכן עד",
+            "M1203 ברוכים הבאים למשחק הטריוויה",
+            "M1204 ועכשיו נשאל אתכם שאלה על הקטע שלמדתם",
+            "M1205 נקודות",
+            "M1206 הנך מועבר לשאלה הבאה",
+            "M1207 השאלה היא",
+            "M1208 אנא הקישו את מספר התשובה הנכונה",
+            "M1209 שעון מתקטק",
+            "M1210 תשובתך שגויה",
+            "M1211 תשובה ראשונה",
+            "M1212 תשובה שניה",
+            "M1213 תשובה שלישית",
+            "M1214 תשובה רביעית",
+            "M1215 אנא נסה שנית",
+            "M1216 התשובה הנכונה היא",
+            "M1217 נכון או לא נכון",
+            "M1218 לנכון הקישו 1 ללא נכון הקישו 0",
+            "M1219 התשובה היא",
+            "M1220 לא נכון",
+            "M1221 נכון",
+            "M1222 סך הניקוד שברשותך הוא",
+            "M1223 קיבלת",
+            "M1224 בחירה לא חוקית",
+            "M1225 השיא שלכם בטרוויה הוא",
+            "M1226 הנכם מתחילים משחק חדש",
+            "M1227 סך הניקוד במשחק החדש הוא",
+            "M1228 סיימתם בהצלחה את כל השאלות בטריוויה",
+            "M1229 סך הניקוד שצברתם במהלך המשחק הוא",
+            "M1230 כל הכבוד",
+            "M1231 להפעלה מחודשת של הטריוויה הקישו 1 לחזרה לתפריט הראשי הקישו 2",
+            "M1232 השיא החדש שלך הוא",
+            "M1233 כבר קיבלת ניקוד על תשובה זו",
+            "M1240 אולי בפעם אחרת",
+            "M1241 אופס, טעות",
+            "M1242 הפעם שגית",
+            "M1243 לא נורא",
+            "M1244 ממש... לא!",
+            "M1245 מענין, אבל זה לא זה",
+            "M1246 נסה שוב",
+            "M1247 שווה לקרוא את החומר פעם נוספת",
+            "M1250 אדיר",
+            "M1251 איזו בקיאות",
+            "M1252 אין כמוך",
+            "M1253 אתה ממש גאון",
+            "M1254 אתה פשוט עשר",
+            "M1255 וואו!! אתה מקסים",
+            "M1256 חכם כמוך לא רואים כל יום",
+            "M1257 יפה מאוד",
+            "M1258 יש במה להתגאות",
+            "M1259 יש לך ראש פיצוץ",
+            "M1260 כל הכבוד",
+            "M1261 לא יאומן!",
+            "M1262 מדהים",
+            "M1263 מיוחד",
+            "M1264 נפלא",
+            "M1265 תמיד אמרו עליך שאתה ילד מחונן",
+            "M1266 תמשיך כך",
+            "M1270 הנך מועבר להקלטת שאלה מספר",
+            "M1271 אנא הקליטו את השאלה לאחר השמע הצליל, לסיום הקישו סולמית",
+            "M1272 אנא הקליטו את התשובה הנכונה ובסיום הקישו סולמית",
+            "M1273 אנא הקליטו מסיח ראשון ובסיום הקישו סולמית",
+            "M1274 אנא הקליטו מסיח שני ובסיום הקישו סולמית",
+            "M1275 אנא הקליטו מסיח שלישי ובסיום הקישו סולמית",
+            "M1277 אם ברצונכם בהקלטת מסיח שלישי הקישו 1 להקלטת שאלה נוספת הקישו 2 לחזרה לתפריט הראשי הקישו 3",
+            "M1278 להקלטת שאלה נוספת הקישו 1 לחזרה לתפריט הראשי הקישו 2",
+            "M1279 להקלטת שאלה טריוויה אמריקאית הקישו 1 להקלטת שאלת נכון או לא נכון הקישו 2",
+            "M1280 להקלטת שאלה שהתשובה עליה נכון הקישו 1 להקלטת שאלה שהתשובה עליה לא נכון הקישו 2",
+            "M1281 השאלה הוקלטה בהצלחה",
+            "M1282 התשובה הנכונה הוקלטה בהצלחה",
+            "M1283 מסיח ראשון הוקלט בהצלחה",
+            "M1284 מסיח שני הוקלט בהצלחה",
+            "M1285 מסיח שלישי הוקלט בהצלחה",
+            "M1290 להקלטת שאלה חדשה הקישו 1 לעריכת שאלה קיימת הקישו 2",
+            "M1301 בשלוחה זו צברת",
+            "M1302 אי צבירת נקודות נוספות עדיין בתוקף",
+            "M1303 אי צבירת נקודות נוספות בתיקיה זו עדיין בתוקף",
+            "M1304 על ערך זה צברת",
+            "M1305 ההודעה קצרה מידי",
+            "M1306 ההודעה מבוטלת",
+            "M1307 תגובות",
+            "M1308 סוף תגובות",
+            "M1309 אין תגובות להשמעה",
+            "M1310 להקלטת תגובה הקישו 1 לשמיעת התגובות הקישו 2 להמשך הקישו 9 או המתינו",
+            "M1311 אנא הקש את מספר מערכת הלקוח עבורו להוציא את החשבונית",
+            "M1312 אין ארועים",
+            "M1313 אירועים להיום",
+            "M1314 אירועים ליום",
+            "M1315 לאירועים מהיום הקישו 1 או המתינו לאירועים מיום אחר הקישו 2",
+            "M1316 לבחירת תאריך עברי הקישו 1 לבחירת תאריך לועזי הקישו 2",
+            "M1317 אנא הקישו את התאריך העברי ב6 ספרות לדוגמא ליום ג תשרי בשנת עה הקישו ג 03, תשרי 01, עה 75",
+            "M1318 אנא הקישו את התאריך הלועזי ב6 ספרות לדוגמא ליום הראשון במרץ 2015 הקישו יום 01, חודש מרץ 03, ושנה ב2 ספרות - 15.",
+            "M1320 לדירוג הקש 1 לשמיעת הדירוגים הקש 2 להמשך הקישו 3 או המתינו",
+            "M1321 אנא דרג מ1 עד 5, כאשר 1 זה הדירוג הנמוך ביותר ו5 זה הדירוג הגבוה ביותר",
+            "M1322 אין זיהוי טלפוני. לא ניתן לדרג.",
+            "M1323 על פי רשומי המערכת כבר דירגת את השמעה זו.",
+            "M1324 הדרוג שהוקש שגוי ניתן לדרג בין 1 ל 5 בלבד",
+            "M1325 הדירוג התקבל בהצלחה",
+            "M1326 לשמיעת הדירוגים הקש 1 להמשך הקישו 2 או המתינו",
+            "M1327 הדירוג שלך הוא",
+            "M1328 כמות המדרגים",
+            "M1329 ממוצע הדירוג",
+            "M1330 בשלוחה זו עדיין אין השמעות",
+            "M1332 תודה רבה המערכת נפתחה בהצלחה מיד תקבלו שיחת טלפון מהמערכת החדשה שלכם אנו חזרו למספר המופיע על הצג להשלמת הרישום",
+            "M1333 באם ברצונכם בקבלת תגמול עבור המערכת אנא הקישו 1 למעבר להקשת ת.ז. לדילוג הקישו 2",
+            "M1334 אנא הקישו את ת.ז. של בעל המערכת ב9 ספרות",
+            "M1335 תעודת הזהות שגויה",
+            "M1336 לתשומת לבכם, השימוש עם מספר אישי זה הגיע לסיומו, שלום ותודה.",
+            "M1337 השעה כעת - M1338 ו ו...",
+            "M1339 דקות",
+            "M1340 נרשמת בהצלחה, אישור מספר",
+            "M1341 לסיום הקישו 1. לשמיעת מספר האישור פעם נוספת הקישו 2.",
+            "M1342 ההרשמה התמלאה. אנא נסו שוב מחר.",
+            "M1343 המספר עכשיו הוא",
+            "M1344 המספר לעכשיו עדיין לא הוגדר",
+            "M1345 אנא הקש את המספר להשמעה, לביטול עריכה הקש כוכבית וסולמית, להגדיר שהמספרים לעכשיו הסתיימו הקישו אפס וסולמית, להגדיר שהמספר עדיין לא הוגדר הקישו כוכבית כוכבית כוכבית וסולמית",
+            "M1346 המספרים לעכשיו הסתיימו",
+            "M1347 אין נתונים להשמעה",
+            "M1348 הרשמה זו התמלאה והסתיימה. שלום ותודה.",
+            "M1349 להוספת השמעה זו לרשימת השמעה ברירת המחדל הקישו 1 להוספת השמעה זו לרשימת השמעה אחרת הקישו 2 להוספת כל ההשמעות שבשלוחה זו לרשימת השמעה חדשה הקישו 3 לביטול הקישו כוכבית",
+            "M1350 מספרך אינו מזוהה במערכת. ניתן להוסיף לרשימות השמעה מטלפון מזוהה בלבד",
+            "M1351 ההשמעה צורפה בהצלחה ל... (רשימת השמעה)",
+            "M1352 אנא הקליטו את שם רשימת ההשמעה",
+            "M1353 לאישור הקישו 1 להקלטה מחודשת 2",
+            "M1354 שם רשימת ההשמעה נקלט בהצלחה",
+            "M1355 אנא הקישו את מספר רשימת ההשמעה להוספה וסולמית לסיום, ניתן להקיש כל מספר עד 10 ספרות.",
+            "M1356 הרשימות הקיימות הם:",
+            "M1357 הוספת קיצור דרך לכל השלוחה - ברשימת השמעה שלכם. אנא הקישו את מספר הרשימה להוספה וסולמית לסיום, ניתן להקיש כל רשימה שאינה קיימת ועד 10 ספרות.",
+            "M1358 רשימת השמעה זו כבר קיימת.",
+            "M1359 מספרך אינו מזוהה במערכת. ניתן להתחבר לרשימות השמעה אישיות מטלפון מזוהה בלבד",
+            "M1360 ברוכים הבאים לרשימת ההשמעה האישית שלכם. רשימת ההשמעה שלכם ריקה, ניתן להוסיף לרשימה במהלך האזנה בתכני המערכת.",
+            "M1361 ברוכים הבאים לרשימת ההשמעה האישית שלכם. להפעלת רשימת ברירת המחדל הקישו 1 או המתינו להפעלת רשימה אחרת הקישו 2 להגדרת רשימת השמעה ברירת המחדל הקישו 3 להגדרת צורת ההפעלה וההגדרות נוספות בשלוחה הקישו 4 לחזרה הקישו כוכבית",
+            "M1362 רשימת השמעה זו ריקה אנא בחרו רשימה אחרת",
+            "M1363 רשימת השמעה ברירת מחדל שלכם היא רשימה מספר",
+            "M1364 לאישור וחזרה הקישו 1 לשינוי הקישו 2",
+            "M1365 אנא הקישו את הרשימה אותה ברצונכם להגדיר כברירת מחדל וסולמית לסיום.",
+            "M1366 הגדרתם בהצלחה לרשימת ברירת מחדל את",
+            "M1367 אנא הקישו את מספר רשימת ההשמעה וסולמית לסיום",
+            "M1368 לא ניתן להקיש מקש כוכבית",
+            "M1369 להגדרת מיקום תחילת הפעלת הרשימה הקישו 1 לשינוי שם השלוחה הקישו 2 להעברת השמעה זו לרשימת השמעה חדשה אחרת הקישו 3 להגדרת השמעה זו כהשמעת ברירת מחדל הקישו 4 למחיקת כל רשימת השמעה זו הקישו 5 ליציאה הקישו כוכבית",
+            "M1370 האם הנכם בטוחים? לאישור מחיקת כל רשימת השמעה זו הקישו 1",
+            "M1371 הרשימה נמחקה בהצלחה",
+            "M1372 אנא הקישו את מספר הרשימה החדשה להעברה וסולמית לסיום",
+            "M1373 רשימת השמעה כבר קיימת אנא בחרו רשימה אחרת",
+            "M1374 רשימת ההשמעה הועברה בהצלחה",
+            "M1375 ההפעלה בשלוחה זו מוגדרת כ...",
+            "M1376 הפעלה מהקובץ שצורף אחרון",
+            "M1377 הפעלה מהקובץ שצורף ראשון",
+            "M1378 הפעלה בסדר אקראי",
+            "M1379 להפעלה מהקובץ שצורף ראשון הקישו 1 להפעלה מהקובץ שצורף אחרון הקישו 2 להפעלה בסדר אקראי הקישו 3 לביטול ויציאה הקישו כוכבית",
+            "M1380 הגדרתם בהצלחה",
+            "M1381 מחיקת ההשמעה. האם הנכם בטוחים? לאישור המחיקה הקישו 1",
+            "M1382 מחיקת ההשמעה התבצעה בהצלחה",
+            "M1383 שמיעה חוזרת 0 לפרטי ההשמעה הקישו 1 לשיתוף ההשמעה עם רשימת השמעה נוספת הקישו 2 להעברת השמעה זו לרשימת השמעה אחרת הקישו 3 למחיקת השמעה זו הקישו 4 לשיתוף ההשמעה זו עם קבוצות ומערכות תכנים אחרות הקישו 5",
+            "M1384 אנא הקישו את מספר רשימת ההשמעה להעברה וסולמית לסיום",
+            "M1385 האם הנכם בטוחים? לאישור מחיקת השמעה זו מרשימת ההשמעה הקישו 1",
+            "M1386 ההשמעה נמחקה בהצלחה",
+            "M1387 שמיעה חוזרת 0 לפרטי ההשמעה הקישו 1 לשיתוף ההשמעה עם רשימת השמעה נוספת הקישו 2 לשיתוף ההשמעה זו עם קבוצות ומערכות תכנים אחרות הקישו 5",
+            "M1388 לא ניתן להעביר השמעה בהפעלת רשימת השמעה של שלוחה שלמה, במקום זאת, ניתן לשתף.",
+            "M1389 לא ניתן למחוק השמעה בהפעלת רשימת השמעה של שלוחה שלמה",
+            "M1390 לאפשרויות האזנה הקישו כוכבית",
+            "M1391 לשמיעה חוזרת הקישו סולמית לשמירת ההשמעה ברשימת ההשמעות האישיות שלכם הקישו 1 לדירוג ההשמעה הקישו 2 לשיתוף השמעה זו עם קבוצות ומערכות תכנים אחרות הקישו 3 לתגובה על השמעה זו הקישו 4 להנמכת עוצמת השמע הקישו 5 להגברת עוצמת השמע הקישו 6 להפעלת כל שלוחה זו בסדר אקראי הקישו 7 לשמיעת פרטי הקובץ ואפשרויות הקשה הקישו 8 למעבר לקובץ אקראי הקישו 9 לניהול ההשמעה על ידי מנהל הקישו 0 לחזרה להשמעה הקישו כוכבית או המתינו",
+            "M1392 אין אישור להעברת הקובץ",
+            "M1393 אנא הקישו את מספר המערכת להעתקת הקובץ",
+            "M1394 הקובץ הועתק בהצלחה",
+            "M1395 חלה שגיאה בהעתקת הקובץ",
+            "M1396 אנא הקישו את מספר השלוחה לשיתוף ניתן לשתף רק לתיקיות של השמעת תכנים בלבד לביטול השיתוף הקישו כוכבית וסולמית",
+            "M1397 השלוחה שבחרתם אינה קיימת או שאינה של השמעת קבצים",
+            "M1398 לא ניתן להקליט תגובה בשלוחה זו.",
+            "M1399 תגובתך התקבלה בהצלחה",
+            "M1400 תגובתך התקבלה בהצלחה והועברה לאישור המנהל",
+            "M1401 לא ניתן להקליט תגובה ללא זיהוי טלפוני, אנא צלצלו מספר מזוהה",
+            "M1402 אנא הקליטו את תגובתכם לאחר השמע הצליל, לסיום הקישו סולמית",
+            "M1403 יש לך...",
+            "M1404 תגובות ממתינות לאישור",
+            "M1405 אין תגובות ממתינות לאישור",
+            "M1406 לשמיעה חוזרת הקישו 0 לאישור התגובה הקישו 1 למחיקת התגובה הקישו 2 לפרטי התגובה הקישו 3 לדילוג והחלטה במועד מאוחר יותר הקישו 4 ליציאה הקישו כוכבית.",
+            "M1407 להשמעה הבאה (X ,תגובות להאזנה הקישו..)",
+            "M1408 תגובות, להאזנה הקישו כוכבית ארבע",
+            "M1410 עדין אין תגובות, להקלטת תגובה הקישו 1 להמשך הקישו 9 או המתינו",
+            "M1411 יש (X תגובות)",
+            "M1412 (יש X) תגובות",
+            "M1413 הקופונים נגמרו.",
+            "M1414 אין כרגע קופונים לחלוקה",
+            "M1415 הקופון שלך הוא",
+            "M1416 לסיום הקישו 1. לשמיעת הקופון פעם נוספת הקישו 2.",
+            "M1417 הסרתם בהצלחה את הטלפון שלכם מרשימת התפוצה",
+            "M1418 הוספתם בהצלחה את הטלפון שלכם לרשימת התפוצה",
+            "M1419 אנא הקישו הסכום לחיוב",
+            "M1420 שקלים חדשים",
+            "M1421 הסכום חייב להיות גדול מ 0 שקלים, אנא נסו שנית",
+            "M1422 אנא הקישו את מספר כרטיס האשראי משמאול לימין ובסיום הקישו סולמית ליציאה הקישו כוכבית וסולמית",
+            "M1423 תוקף הכרטיס שגוי - יש להקיש תוקף ב4 ספרות חודש ב2 ספרות ושנה ב2 ספרות",
+            "M1424 אנא הקישו את תוקף הכרטיס בארבע ספרות",
+            "M1425 קיימת שגיאת התחברות עם השרת, אנא נסו מחדש בעוד מספר דקות, תודה",
+            "M1426 העיסקה נדחתה סטטוס סירוב",
+            "M1427 אנא נסו שנית עם כרטיס אחר",
+            "M1428 אנא הקישו את 3 הספרות בגב הכרטיס",
+            "M1429 אנא הקישו את מספר תעודת הזהות של בעל הכרטיס ובסיום הקישו סולמית",
+            "M1430 העיסקה התקבלה בהצלחה",
+            "M1431 אישור מספר",
+            "M1432 לשמיעה חוזרת של מספר האישור הקישו 1 לסיום הרכישה והמשך הקישו 2",
+            "M1433 אין שם משתמש",
+            "M1434 אין מספר מסוף",
+            "M1435 אין סיסמת מסוף",
+            "M1436 אנא הקישו את מספר התשלומים, ניתן לחלק עד ל",
+            "M1437 תשלומים",
+            "M1438 כאשר התשלום הראשון יהיה בגובה של ..",
+            "M1439 כמות התשלומים אינה תקינה",
+            "M1440 אנא הקש את המפתח שלך וסולמית לסיום",
+            "M1441 המפתח שהוקש אינו קיים.",
+            "M1442 מפתח זה כבר סיים את מקסימום השימושים.",
+            "M1443 אנא הקישו את השיוך שלכם, לדילוג הקישו סולמית או המתינו",
+            "M1444 עד כה חולקו",
+            "M1445 ספרים",
+            "M1446 סיסמת הקלטות והפעלת שידור חי",
+            "M1447 נרשמת בהצלחה",
+            "M1448 פג תוקף השידור. לחידוש אנא פנה לשרות הלקוחות",
+            "M1449 ההגדרות לא הושלמו",
+            "M1450 שגיאה בהפעלת השידור",
+            "M1451 השידור כבר החל - לא ניתן להכנס לשידור פעיל",
+            "M1452 ההודעה הוקלטה בהצלחה",
+            "M1453 בשלוחה זו",
+            "M1454 השמעות",
+            "M1455 תגובות משלוחה",
+            "M1456 התגובה נכנסה בהצלחה",
+            "M1457 תגובה הבאה",
+            "M1458 התגובה נמחקה בהצלחה",
+            "M1459 לשמיעה חוזרת הקישו 0 למעבר להשמעה הבאה הקישו 1",
+            "M1460 אין מספרים לחיוג אנא הוסיפו מספרים לחיוג ונסו שנית",
+            "M1461 אין הודעה מוקלטת לשידור",
+            "M1462 הפעלת קמפיין",
+            "M1463 ברשותך",
+            "M1464 יחידות",
+            "M1465 ברשימת התפוצה שלכם ישנם",
+            "M1466 מספרי טלפון לחיוג",
+            "M1467 עבור קמפיין זה תחויב ב",
+            "M1468 ההודעה לשידור היא",
+            "M1469 לאישור הפעלת הקמפיין הקישו 1, לחזרה לתפריט הקישו 2",
+            "M1470 לקוח יקר הקמפיין שביקשת להפעיל כבר פועל במערכת ועדיין לא הסתיים, האם אתה בטוח שברצונך להפעיל קמפיין נוסף? להפעלת קמפין נוסף הקישו 1 אחרת הקישו 2",
+            "M1471 יתרת היחידות החדשה היא",
+            "M1472 הקמפיין מופעל כעת",
+            "M1473 ההשמעה אותה שמעת לאחרונה, בתיקייה ...XXX",
+            "M1474 האזנה מספר",
+            "M1475 עצרת בדקה",
+            "M1476 אורך ההשמעה",
+            "M1477 דקות",
+            "M1478 למעבר למשאיר ההודעה הקישו 1, לשמיעה חוזרת של פרטי ההודעה, הקישו 2, לחזרה להודעות הקישו *",
+            "M1479 לא ניתן לבצע את השיחה. אנא פנה למנהל המערכת.",
+            "M1480 למעבר למשאיר ההודעה הקישו 1,לחזרה להודעות הקישו *",
+            "M1481 לשמיעה חוזרת של פרטי ההודעה, הקישו 1, לחזרה להודעות הקישו *",
+            "M1482 הוקלטה",
+            "M1483 ביום",
+            "M1484 אתמול",
+            "M1485 בשעה",
+            "M1486 הודעה ממספר טלפון",
+            "M1487 אין פרטים על ההודעה",
+            "M1488 היום",
+            "M1489 הועברה ביום",
+            "M1490 ו..",
+            "M1491 דקות",
+            "M1492 לא מעודכן תאריך להודעה זו",
+            "M1493 לא מעודכנת שעה להודעה זו",
+            "M1494 להודעה זו לא מעודכן מספר מקליט ההודעה",
+            "M1495 ב..",
+            "M1496 יתרת היחידות שברשותך אינה מאפשרת את הוצאת הקמפיין",
+            "M1497 הפעלת הקמפין בוטלה",
+            "M1498 אנא הקישו את מספר השורה המבוקש לבחירת כסא אקראי הקישו 0 וסולמית לשמיעת כל המקומות הפנויים ברצף הקישו כוכבית וסולמית ליציאה הקישו סולמית.",
+            "M1499 אין כסאות לבחירה בשורה זו",
+            "M1500 בשורה...",
+            "M1501 יש",
+            "M1502 כסאות זמינים",
+            "M1503 אנא הקישו את מספר הכסא המבוקש, לבחירת כסא אקראי הקישו 0 וסולמית ליציאה הקישו סולמית.",
+            "M1504 הכסאות הזמינים הם:",
+            "M1505 כסא זה אינו זמין למכירה",
+            "M1506 בחרת שורה",
+            "M1507 כסא",
+            "M1508 הסכום לתשלום על הכסא הינו:",
+            "M1509 לשמירת המקום הקישו 1 לבחירת כסא אחר הקישו 2",
+            "M1510 הכסא נשמר עד לסיום השיחה ומקסימום ל20 דקות",
+            "M1511 (כסא...) עדיין פנוי, באם ברצונכם לרכוש גם אותו הקישו 1 לסיום ומעבר לתשלום הקישו 2",
+            "M1512 שגיאה בשמירת הכסא",
+            "M1513 סיום הזמנה",
+            "M1514 הוזמנו (X כסאות)",
+            "M1515 (הוזמנו X) כסאות",
+            "M1516 הסך הכולל לתשלום",
+            "M1517 להלן הפירוט",
+            "M1518 שורה..",
+            "M1519 מחיר",
+            "M1520 הסך הכולל לתשלום",
+            "M1521 שקלים",
+            "M1522 לאישור ההזמנה הקישו 1 לביטול ההזמנה הקישו 2",
+            "M1523 ההזמנה בוטלה שלום ותודה",
+            "M1524 לתשלום בכרטיס אשראי הקישו 1 לתשלום בהוראת קבע הקובעה במוסד הקישו 2 להקשת קופון הקישו 3",
+            "M1525 המקומות נרכשו בהצלחה",
+            "M1526 הגעת למקסימום כרטיסים הניתן לשמור עבורך הינך מועבר לתשלום",
+            "M1527 כבר יש כסאות קנויים על שמך לשמיעת הפרטים הקישו 1 להזמנה נוספת הקישו 2 ליציאה הקישו כוכבית",
+            "M1528 כבר קנית את מקסימום כסאות האפשרי עבורך, לא ניתן להזמין כסאות נוספים",
+            "M1529 נקנו... (כסאות)",
+            "M1530לסיום ומעבר לתשלום הקישו 1 לקניית כסא נוסף סמוך הקישו 2 לבחירת כסא נוסף בשורה זו הקישו 3 לבחירת מקום בשורה אחרת הקישו 4",
+            "M1531 ...אינו זמין למכירה אנא נסו אפשרויות נוספות",
+            "M1532 אין כסא אקראי לבחירה בשורה זו אנא בחר כסא מהתפריט",
+            "M1533 העיסקה נקלטה בהצלחה",
+            "M1534 חובה לודא מול הנציג תוך 24 שעות שהוראת הקבע נקלטה ותקינה, אחרת הרישום יבוטל",
+            "M1535 חובה לודא מול הנציג תוך 24 שעות שהקופון נקלט ותקין אחרת הרישום יבוטל",
+            "M1536 אנא הקישו את קוד הקופון שברשותכם וסולמית לסיום",
+            "M1537 לסיום ומעבר לתשלום הקישו 1 לבחירת מקום נוסף הקישו 2",
+            "M1538 הקופון שהוקש שגוי",
+            "M1539 אין הרשאה לחיוב בהוראת קבע",
+            "M1540 עניתם בהצלחה",
+            "M1541 תשובתכם שגויה אנא נסו בפעם הבאה",
+            "M1542 שגיאה בהפעלת השאלה",
+            "M1543 שגיאה בקבלת תשובה נכונה",
+            "M1549 אנא הקליטו את השם שעבורו אתם רוכשים את המקומות וכן את הכתובת למשלוח דואר שלו, בסיום ההקלטה הקישו סולמית",
+            "M1550 אם ברצונכם שמעתה כל שלוחה אליה תיכנסו תאפשר לכם לבחור איזו השמעה להפעיל, הקישו 1. אם ברצונכם לבטל בחירה זו, כך שבכל השלוחות לא יתאפשר לכם לבחור קובץ, אלא השלוחה תופעל בצורה רגילה, הקישו 2.",
+            "M1551 ההגדרה עודכנה בהצלחה מעתה, בשיחה זו, יתאפשר לבחור קובץ להשמעה, בכל שלוחה של השמעת קבצים.",
+            "M1552 ההגדרה עודכנה בהצלחה מעתה, בשיחה זו, כל השלוחות יופעלו בצורה רגילה.",
+            "M1553 לאישור ההקלטה הקישו 1, לשמיעה הקישו 2 להקלטה מחדש 3",
+            "M1554 הפרטים נקלטו בהצלחה",
+            "M1555 למחיקת ההודעה הקישו 1 לשינוי ההודעה הקישו 2 לחזרה הקישו כוכבית.",
+            "M1556 הנכם מועברים להקלטת הקובץ מחדש. אנא הקליטו את הודעתכם לאחר הצליל, ובסיום הקישו #.",
+            "M1557 הקלטת הקובץ מחדש הסתיימה בהצלחה.",
+            "M1558 הודעה לפני שמיעת הודעת סוג המפתח",
+            "M1559 לשינוי הקלטה זו הקישו 8 להקלטת קובץ חדש לשלוחה זו הקישו 7 שלמיעה חוזרת הקישו 9 למעבר להודעה הבאה הקישו 1 או המתינו למחיקת הקובץ הקישו 2 לשכפול הקובץ 3 להעברת הקובץ 4 להוספת כותרת לשיעור הקישו 5 לשמיעת פרטי ההודעה הקישו 6 להקלטת קובץ חדש לשלוחה זו הקישו 7 לשינוי הקלטה זו הקישו 8",
+            "M1560 שעון נוכחות לדיווח על כניסה הקישו 1 לדיווח על יציאה הקישו 2 לחזרה לתפריט קודם הקישו כוכבית",
+            "M1561 דיווח כניסה התבצע בהצלחה",
+            "M1562 דיווח כניסה כבר התבצע בהצלחה",
+            "M1563 לחזרה לתפריט הקישו כוכבית לדיווח מאוחר על היציאה הקישו 1 לדיווח על כניסה נוספת ללא דיווח על היציאה הקישו 2",
+            "M1564 דיווח יציאה התבצע בהצלחה",
+            "M1565 דיווח יציאה כבר התבצע בהצלחה",
+            "M1566 לחזרה לתפריט הקישו כוכבית לדיווח מאוחר על הכניסה הקישו 1 לדיווח על יציאה נוספת ללא דיווח על כניסה הקישו 2",
+            "M1567לא ניתן לבצע יציאה ללא כניסה אנא דווחו על כניסה ולאחר מכן יציאה",
+            "M1568 סך המשמרת הינו",
+            "M1569 שעות",
+            "M1570 דיווח מאוחר על כניסה שימו לב: לאישור סופי של הנתונים יש לגשת למעסיק שלכם הנתונים נשלחים עם סימון של דיווח מאוחר עם שעת הדיווח לביטול דיווח הקישו כוכבית וסולמית לדיווח מאוחר על כניסה מהיום הקישו ב4 ספרות את השעה והדקה לדוגמא לדיווח על כניסה בשעה שמונה וחמשה הקישו 0805 לדיווח מאוחר על כניסה ביום אחר הקישו 1 וסולמית",
+            "M1571 השעה אינה תקינה",
+            "M1572 דיווח מאוחר על כניסה התבצע בהצלחה",
+            "M1573 דיווח יציאה ללא דיווח כניסה התבצע בהצלחה",
+            "M1574 שים לב - על מנת להשלים את הפירוט עליך לגשת למעסיק",
+            "M1575 התאריך אינו תקין",
+            "M1576 דיווח מאוחר על כניסה בתאריך אחר אנא הקישו ב4 ספרות את היום והחודש של הדיווח לדוגמא לדיווח על כניסה ב19 לספטמבר הקישו תשע עשרה אפס תשע לביטול דיווח הקישו כוכבית וסולמית",
+            "M1577 חודש..",
+            "M1578 לא ניתן להקיש תאריך עתידי",
+            "M1579 אנא הקישו ב4 ספרות את השעה והדקה לדוגמא לדיווח על כניסה בשעה שמונה וחמשה הקישו 0805",
+            "M1580 שימו לב! לסיום הטיפול בכניסה ללא יציאה עליך לגשת למעביד דיווח כניסה נוספת התבצע בהצלחה",
+            "M1581 דיווח מאוחר על יציאה שימו לב: לאישור סופי של הנתונים יש לגשת למעסיק שלכם הנתונים נשלחים עם סימון של דיווח מאוחר עם שעת הדיווח לביטול דיווח הקישו כוכבית וסולמית לדיווח מאוחר על יציאה מהיום הקישו ב4 ספרות את השעה והדקה לדוגמא לדיווח על יציאה בשעה ארבע אחר הצהרים הקישו 1600 לדיווח מאוחר על יציאה ביום אחר הקישו 1 וסולמית",
+            "M1582 לתשומת לבכם סיכום המשמרת הינו על סמך דיווח כניסה מאוחר",
+            "M1583 שים לב! לסיום הטיפול עליך לגשת למעביד דיווח מאוחר של יציאה התקבל בהצלחה",
+            "M1584 דיווח מאוחר על יציאה בתאריך אחר אנא הקישו ב4 ספרות את היום והחודש של הדיווח לדוגמא לדיווח על יציאה ב19 לספטמבר הקישו תשע עשרה אפס תשע לביטול דיווח הקישו כוכבית וסולמית",
+            "M1585 אנא הקישו ב4 ספרות את השעה והדקה לדוגמא לדיווח על יציאה בשעה ארבע אחר הצהרים הקישו 1600",
+            "M1586 לא ניתן להקיש זמן עתידי",
+            "M1587 עדיין אין כסאות בהזמנה זו",
+            "M1588 לבחירת כסא נוסף בשורה זו הקישו 1 לבחירת כסא נוסף בשורה אחרת הקישו 2 לסיום ומעבר לתשלום הקישו 3",
+            "M1590 לימוד דף גמרא",
+            "M1591 נותרו",
+            "M1592 דפים לסיום מחזור מספר",
+            "M1593 של השס",
+            "M1594 לקבלת דף ללימוד הקישו 1, לחזרה הקישו 2",
+            "M1595 הדף שנפל בחלקך להשלמת סיום השס הוא",
+            "M1596 דף",
+            "M1597במסכת",
+            "M1598עד דף",
+            "M1599 עיסקה זו תחוייב בפריסה של",
+            "M1600 אנא הקש מספר תשלומים וסולמית לסיום",
+            "M1601לא ניתן לבחור יותר מ36 תשלומים",
+            "M1602בעיסקה זו ניתן עד",
+            "M1603הסכום לכל תשלום לא יכול להיות קטן מעשרה שקלים",
+            "M1604אין סוג סליקה",
+            "M1605הקש את הספרות כעת",
+            "M1607 אין מענה משרת API",
+            "M1609לא מוגדר לינק",
+            "M1610 לאחר הצליל נא לומר או להקיש את שם השלוחה המבוקשת לחזרה לתפריט קודם אמרו חזור או הקישו סולמית",
+            "M1611דיבור לא ברור",
+            "M1612אין הגדרה לבקשה",
+            "M1613לא זוהה דיבור",
+            "M1615 לאחר הצליל אנא אמרו את שם המוצר או הקטגוריה המבוקשת",
+            "M1616 בקשתכם לקבלת מספר אישי למערכת זו נקלטה בהצלחה. מיד יופיע לכם המספר על צג הטלפון. כעת תוכלו לחייג למערכת זו, דרך המספר שקיבלתם.",
+            "M1617 לצערנו לא קיים כעת מספר אישי למספר שלכם",
+            "M1618 הכמות ממוצר זה אזלה אנא נסה שוב במועד אחר",
+            "M1619 אנא הקליטו את השם שעבורו התבצעה ההזמנה וכן את הכתובת למשלוח דואר בסיום ההקלטה הקישו סולמית",
+            "M1620 אנא הקישו את מספר המוצר לסיום הזמנה ומעבר לתשלום הקישו אפס וסולמית ליציאה הקישו כוכבית וסולמית",
+            "M1621 מספר מוצר זה אינו מוגדר",
+            "M1622המחיר למוצר זה",
+            "M1623להזמנת המוצר הקישו 1 לחזרה הקישו 2",
+            "M1624אנא הקישו את הכמות להזמנה ממוצר זה",
+            "M1625 הכמות לא יכולה להיות אפס",
+            "M1626 הכמות היא",
+            "M1627 הסך הכולל לתשלום על מוצר זה",
+            "M1628 לאישור הזמנת המוצר הקישו 1 לביטול הקישו 2 לתיקון הכמות הקישו 2 לביטול ההזמנה ממוצר זה הקישו 3",
+            "M1629 כבר הזמנת",
+            "M1630 יחידות ממוצר זה",
+            "M1631 הזמנת המוצר נקלטה ונשמרה עד לסיום השיחה לסיום ומעבר לתשלום הקישו 1 להמשך קניה הקישו 2",
+            "M1632 סיום הזמנה",
+            "M1633הוזמנו",
+            "M1634 מוצרים",
+            "M1635שהם",
+            "M1636פריטים",
+            "M1637הסך הכולל לתשלום עבור כלל המוצרים",
+            "M1638 שקלים",
+            "M1639 לאישור ההזמנה הקישו 1 לביטול ההזמנה הקישו 2",
+            "M1640 להלן פירוט ההזמנה",
+            "M1641 מוצר",
+            "M1642 מחיר",
+            "M1643 הוזמנו",
+            "M1644 פריטים",
+            "M1645 תשלום כולל עבור מוצר זה",
+            "M1646לשמיעת הפירוט אנא המתינו",
+            "M1647 לתשלום בכרטיס אשראי הקישו 1 לתשלום סוכנים הקישו 4",
+            "M1648 סוכן לא מאושר",
+            "M1649 אנא הקישו את מספר הסוכן שלכם וסולמית לסיום",
+            "M1650 ההזמנה התבצעה בהצלחה",
+            "M1651 אישור מספר...",
+            "M1652ההזמנה בוטלה שלום ותודה",
+            "M1653אין מוצרים בסל הקניות שלך",
+            "M1654לפניכם",
+            "M1655מוצרים לבחירה",
+            "M1656 אין מוצרים לבחירה",
+            "M1659 להזמנה ממוצר זה הקישו1 למעבר למוצר הבא הקישו 2 לסיום הזמנה ומעבר לתשלום הקישו 3 או אפס לחזרה לתפריט קודם הקישו 4 או סולמית",
+            "M1668 לתשומת ליבכם, דמי משלוח עבור הזמנה זו בסך של..",
+            "M1669 לקבלת דף גמרא נוסף הקישו 1, לחזרה לתפריט הקישו 2",
+            "M1670 לקבלת פרק נוסף הקישו 1, לחזרה לתפריט הקישו 2",
+            "M1671 לקבלת מספר אישי לטלפון אשר ממנו אתם מחייגים, הקישו 1, לשליחת מספר אישי לטלפון אחר, הקישו 2, לדיווח על מספר שנחסם, הקישו 3.",
+            "M1672 אנא הקישו את מספר הטלפון שאליו ברצוכם לשלוח מספר אישי של מערכת זו.",
+            "M1673 הפעולה בוצעה בהצלחה, מספר אישי למערכת זו, נשלח בהצלחה למספר הטלפון שהקשתם.",
+            "M1674 לצערנו לא ניתן לשלוח כעת מספר אישי, למספר הטלפון שהוקש.",
+            "M1683 דמי משלוח - באם ברצונכם לאסוף את המוצר בעצמכם ללא תוספת דמי משלוח הקישו 2 להמשך כולל דמי משלוח בסך",
+            "M1684שקלים הקישו 1",
+            "M1686קטגוריה זו הסתיימה, למעבר לתשלום הקישו 1, לחזרה לתפריט קודם הקישו 2",
+            "M1687אפשרות לא מאושרת",
+            "M1688המלאי הזמין ממוצר זה כרגע הוא",
+            "M1689 אנא בחר כמות הקיימת במלאי",
+            "M1691 לאחר הצליל אנא הקליטו את ההודעה למנהל המערכת, ההודעה תשלח במידה והעיסקה תבוצע בהצלחה, בסיום ההקלטה הקישו סולמית",
+            "M1692ברירת מחדל זה גינגל של ימות המשיח (הודעה בצד העונה לפני תחילת השיחה בניתוב שיחה)",
+            "M1693שיחה זו מועברת אליכם באמצעות הפלטפורמה הטכנולגית של ימות המשיח, לקבלת השיחה הקישו 1, לדחיית השיחה הקישו 2",
+            "M1694 לשמיעה חוזרת של מספר האישור הקישו 1 לסיום הקישו 2",
+            "M1697 שימו לב, לבקשתכם, נחסמתם מלקבל צינתוקים ממערכת זו. ולכן, לא ניתן לשלוח לכם כעת מספר אישי.",
+            "M1698 אם ברצונכם לאשר קבלת צינתוקים מהמערכת, ולקבל מספר אישי, הקישו 1. לביטול ויְצִיאָה, הקישו 2, או הַמְתינו.",
+            "M1700הודעה שתושמע ראשונה בשלוחה",
+            "M1701הקווים העוברים בתחנה הם",
+            "M1702בשעה",
+            "M1703קו",
+            "M1704אנא הקישו מספר תחנה",
+            "M1705 יגיע בעוד",
+            "M1706 דקות",
+            "M1707 no_such_station",
+            "M1708 no_line_is_expected",
+            "M1709 query_error",
+            "M1710יגיע בעוד פחות מדקה",
+            "M1711 א'",
+            "M1712 שתי",
+            "M1713 אנא הקישו מספר אוטובוס",
+            "M1714 this_line_is_not_expected_during_hour",
+            "M1715ונמצא בתחנה",
+            "M1716 ונמצא בתחנת המוצא",
+            "M1717 לכיוון",
+            "M1718 אין מיקום משוער",
+            "M1719 הנך פעם ראשונה במערכת, ועדיין אין לך חיפושים שמורים.",
+            "M1720 אנא הקישו יום בשבוע",
+            "M1722 ל",
+            "M1723 הקישו",
+            "M1724 נבחר מפעיל שגוי",
+            "M1725 no_such_bus",
+            "M1726אנא בחר מפעיל מהרשימה",
+            "M1727נבחר יום שגוי",
+            "M1728אנא בחר מסלול מהרשימה",
+            "M1729נבחר מסלול שגוי",
+            "M1730אנא הקישו שעה רצויה בין 0 ל23 M1731אנא הקישו מספר דקות רצוי בין 0 ל59",
+            "M1732נבחרה שעה שגויה",
+            "M1733 נבחר מספר דקות שגוי",
+            "M1734הקו יעבור בתחנה",
+            "M1797 אין הגדרה לבקשה",
+            "M1798 האם לא קיבלתם את שיחת האימות?",
+            "M1799 לשליחה מחודשת של שיחת אימות הקישו 1, לחזרה להקשת הארבע ספרות האחרונות הקישו 2. שימו לב, כדי לקבל את שיחת האימות עליכם לוודא שאופציית שיחה ממתינה פועלת אצלכם. ניתן לבדוק זאת בהגדרות הטלפון או לפנות לחברת התקשורת על מנת לוודא או להפעיל את האופציה.",
+            "M1800 אנא הקישו את סיסמת הניהול וסולמית לסיום",
+            "M1801 אחד או יותר מהנתונים שהקשת שגוי",
+            "M1802 לצורך אימות מספר הטלפון שלכם, תקבלו כעת שיחה ממספר מסויים, יש לזכור את ארבעת הספרות האחרונות של המספר, ולהקיש אותם לאחר קבלת הצינתוק.",
+            "M1803אנא הקישו את ארבעת הספרות האחרונות של מספר הטלפון שקיבלתם ממנו שיחה כעת",
+            "M1804אחד או יותר מהנתונים שהוקשו שגויים",
+            "M1805חלה שגיאה באימות מספר הטלפון",
+            "M1806 אימות מספר הטלפון בוצע בהצלחה",
+            "M1807 מספר החברים בקבוצה הוא",
+            "M1808 לשמיעת מספר הטלפון של מנהל הקבוצה הקישו 1, לבדיקה האם מספר מסויים חבר בקבוצה הקישו 2, לשמיעת כל המספרים החברים בקבוצה ברצף הקישו 3.",
+            "M1809מנהל הקבוצה הוא:",
+            "M1810מִסְפָּר הַטֶּלֶפוֹן שהוקש אֵינֶנּוּ תַּקִּין, אָנָּא נַסּוּ שֵׁנִית.",
+            "M1811כבר קיים בקבוצה שלך.",
+            "M1812 כבר קיים בקבוצה שלך במצב חסום.",
+            "M1813 איננו קיים בקבוצה שלך",
+            "M1814 אנא הקישו את מספר הטלפון ולסיום הקישו סולמית.",
+            "M1815 הוצאתם מחדר הועידה",
+            "M1816 הנך מועבר לחדר הועידה",
+            "M1817 צליל כניסת משתתף לחדר הועידה (ברית מחדל שקט)",
+            "M1818 צליל יציאת משתתף מחדר הועידה (ברירת מחדל שקט)",
+            "M1823 לא הוגדר כמות עמודים בפרק זה",
+            "M1824 הדף שיצא לך ללמוד הוא דף",
+            "M1825 עמוד",
+            "M1826 בפרק",
+            "M1827 לקבלת עמוד נוסף הקישו 1, לחזרה לתפריט הקישו 2 או המתינו",
+            "M1828 שם החלל לתפילה הוא",
+            "M1829 דולרים ארצות הברית",
+            "M1831 הזמנת המוצר נקלטה ונשמרה עד לסיום השיחה",
+            "M1832 יש",
+            "M1833 הזמנות מאושרות שבוצעו מזיהוי זה",
+            "M1834 עסקה מאושרת מספר",
+            "M1835 אישור מספר",
+            "M1836 כמות הפריטים שהוזמנה",
+            "M1837 הסך הכולל ששולם",
+            "M1838 לשמיעה חוזרת הקישו 1 לשמיעת העיסקה הבאה הקישו 2 לפירוט מלא של עיסקה זו הקישו 3 ליציאה הקישו כוכבית",
+            "M1839 אין הזמנות מאושרות ממספר זיהוי זה",
+            "M1840 סוף אישורים",
+            "M1842 לא הוגדר זמן להפעלת השידור",
+            "M1843 אין קובץ להפעלת השידור",
+            "M1844 השידור כבר הסתיים",
+            "M1845 השידור הסתיים כעת בהצלחה",
+            "M1847 השידור יחל בעוד...",
+            "M1848 להמתנה הקישו 1 ליציאה הקישו 2 או כוכבית",
+            "M1849 שעות",
+            "M1850 ו..",
+            "M1851 דקות",
+            "M1856 השעה אינה תקינה",
+            "M1857 התאריך אינו תקין",
+            "M1858 תעודת הזהות אינה תקינה",
+            "M1859 על פי רשומי המערכת כבר הכנסת בעבר את הפרטים אותם הכנסת עכשיו, לא ניתן להמשיך, שלום ותודה",
+            "M1860 במודול זה מחושב הסכום אותו אתם צריכים לטעון בפועל בשביל שלאחר אחוזי התוספת תגיעו לסכום המופיע בחנות. התוספת הינה על סך",
+            "M1861 אחוזים",
+            "M1862 אנא הקישו את הסכום המלא לתשלום המופיע בחנות לסימון נקודה הקישו כוכבית. לסיום הקישו סולמית. לדוגמא לסכום 35.90 שח הקישו : שלושים וחמש כוכבית תשעים וסולמית לסיום. ליציאה הקישו כוכבית וסולמית",
+            "M1863לא הוגדרו אחוזים לחישוב",
+            "M1864בקניה זו הנכם חוסכים",
+            "M1865שקלים.",
+            "M1866לרכישת מוצר זה, הסכום אותו תצטרכו לטעון בפועל בכרטיס הוא",
+            "M1867כאשר לאחר תוספת של",
+            "M1868אחוזים, יטען לכם בכרטיס סך של..",
+            "M1869 להקשת סכום נוסף הקישו 1 להמשך הקישו 2 או כוכבית לשמיעה חוזרת הקישו סולמית או המתינו",
+            "M1870לבחירת המוצר אנא הקישו את הכמות",
+            "M1871למעבר למוצר הבא הקישו כוכבית",
+            "M1872למעבר לתשלום הקישו אפס",
+            "M1873לחזרה הקישו כוכבית",
+            "M1874בסיום הבחירה הקישו סולמית",
+            "M1875לפירוט ההזמנה הקישו 3",
+            "M1907 שקלים",
+            "M1908 ו..",
+            "M1909 אגורות",
+            "M1910 מספר הטלפון שהוקש אינו תקין, אנא נסו שנית",
+            "M1911ברכות",
+            "M1912שבת",
+            "M1913עירובין",
+            "M1914פסחים",
+            "M1915יומא",
+            "M1916סוכה",
+            "M1921ביצה",
+            "M1922ראש השנה",
+            "M1923תענית",
+            "M1924מגילה",
+            "M1925מועד קטן",
+            "M1926חגיגה",
+            "M1931יבמות",
+            "M1932כתובות",
+            "M1933נדרים",
+            "M1934נזיר",
+            "M1935סוטה",
+            "M1936גיטין",
+            "M1937קידושין",
+            "M1941בבא קמא",
+            "M1942בבא מציעא",
+            "M1943בבא בתרא",
+            "M1944סנהדרין",
+            "M1945מכות",
+            "M1946שבועות",
+            "M1947עבודה זרה",
+            "M1948הוריות",
+            "M1950תמיד",
+            "M1951זבחים",
+            "M1952מנחות",
+            "M1953חולין",
+            "M1954ברכות",
+            "M1955ערכין",
+            "M1956תמורה",
+            "M1957 כריתות",
+            "M1958מעילה",
+            "M1959קנים",
+            "M1960מידות",
+            "M1961נידה",
+            "M1962 ההגדרות לא הושלמו",
+            "M1974 לא הוגדר מספר עסק",
+            "M1975 אין קובץ רשימת עסקים",
+            "M1976 אנא הקישו את הסכום בשקלים מלאים אותו שילמת, להזכירך ניתן להזין רק מה שכבר שולם ולא תשלום עתידי, הכל בכפוף לתקנון, לדוגמא במידה ושילמתם תשעים ותשע וחצי ₪ הקישו 99 וסולמית",
+            "M1977 לדירוג בעל המקצוע הקישו 1 או המתינו לדילוג הקש 2",
+            "M1978 עסק לא מופיע ברשימה",
+            "M1993 אנא הקש את מספר הזיהוי של הנמען וסולמית לסיום",
+            "M1994 לשמיעת התהילים בנוסח ספרד הקישו 1 או המתינו לשמיעת התהילים בנוסח אשכנז הקישו 2",
+            "M1996 (השמעת הודעה לפני השמעת המספר השגוי בשלוחה עם כניסה לפי הקשת מספר זיהוי אישי) הודעות מM2001 עד –M2150 פרקי התהילים",
+            "M2154הפקס נשלח בהצלחה",
+            "M2155אנא הקישו את המִסְפָּר שאליו ברצונכם לשלוח את הפקס ובסיום הַקִּישו סולמית",
+            "M2156לצערנו, קיימת שגיאה בשליחת הפקס. פרטי השגיאה הם",
+            "M2157לצערנו, לא ניתַן לשלוח את הפקס, מפני שלא מוגדר מספר טלפון לשליחה",
+            "M2160משימתך היא..",
+            "M2161לאישור ביצוע המשימה הקישו 1 לחזרה הקישו כוכבית.",
+            "M2162אישור ביצוע המשימה התקבל בהצלחה.",
+            "M2163המשימות שעדיין לא בוצעו הם...",
+            "M2164מספר זה כבר דיווח היום על ביצוע המשימה.",
+            "M2165למספר טלפון זה לא הוקצו משימות",
+            "M2166בקשתך התקבלה. בדקות הקרובות הדוח המבוקש ישלח אליך לדואר האלקטרוני המוגדר במערכת.",
+            "M2167הקובץ אינו קיים",
+            "M2168לצערנו, לא ניתַן לשלוח את הפקס, מפני שאין קובץ תקין לשליחה",
+            "M2181 אנא הקישו את המספר שנחסם, ובסיום, הַקישו סולמית",
+            "M2182 שימו לב, בשליחת דיווח, הנכם מאשרים קבלת צינתוקים ואו שיחות מאיתנו, על מנת לעדכן אתכם במספר חדש",
+            "M2183לאישור, הקישו 1. לביטול ויְצִיאָה, הקישו 2, או הַמְתינו.",
+            "M2184 אנא בחרו את חברת התקשורת של הפלאפון שעבורו נחסם המספר. לפלאפון, הקישו 1. לסלקום, הקישו 2. לפרטנר אורנג', הקישו 3. לגולן טלקום, הקישו 4. להוט מובייל או מירס, הקישו 5. לרמי לוי, הקישו 6. לבזק, הקישו 7. לנטויז'ן, הקישו 8, לחברות אחרות, או אם לא ידוע לכם לאיזה חברת תקשורת משוייך המכשיר שלכם, הקישו 9, או המתינו.",
+            "M2185הדיווח התקבל בהצלחה",
+            "M2186 הקלטת הודעות מערכת",
+            "M2187 אנא הקישו את שלוחת היעד וסולמית לסיום, לשלוחה פנימיות הקישו את הכתובת המלאה כאשר בין שלוחה לשלוחה הקישו כוכבית ולסיום הכתובת המלאה הקישו סולמית, לדוגמא לשלוחה אחת בתוך שלוחה אחת בתוך שלוחה שלוש הקישו שלוש כוכבית אחת כוכבית שלוש וסולמית לשלוחת הודעות ברירת המחדל הקישו כוכבית כוכבית וסולמית.",
+            "M2188 שימו לב ההקלטה בשלוחה זו תחליף את כל המקומות במערכת בהם מושמעת הודעה זו, אלא אם כן תשימו הודעה מיוחדת בתוך השלוחה הספציפית לאישור והמשך הקישו 1 לביטול וחזרה הקישו 2",
+            "M2189 אנא הקישו את מספר הודעת מערכת ב4 ספרות לחזרה לתפריט הקודם הקישו כוכבית וסולמית",
+            "M2190אנא הקליטו את ההודעה המיוחדת שלכם לאחר הצליל ובסיום הקישו סולמית",
+            "M2191ההקלטה מבוטלת",
+            "M2192שלוחה ראשית",
+            "M2193שלוחת הודעות ברירת מחדל",
+            "M2194יצרתם בהצלחה הודעת מערכת בשלוחה...",
+            "M2195הודעה מספר",
+            "M2198המערכת מזהה כי כבר נרשמתם לא ניתן להירשם בשנית שלום ותודה",
+            "M2200השיעורים באדיבות מפעל קביעותא ללימוד המשנה וההלכה היומית ובאדיבות מפעל המשניות",
+            "M2264שימו לב חלוקת המשניות הינה אוטומטית והינכם מתחייבים לאמרו",
+            "M2265בחלוקת מסכתות משניות זו, הושלמו עד כה",
+            "M2266סדרי חלוקת מסכתות משניות",
+            "M2267המסכת אותה קיבלתם לומר היא",
+            "M2268לקבלת מסכת נוספת הקישו 1, לחזרה לתפריט הקישו 2",
+            "M2269בחלוקת פרקי משניות זו, הושלמו עד כה",
+            "M2270סדרי חלוקת פרקי משניות",
+            "M2271פרק המשניות אותו קיבלתם ללמוד",
+            "M2272פרק..",
+            "M2273לקבלת פרק משניות נוסף הקישו 1, לחזרה לתפריט הקישו 2",
+            "M2284אנא הקישו את האות הבאה ולאחריה סולמית. לסיום ההקשות או לביטול הקשה אחרונה או לביטול כלל ההקשות הקישו כוכבית\"",
+            "M2285אנא הקישו את האות ולאחריה סולמית. לביטול ויציאה הקישו כוכבית",
+            "M2286תפריט סיום או ביטול לשינוי שפת מקלדת הקישו 6 לסיום ההקלדה הקישו 1 לשמיעת הטקסט שהוקלד הקישו 2 לביטול של האות האחרונה הקישו 3 לביטול והקלדה מחודשת של כל הטקסט הקישו 4 ליציאה הקישו 5\"",
+            "M2283 הגדרת שפת מקלדת - לעברית הקישו 1, לאנגלית הקישו 2",
+            "M4170 מצב הקלדה עברית - עודכן",
+            "M4171 מצב הקלדה אנגלית - עודכן",
+            "M2287הביטול התקבל בהצלחה",
+            "M2288 הטקסט המעודכן הוא",
+            "M2289הטקסט שהוקלד הוא",
+            "M2290לאישור הקישו 1 לשמיעה חוזרת 2 להקשה מחודשת של כל הטקסט הקישו",
+            "M2291לשמוע את הטקסט שהוקלד באמצעות מנוע השמעת מילים הקישו 1 או המתינו, לשמוע את הטקסט שהוקלד אות אחר אות הקישו 2",
+            "M2470 שרות זה אינו פעיל במערכת זו אנא פנו לשרות הלקוחות",
+            "M2471דירוג שביעות רצון מהשירות והעמידה בזמנים",
+            "M2472דירוג שביעות רצון מהמקצועיות",
+            "M2473דירוג שביעות רצון מהמחיר",
+            "M2474לא הוגדר סוג זיהוי לחיפוש",
+            "M2475אין קובץ מורשי עריכה",
+            "M2476לא מוגדרים הרשאות עריכה עבורך",
+            "M2477אנא הקישו את מספר הזיהוי של הלקוח וסולמית לסיום",
+            "M2478סך הניקוד הקיים הלקוח הוא",
+            "M2479 להוספת ניקוד הקישו 1 להורדת ניקוד הקישו 2 להקשת מספר זיהוי של לקוח אחר הקישו כוכבית",
+            "M2480 הוספת ניקוד אנא הקישו את סכום הנקודות שברצונכם להוסיף",
+            "M2481 הורדת ניקוד אנא הקישו את סכום הנקודות שברצונכם להוריד",
+            "M2482 עדכון הנקודות התבצע בהצלחה סך הניקוד החדש הוא",
+            "M2483לביצוע פעולות נוספות הקישו 1 לחזרה לתפריט קודם הקישו 2 או המתינו",
+            "M2484לא ניתן להכנס למינוס נקודות",
+            "M2485אין קובץ תורמים",
+            "M2486משוייכים אליך",
+            "M2487 תורמים",
+            "M2488 אנא הקש את מספר הזיהוי של התורם לשמיעת כל התורמים ברצף הקישו אפס וסולמית. ליציאה הקישו כוכבית וסולמית",
+            "M2489אין תורמים משויכיים אליך, אנא פנה למנהל הארגון",
+            "M2490להלן הפירוט",
+            "M2491סוף רשימה",
+            "M2492תורם זה אינו קיים ברשימה שלך",
+            "M2493תורם זה עדיין לא תרם",
+            "M2494תורם זה תרם סך של",
+            "M2495שקלים",
+            "M2496לעדכון תרומה או סכום התרומה הקישו 1 לבדיקת מספר אחר הקישו 2",
+            "M2497עדכון תרומה חדש, אנא עדכן את סכום התרומה המעודכן וסולמית לסיום",
+            "M2498העדכון התבצע בהצלחה",
+            "M2499בכל שלב ניתן להקיש 9 ולערוך את פרטי התרומה, או להקיש על כל מקש אחר לפרטי התורם הבא",
+            "M2508 בעיסקה זו תחויבו בסך..",
+            "M2509לצורך השלמת הרכישה, יש להקיש את מספרי תעודות הזהות של המשתתפים עבורם נרכשו הכרטיסים. נרכשו",
+            "M2510כרטיסים",
+            "M2511אנא הקש את תעודת הזהות לכרטיס מספר",
+            "M2512תעודת זהות אינה תקינה",
+            "M2513בונוס!",
+            "M2514קיבלתם",
+            "M2515פריטים תוספת מתנה",
+            "M2516סהכ כולל בונוס",
+            "M2517אנא הקישו את יום החיוב וסולמית לסיום",
+            "M2518 אנא הקישו את סכום החיוב בכל חודש וסולמית לסיום",
+            "M2519 בעיסקה זו תחוייבו בכל חודש בסך",
+            "M2520 כמות החודשים לחיוב היא",
+            "M2521 אנא הקש מספר חודשים לחיוב וסולמית, לחיוב קבוע אנא הקישו אפס וסולמית",
+            "M2522 חיוב קבוע",
+            "M2523 תאריך החיוב הקרוב הוא",
+            "M2573 הפעולה בוצעה בהצלחה",
+            "M2700 כמות הנרשמים עד עכשיו היא",
+            "M2710 להקשה מחדש הקישו 1 או המתינו ליציאה הקישו 2",
+            "M2767 מתוך יעד ניקוד אישי של ... (נקודות)",
+            "M2768 מתוך יעד ניקוד קבוצתי של... (נקודות)",
+            "M2991 אנא הקישו את מספר ההקלטה כפי שברצונכם שתשמר, ובסיום הקישו סולמית",
+            "M2990 שם הקובץ שהוקש, כבר קיים בשלוחה, אנא הקישו שם קובץ אחר. אם ברצונכם שהקובץ הקיים יוחלף בקובץ החדש, הקישו שוב את מספר הקובץ הקיים",
+            "M3330 מספר הטלפון לא מזוהה במערכת, נא התקשרו ממספר מזוהה",
+            "M3331 לא הוגדרה רשימת צינטוקים",
+            "M3332 להצטרפות לרשימת הצינתוקים הקישו 1 להסרה מרשימת הצינתוקים הקישו 2 להשתקת צינתוקים עד לזמן מסוים הקישו 3, ליציאה הקישו כוכבית וסולמית",
+            "M3333 מספרכם כבר מופיע ברשימת הצינתוקים",
+            "M3334 מספר הטלפון שלכם נוסף בהצלחה לרשימת הצינתוקים",
+            "M3335 מספרכם לא מופיע ברשימת הצינתוקים",
+            "M3336 מספר הטלפון שלכם נמחק בהצלחה מרשימת הצינתוקים",
+            "M3337 להפעלת צינתוק הקישו 1 למחיקת מספר מרשימת הצינתוקים הקישו 2 לאיפוס כל רשימת הצינתוקים הקישו 3 ליציאה הקישו כוכבית וסולמית",
+            "M3338 הצינתוק הופעל בהצלחה",
+            "M3339 נא הקישו את המספר למחיקה ובסיום הקישו סולמית",
+            "M3340 המספר נמחק בהצלחה מרשימת הצינתוקים",
+            "M3341 המספר שהקשתם לא מופיע ברשימת הצינתוקים",
+            "M3342 שימו לב לאחר האיפוס לא ניתן יהיה לשחזר את המספרים האם הינכם בטוחים? לאישור האיפוס הקישו 1 לביטול ויציאה הקישו 2",
+            "M3343 איפוס רשימת הצינתוקים הסתיים בהצלחה",
+            "M3345 לשמיעת ההודעה הקישו אחת לאישור הקישו שתיים או סולמית להקלטה מחדש הקישו שלוש להמשך הקלטה הקישו ארבע",
+            "M3410 מספרכם אינו רשאי להירשם, לבירורים פנו לאחראי",
+            "M3411 הרישום בוצע בהצלחה. שלום ותודה",
+            "M3508 פתיחת חדר ועידה",
+            "M3509 להפעלת צינתוק על פתיחת חדר הוועידה, הקישו 1, להמשך ללא צינתוק, הקישו 2 או המתינו",
+            "M3510 צינתוק ישלח לרישימה המוגדרת מייד בכניסתכם לחדר הוועידה",
+            "M3511 הצינתוק על הפעלת חדר הוועידה נשלח כעת",
+            "M3512 שליחת הצינתוק על הפעלת חדר הוועידה, נכשלה, אנא בדקו את הגדרות המערכת",
+            "M3513 אנא הקישו את המספר הרצוי ובסיום סולמית",
+            "M3514 המספר שהוקש אינו קיים במערכת",
+            "M3515 להגרלת מספר אקראי הקישו 1, להקשה מחדש הקישו 2, ליציאה הקישו 3",
+            "M3516 הקוד שהוגרל הוא",
+            "M3902 אם שכחתם את הסיסמה הקישו # בלבד",
+            "M3935 להוספה למספר דקות, הקישו 1, למספר שעות, הקישו 2, למספר ימים הקישו 3, למספר חודשים, הקישו 4.",
+            "M3936 הקישו את כמות מספר הדקות שברצונכם להיות מחוברים לקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3937 הקישו את כמות מספר השעות שברצונכם להיות מחוברים לקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3938 הקישו את כמות מספר הימים שברצונכם להיות מחוברים לקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3939 הקישו את כמות מספר החודשים שברצונכם להיות מחוברים לקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3940 להשתקה למספר דקות, הקישו 1, למספר שעות, הקישו 2, למספר ימים הקישו 3, למספר חודשים, הקישו 4.",
+            "M3941 הקישו את כמות מספר הדקות שברצונכם להיות מנותקים מקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3942 הקישו את כמות מספר השעות שברצונכם להיות מנותקים מקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3943 הקישו את כמות מספר הימים שברצונכם להיות מנותקים מקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3944 הקישו את כמות מספר החודשים שברצונכם להיות מנותקים מקבלת הצינתוקים, ולסיום, הקישו סולמית",
+            "M3945 מספר הטלפון שלכם נוסף בהצלחה לרשימת הצנתוקים למשך הזמן שהגדרתם",
+            "M3946 מספר הטלפון שלכם הוסר בהצלחה מרשימת הצנתוקים למשך הזמן שהגדרתם",
+            "M3949 אנא הקישו את הערך הרצוי ובסיום הקישו סולמית",
+            "M3985 מספר הטלפון אינו זמין, אנא נסו שוב במועד מאוחר יותר",
+            "M3987 השלוחה לא הוגדרה, יש להגדיר שליחת מייל או סמס",
+            "M3988 המספר עבורו מופעל השירות לא מוגדר",
+            "M3989 מספר הטלפון שהוכנס לשליחת הסמס לא תקין",
+            "M4108 מתוכם, כמות המספרים הפעילים היא",
+            "M4109 וכמות המספרים המושתקים היא",
+            "M4376 לא ניתן להתחבר בו זמנית מאותו משתמש",
+            "M4400 לכניסה לחנות הקישו 1, לשמיעת והגדרת פרטים אישיים והגדרות אבטחה הקישו 2",
+            "M4401 כדי להיכנס לאיזור האישי יש להקיש את סיסמת הניהול ולסיום סולמית אי הקשת הסיסמה הנכונה יגרום לשיבוש בהמשך האיור האישי, אם שכחתם את הסיסמה הקישו 0 וסולמית",
+            "M4402 שגיאה בקבלת הגדרות האבטחה של חשבונך הינך מוחזר",
+            "M4403 שגיאה בשינוי הסיסמה, הינך מוחזר",
+            "M4404 שינוי סיסמה בוצע בהצלחה",
+            "M4405 שגיאה בקליטת השינוי הינך מוחזר",
+            "M4406 השינוי נקלט בהצלחה",
+            "M4407 נא הקישו את מספר הטלפון ולסיום סולמית, לביטול הקישו 0 וסולמית",
+            "M4408 לשינוי עיר מגורים הקישו 1, לשינוי רחוב הקישו 2, לשינוי מספר בית הקישו 3, לשינוי כניסה הקישו 4, לשינוי המיקוד הקישו 5, לשינוי מספר הדירה הקישו 6, לחזרה הקישו 7",
+            "M4409נא הקישו את מספר הבית ולסיום סולמית לביטול הקישו 0 וסולמית",
+            "M4410 נא הקישו את מספר הכניסה ולסיום סולמית לביטול הקישו 0 וסולמית",
+            "M4411 נא הקישו את המיקוד ולסיום סולמית לביטול הקישו 0 וסולמית",
+            "M4412 נא הקישו את מספר הדירה ולסיום סולמית לביטול הקישו 0 וסולמית",
+            "M4413 כעת תקבלו שיחת צינתוק, עליכם לשמור את הארבע ספרות אחרונות של המספר, לאחמכ תצטרכו להקיש אותם כדי לבצע אימות",
+            "M4414 המערכת לא הצליחה להוציא שיחת אימות לטלפון המעודכן למערכת, נא פנו למנהל המערכת",
+            "M4415 נא הקישו את ארבע ספרות אחרונות של המספר שהתקשר אליכם עכשיו ולסיום הקישו סולמית",
+            "M4416 כעת תוכלו להוסיף עוד טלפון לחשבון, להוספת טלפון בבית הקישו 1 לסיום ומעבר לביצוע הרשמה הקישו 2",
+            "M4417 להוספת טלפון נוסף הקישו 1, לסיום ומעבר לביצוע ההרשמה הקישו 2",
+            "M4418 מספר החנות",
+            "M4419 שם החנות",
+            "M4420 תאריך הקנייה",
+            "M4421 עלות הקניה",
+            "M4422 להכנסת שם איש הקשר בהקלטה הקישו 1, להכנסת שם איש הקשר בהקשה הקישו 2, לחזרה הקישו 3",
+            "M4423 להכנסת ההערה בהקלטה הקישו 1, להכנסת ההערה בהקשה הקישו 2 לחזרה הקישו 3",
+            "M4424 במוצר זה יש לבחור",
+            "M4425 בחירתך נקלטה, בנוסף במוצר זה יש לבחור",
+            "M4426 ל...",
+            "M4427 וסולמית",
+            "M4428 לקטגורייה",
+            "M4429 לשמיעת כל המוצרים מקטגורייה זו ברצף הקישו 1, לשמיעת כל המוצרים מסודרים לפי תתי קטגוריות הקישו 2, לחזרה להקשת קטגורייה אחרת הקישו 3, לחזרה לתחילת החנות הקישו 4",
+            "M4430 יש לנו פרטים שהכניס מוכר עליך, הקש 1 לשמיעת הפרטים, הקש 2 לאישור והרשמה עם הפרטים האלו, הקש 3 להרשמה רגילה והכנסה מחדש של כל הפרטים",
+            "M4431 בכדי להיכנס לחנות זו, יש ליצור קשר עם מנהל החנות עמ שירשום אתכם כלקוחות, שלום ותודה",
+            "M4432 כעת יושמעו כל המוצרים בחנות בכל מוצר תוכלו להקיש 1 להזמנה מהמוצר, 2 או המתנה בכדי לעבור למוצר הבא, 3 למוצר קודם, 4 למעבר לתשלום, 5 ליציאה מהקראת המוצרים",
+            "M4433 כעת יושמעו כל הקטגוריות ברצף, בכל קטגורייה תוכלו להקיש 1 לכניסה לקטגורייה, 2 או המתנה בכדי לעבור לקטגורייה הבאה, 3 לחזרה לקטגורייה קודמת, 4 לחזרה",
+            "M4434 כעת יושמעו כל תתי הקטגוריות ברצף, בכל תת קטגורייה תוכלו להקיש 1 לכניסה לתת הקטגורייה, 2 או המתנה בכדי לעבור לתת קטגורייה הבאה, 3 לחזרה לתת קטגורייה קודמת, 4 לחזרה",
+            "M4809להשתקת התראות הקישו 1, לביטול השתקת התראות הקישו 2, לבדיקת הסטטוס הנוכחי הקישו 3",
+            "M4810להשתקת התראות לזמן מסוים הקישו 1, להשתקת התראות החל מזמן מסוים הקישו 2, להשתקת התראות לצמיתות הקישו 3",
+            "M4811ביטול השתקת התראות מהמערכת לטלפון שלכם, בוצע בהצלחה",
+            "M4812השתקת התראות מהמערכת לטלפון שלכם, בוצע לצמיתות",
+            "M4813להשתקת התראות למספר דקות, הקישו 1, למספר שעות, הקישו 2, למספר ימים הקישו 3, למספר חודשים, הקישו 4",
+            "M4814הקישו את מספר הדקות שברצונכם להפסיק לקבל התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4815הקישו את מספר השעות שברצונכם להפסיק לקבל התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4816הקישו את מספר הימים שברצונכם להפסיק לקבל התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4817הקישו את מספר החודשים שברצונכם להפסיק לקבל התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4818השתקת התראות מהמערכת לטלפון שלכם, בוצע בהצלחה למשך הזמן שהגדרתם",
+            "M4819להשתקת התראות בעוד מספר דקות, הקישו 1, בעוד מספר שעות, הקישו 2, בעוד מספר ימים הקישו 3, בעוד מספר חודשים, הקישו 4",
+            "M4820הקישו את מספר הדקות שלאחיהן יתבצע השתקת התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4821הקישו את מספר השעות שלאחיהן יתבצע השתקת התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4822הקישו את מספר הימים שלאחיהן יתבצע השתקת התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4823הקישו את מספר החודשים שלאחיהן יתבצע השתקת התראות מהמערכת, ולסיום הקישו סולמית",
+            "M4824הגדרת השתקת התראות מהמערכת לטלפון שלכם, בוצע בהצלחה החל מהזמן שהגדרתם ולצמיתות",
+            "M4825הטלפון שלכם מושתק מקבלת התראות מהמערכת",
+            "M4826הטלפון שלכם מושתק מקבלת התראות מהמערכת לצמיתות",
+            "M4827מספר הטלפון שלכם מורשה לקבל התראות מהמערכת",
+            "M4828עד",
+            "M4829היום",
+            "M4830בעוד",
+            "M4831שעות",
+            "M4832מחר",
+            "M4833תאריך",
+            "M4834בשעה",
+            "M4835ו",
+            "M4836דקות",
+            "M3520 לא הוגדר מספר חנות",
+            "M3521 מספר החנות שהוגדר לא קיים",
+            "M3522 סיסמת המוכר לחנות שהוגדרה בשלוחה אינה תקינה",
+            "M3523",
+            "M3524 סיסמת החנות שהקשתם אינה תקינה",
+            "M3525 החנות סגורה כעת, שלום ותודה",
+            "M3526 נראה שעדיין לא נרשמתם למערכת המכירות, כדי לרכוש באחד מכל החניות של המערכת יש להירשם בה",
+            "M3527 ההרשמה נכשלה, יכול להיות שמספר הטלפון כבר רשום כשם משתמש, או שמספר הטלפון כבר נמצא במע",
+            "M3528 שגיאה כללית",
+            "M3529 נא הקישו את סיסמתכם האישית ולסיום הקישו סולמית",
+            "M3530 ניכר שזוהי הפעם הראשונה שהינכם נכנסים לחנות זו, מייד תעברו תהליך רישום קצר, ולאחמכ כב",
+            "M3531 האם הינכם מעוניינים לקבל בדואל עדכונים ומבצעים וכדו' מהחנות, להצטרפות הקישו 1, להמשך",
+            "M3532 האם הינכם מעוניינים לקבל הודעות קוליות מעדכונים ומבצעים וכדו' מהחנות, להצטרפות הקישו 1",
+            "M3533 האם הינכם מעוניינים לקבל הודעות סמס מעדכונים ומבצעים וכדו' מהחנות, להצטרפות הקישו 1, ל",
+            "M3534 הרשמתכם לחנות הסתיימה בהצלחה, מייד תעברו לחנות",
+            "M3535 ההרשמה לחנות נכשלה שלום ותודה",
+            "M3536 אינכם מורשים להיכנס לחנות זו, נא פנו למנהל החנות",
+            "M3537 ברוכים הבאים לחנות",
+            "M3538 בעגלת הקניות שלכם ישנם כרגע",
+            "M3539 מוצרים",
+            "M3540 שהם",
+            "M3541 פריטים",
+            "M3542 לעריכת המוצרים בעגלת הקניות הקישו 1, לרכישת מוצרים הקישו 2, למעבר לתשלום הקישו 3.",
+            "M3543 לשמיעת כל המוצרים שיש כעת בעגלת הקניות ברצף הקישו 1, לבחירת מוצר מעגלת הקניות עפ המק",
+            "M3544 כעת יושמעו כל המוצרים בעגלת הקניות ברצף, בסיום שמיעת פרטי מוצר תועברו למוצר הבא, תוכלו",
+            "M3545 שם המוצר",
+            "M3546 מחיר ליחידה",
+            "M3547 שקלים",
+            "M3548 הכמות שהוזמנה ממוצר זה",
+            "M3549 סך התשלום למוצר זה",
+            "M3550 לעריכת המוצר הקישו 1, למוצר הבא הקישו 2 או המתינו, למוצר הקודם הקישו 3, ליציאה מהקראת",
+            "M3551 לשינוי הכמות שהוזמנה ממוצר זה הקישו 1, למחיקת המוצר מעגלת הקניות הקישו 2, לחזרה לרשימת",
+            "M3552 הכמות המעודכנת הוא",
+            "M3553 נא הקישו את הכמות החדשה שהינכם רוצים להזמין ממוצר זה ולסיום הקישו סולמית, לביטול הקישו",
+            "M3554 השינוי נקלט בהצלחה",
+            "M3555 השינוי נכשל",
+            "M3556 הינכם מבקשים למחוק את המוצר",
+            "M3557 לאישור הקישו 1, לביטול הקישו 2",
+            "M3558 המוצר נמחק בהצלחה מעגלת הקניות",
+            "M3559 מחיקת המוצר נכשלה",
+            "M3560 נא הקישו את מספר הקטלוגי של המוצר לסיום הקישו סולמית",
+            "M3561 מספר הקטלוגי של המוצר שגוי או שאינו מופיע בעגלת הקניות שלכם",
+            "M3562 לשינוי הכמות שהוזמנה ממוצר זה הקישו 1, למחיקת המוצר מהסל הקישו 2, להקשת מספר מקט אחר",
+            "M3563 בחנות מוצעים כרגע",
+            "M3564 מחולקים ב",
+            "M3565 קטגוריות",
+            "M3566 לבחירת מוצר עפ מקט הקישו 1, לבחירת קטגוריית מוצרים הקישו 2, לשמיעת כל המוצרים ברצף ה",
+            "M3567 מספר המקט שהוקש שגוי",
+            "M3568 המוצר שבחרתם אינו זמין לרכישה נא פנו למנהל החנות",
+            "M3569 משקל המוצר בגרמים",
+            "M3570 הכמות במלאי",
+            "M3571 להזמנה ממוצר זה הקישו את הכמות הרצויה ולסיום הקישו סולמית, להקשת מספר מקט אחר הקישו 0",
+            "M3572 בחרת",
+            "M3573 סך התשלום למוצר זה כפול הכמות שבחרת הוא",
+            "M3574 שגיאה בהזמנת המוצר, הינכם מוחזרים",
+            "M3575 לא ניתן להזמין את הכמות הרצויה, נא בחרו כמות בשנית",
+            "M3576 המוצר נוסף בהצלחה לעגלת הקניות",
+            "M3577 להקשת מקט נוסף הקישו 1, למעבר לתשלום הקישו 2, לחזרה הקישו 3",
+            "M3578 היכנם מועברים לסיכום הקניה ושמירתה",
+            "M3579 עגלת הקניות שלכם ריקה ולא ניתן לעבור לתשלום בעגלה ריקה, הינכם מועברים לרכישת מוצרים",
+            "M3580 סך התשלום לקנייה זו הינה",
+            "M3581 לאישור ומעבר לתשלום הקישו 1, לחזרה לשמיעת סיכום הקנייה הקישו 2, לחזרה למוצרים הקישו 3",
+            "M3582 לתשלום באשראי הקישו 1, לתשלום בקבלת נתונים הקישו 2, לתשלום במזומן הקישו 3, לתשלום בנקו",
+            "M3583 הינכם מועברים לתשלום באשראי",
+            "M3584 הינכם מועברים לתשלום בקבלת נתונים",
+            "M3585 הינכם מועברים לתשלום במזומן",
+            "M3586 התשלום התקבל בהצלחה, נא המתינו לשמירת הקנייה שלכם",
+            "M3587 הקנייה נשמרה בהצלחה",
+            "M3588 הקנייה נשמרה ושולמה בהצלחה",
+            "M3589 שגיאה בשמירת הקנייה, נא פנו למנהל החנות",
+            "M3590 שגיאה בקבלת התשלום, הינכם מוחזרים לאפשריות תשלום",
+            "M3591 המוצר שבחרתם כבר נמצא בעגלת הקניות שלכם, הזמנה חדשה ממוצר זה, רק יוסיף על הכמות",
+            "M3592 להמשך לבחירת תוספת כמות ממוצר זה הקישו 1, לבחירת מקט אחר הקישו 2",
+            "M3593 אנא המתינו, המערכת בודקת את תקינות עגלת הקניות שלכם.",
+            "M3594 המערכת מצאה כי יש אי תקינות בעגלת הקניות שלכם, יכול להיות שיש לכם מוצרים שנגמרו מהמלאי",
+            "M3595 לאישור הזמנת הכמות הקישו 1, לתיקון הכמות הקישו 2, לבחירת מקט אחר הקישו 3",
+            "M3596 מספר המקט שהקשתם לא קיים בעגלת הקניות שלכם",
+            "M3597 הינכם עוברים כעת לתהליך הרשמה למרכז הקניות של חברת ימות המשיח פתרונות תקשורת, בהרשמתכם",
+            "M3598 וכעת נבחר סיסמה, הסיסמה ישמש אותכם בכל פעם שתיכנסו לרכישת מוצרים גם באתר, וגם בטלפון,",
+            "M3599 ההרשמה הסתיימה בהצלחה, ומעתה תוכל לרכוש במגוון החנויות של מרכז הקניות",
+            "M3600 הקלטה עצמית שם החנות",
+            "M3601 סוג השגיאה במוצר",
+            "M3602 מוצר לא תקין",
+            "M3603 הזמנה של כמות גדולה מהמלאי או מהמותר",
+            "M3604 פירוט השגיאה",
+            "M3605 המוצר לא זמין לרכישה",
+            "M3606 הכמות המותרת להזמנה ממוצר זה הוא",
+            "M3607 אם תשאירו את המוצר כך, המערכת יתקן אוטומטי בעת התשלום, לדילוג על תיקון המוצר ומעבר למו",
+            "M3608 שגיאה בקבלת פרטי השגיאה של המוצר הינכם מועברים למוצר הבא",
+            "M3609 להזמנה ממוצר זה הקישו 1, למעבר למוצר הבא הקישו 2 או המתינו, למוצר הקודם הקישו 3, למעבר",
+            "M3610 קוד המוצר - מקט",
+            "M3611 נא הקישו את הכמות שברצונכם לרכוש ולסיום הקישו סולמית, למעבר למוצר הבא הקישו 0 וסולמית,",
+            "M3612 לאישור הזמנת המוצר הקישו 1, לבחירת הכמות מחדש הקישו 2, למעבר למוצר הבא ללא הזמנה מהמוצ",
+            "M3613 המוצר כבר נמצא בעגלת הקניות שלכם, הזמנה נוספת ממוצר זה רק יוסיף על הכמות הקיימת, להמשך",
+            "M3614 אין יותר קטגוריות להשמעה",
+            "M3615 מספר קטגורייה",
+            "M3616 שם הקטגורייה",
+            "M3617 לכניסה לקטגורייה זו הקישו 1, למעבר לקטגורייה הבאה הקישו 2 או המתינו, לחזרה לקטגורייה ה",
+            "M3618 בקטגורייה זו ישנם כרגע",
+            "M3619 תתי קטגורייה",
+            "M3620 לשמיעת כל המוצרים מקטגורייה זו ברצף הקישו 1 או המתינו, לשמיעת המוצרים לפי תתי קטגוריות",
+            "M3621 אין יותר תתי קטגוריות להשמעה",
+            "M3622 מספר תת הקטגורייה",
+            "M3623 שם תת הקטגורייה",
+            "M3624 לכניסה לתת קטגורייה זו הקישו 1, למעבר לתת קטגורייה הבאה הקישו 2 או המתינו, לחזרה לתת ק",
+            "M3625 בתת קטגורייה זו ישנם כרגע",
+            "M3626 אין יותר מוצרים להשמעה בתת קטגורייה זו",
+            "M3627 אין יותר מוצרים להשמעה בחנות, הינכם מוחזרים",
+            "M3628 בחנות זו צריך לרכוש במינימום של",
+            "M3629 בחנות זו יש תוספת תשלום לכל רכישה בסך",
+            "M3630 בחנות זו אין שירות משלוחים",
+            "M3631 בחנות זו מוצע שירות משלוחים",
+            "M3632 בחנות זו מסופקים המוצרים במשלוח בלבד",
+            "M3633 מחיר המשלוח נקבע לפי משקל המוצרים שהוזמנו",
+            "M3634 המשלוח ניתן ללא עלות",
+            "M3635 מחיר המשלוח הוא",
+            "M3636 מחיר משלוח לכל קילו הוא",
+            "M3637 אין יותר מוצרים להשמעה בקטגורייה זו",
+            "M3638 אין יותר מוצרים בעגלת הקניות שלכם",
+            "M3639 אין יותר מוצרים עם שגיאה בעגלת הקניות, הינכם מועברים לבדיקת עגלת הקניות שלכם",
+            "M3640 להוספת משלוח הקישו 1, להמשך ללא משלוח הקישו 2",
+            "M3641 לרכישה שלכם נוספה משלוח בסך",
+            "M3642 נוסף משלוח לכתובת המעודכנת בחשבון שלכם",
+            "M3643 עלות תוספת התשלום לכל קנייה הינה בסך",
+            "M3644 עלות המשלוח",
+            "M3645 סך הכל לתשלום",
+            "M3646 עגלת הקניות שלכם נמצא תקין",
+            "M3647 לסיום קטגורייה זו הקישו 1 או המתינו, לשמיעה חוזרת של קטגורייה זו הקישו 2, למעבר לתשלום",
+            "M3648 הינכם מועברים לעריכת עגלת הקניות שלכם",
+            "M3649 לסיום תת קטגורייה זו הקישו 1 או המתינו, לשמיעה חוזרת של המוצרים מתת קטגורייה זו הקישו",
+            "M3650 שימו לב לאחר מחיקת עגלת הקניות, לא ניתן יהיה לשחזר אותה, לאישור המחיקה הקישו 1, לביטול",
+            "M3651 עגלת הקניות נמחקה בהצלחה",
+            "M3652 מחיקת עגלת הקניות נכשלה",
+            "M3653 הסניף המוגדר בשלוחה אינו תקין, נא פנו למנהל החנות",
+            "M3654 בחנות ישנם",
+            "M3655 סניפים",
+            "M3656 לסניף",
+            "M3657 הקישו",
+            "M3658 לא ניתן לשנות לכמות שהזנתם, נא בחרו כמות אחרת",
+            "M3659 סכום הקניה נמוך מהמינימום בחנות",
+            "M3660 הינך חורג ממספר הקניות המאושר לכל לקוח",
+            "M3661 סכום הקניה, חורג מהמקסימום שניתן לרכוש בקנייה",
+            "M3662 עברת את סכום המקסימום המותר לכל לקוח",
+            "M3663 מספר המוצרים בעגלת הקניות גבוה ממקסימום המוצרים הניתן לרכוש בכל קנייה",
+            "M3664 עברת את מקסימום המוצרים שכל לקוח יכול לרכוש מכלל הרכישות",
+            "M3665 מספר הפריטים בעגלת הקניות גבוה ממקסימום הפריטים הניתן לרכוש בכל קנייה",
+            "M3666 עברת את מקסימום הפריטים שכל לקוח יכול לרכוש מכל הרכישות",
+            "M3667 מספר המוצרים בעגלת הקניות נמוך מהמינימום שיש לרכוש",
+            "M3668 מספר הפריטים בעגלת הקניות נמוך מהמינימום שיש לרכוש",
+            "M3669 מינימום הסכום שיש לרכוש בקניה הוא",
+            "M3670 ואילו סכום הרכישה שלך הוא",
+            "M3671 מספר הקניות המאושר לכל לקוח הוא",
+            "M3672 בקנייה זו הינך מגיע לקנייה מספר",
+            "M3673 מקסימום הסכום שניתן לרכוש בקנייה הוא",
+            "M3674 מקסימום הסכום שכל לקוח יכול לרכוש בכל רכישותיו בחנות זו הוא",
+            "M3675 ואילו סכום הקניות שלכם כולל קנייה זו הוא",
+            "M3676 מקסימום המוצרים שניתן לרכוש בקנייה הוא",
+            "M3677 ואילו מספר המוצרים בקנייה שלכם הוא",
+            "M3678 מקסימום המוצרים שכל לקוח יכול לרכוש בכל הרכישות בחנות זו הוא",
+            "M3679 ואילו מספר המוצרים שלכם כולל קנייה זו הוא",
+            "M3680 מקסימום הפריטים שניתן לרכוש בקנייה הוא",
+            "M3681 ואילו מספר הפריטים בקנייה שלכם הוא",
+            "M3682 מקסימום הפריטים שכל לקוח יכול לרכוש בכל הרכישות בחנות זו הוא",
+            "M3683 ואילו מספר הפריטים שלכם כולל קנייה זו הוא",
+            "M3684 מספר המוצרים המינימלי שיש לרכוש בחנות הוא",
+            "M3685 מספר הפריטים המינימלי שיש לרכוש בחנות הוא",
+            "M3686 לחזרה לעריכת הקניה הקישו 1, לאיפוס ומחיקת כל הסל הקישו 2, ליציאה הקישו 3",
+            "M3687 לאיפוס ומחיקת כל הסל הקישו 1, ליציאה הקישו 2",
+            "M3688 סך הנחה לקנייה זו",
+            "M3689 המערכת מצאה כי יש קניות שעדיין לא שולמו, למעבר לפירוט ולתשלום הקישו 1, להמשך לחנות הקי",
+            "M3690 המערכת מצאה כי יש קניות שעדיין לא שולמו, הינכם מועברים לשמיעת פירוט הקניות ותשלום עליה",
+            "M3691 מספר קנייה",
+            "M3692 לתשלום על הקנייה הקישו 1, למעבר לקניה הבאה הקישו 2 או המתינו, לקנייה הקודמת הקישו 3, ל",
+            "M3693 לתשלום באשראי הקישו 1, לתשלום בקבלת נתונים הקישו 2",
+            "M3694 אין יותר קניות שעדיין לא שולמו",
+            "M3695 בחנות מוצעת הנחה של",
+            "M3696 אחוזים",
+            "M3697 ההנחה מותנית בקנייה של מעל",
+            "M3698 הכמות שהוזמנה ממוצר זה קטנה מהמינימום שניתן להזמין",
+            "M3699 הכמות המינימלית למוצר זה הוא",
+            "M3800 מספר המקט שהוגדר בשלוחה שגוי",
+            "M3801 המקט המוגדר בשלוחה, אינו זמין לרכישה, נא פנו למנהל החנות",
+            "M3802 להמשך לבחירת תוספת כמות ממוצר זה הקישו 1, ליציאה הקישו 2",
+            "M3803 לאישור הזמנת הכמות הקישו 1, לתיקון הכמות הקישו 2, לחזרה הקישו 3",
+            "M3804 שגיאה בהזמנת המוצר, הינכם מוחזרים",
+            "M3805 למעבר לתשלום הקישו 1, ליציאה הקישו 2",
+            "M3806 שגיאה בשמירת הקנייה, נא פנו למנהל המערכת, הינכם מועברים לקנייה הבאה",
+            "M3807 קודם נבחר שם משתמש, שם המשתמש ישמש אותכם לזיהוי במערכת, וכן בעת כניסתכם באתר האינטרנט,",
+            "M3808 נא הקליטו את שם המשתמש ובסיום הקישו סולמית",
+            "M3809 הקלטת שם המשתמש הסתיים בהצלחה",
+            "M3810 נא הקישו את שם המשתמש במספרים ולסיום הקישו סולמית",
+            "M3811 בחרתם לדלג על הקלטת שם משתמש, ושם המשתמש יהיה מספר הטלפון ממנו אתם מחייגים",
+            "M3812 כעת תוכלו להוסיף מייל לחשבון שלכם, כך תוכלו לקבל פירוטי קניות ישירות למייל ומידע חשוב,",
+            "M3813 הינכם מועברים להקשת מייל",
+            "M3814 כתובת המייל נקלטה בהצלחה",
+            "M3815 מודול קניות",
+            "M3816 להקלטת שם פרטי הקישו 1, לדילוג הקישו 2",
+            "M3817 נא הקליטו את שם הפרטי ולסיום הקישו סולמית",
+            "M3818 שם הפרטי שהוקלט נקלט בהצלחה",
+            "M3819 להקלטת שם משפחה הקישו 1, לדילוג הקישו 2",
+            "M3820 נא הקליטו את שם המשפחה ולסיום הקישו סולמית",
+            "M3821 שם המשפחה נקלט בהצלחה",
+            "M3822 כעת תוכלו להוסיף פרטי כתובת מגורים, למקרה של משלוח, וכדו', להכנסת פרטי כתובת הקישו 1,",
+            "M3823 נא הקליטו את עיר המגורים ולסיום הקישו סולמית",
+            "M3824 נא הקליטו את שם הרחוב ולסיום הקישו סולמית",
+            "M3825 נא הקישו את מספר הבית ולסיום סולמית",
+            "M3826 באם למספר הבית יש כמה כניסות הקישו את הכניסה במספרים ולסיום סולמית, לדוגמה לכניסה א הק",
+            "M3827 נא הקישו מספר דירה ולסיום סולמית, לדילוג הקישו סולמית",
+            "M3828 נא הקישו מיקוד ולסיום סולמית, לדילוג הקישו סולמית",
+            "M3829 מספר הטלפון אינו מזוהה, לא ניתן להמשיך במערכת המכירות בצורה טלפונית ללא מספר טלפון, נא",
+            "M3830 לקבלת משלוח לכתובת המעודכנת בחשבון שלכם הקישו 1, לקבלת המשלוח לכתובת אחרת הקישו 2, לשמ",
+            "M3831 להקלטת פרטי הכתובת האחרת הקישו 1, להקשת הפרטים במקשי הטלפון הקישו 2 לחזרה לבחירת הכתוב",
+            "M3832 נא הקישו את שם העיר",
+            "M3833 נא הקישו את שם הרחוב",
+            "M3834 באם איש הקשר לקבלת המשלוח הוא בעל החשבון תוכלו לדלג עי הקשת 1, באם יש איש קשר אחר לקב",
+            "M3835 נא הקישו את שם איש הקשר למשלוח",
+            "M3836 נא הקישו את מספר הטלפון של איש הקשר",
+            "M3837 נא הקליטו את שם איש הקשר למשלוח",
+            "M3838 אם הפרטים נכונים הקישו 1, להכנסת פרטי המשלוח מחדש הקישו 2, לשמיעה חוזרת של הפרטים הקיש",
+            "M3839 אם יש לך הערה מיוחדת למשלוח הקישו 1, לדילוג הקישו 2",
+            "M3840 נא הקישו את ההערה",
+            "M3841 נא הקליטו את ההערה ולסיום סולמית",
+            "M3842 שגיאה בהקלדת האותיות, הינכם מוחזרים",
+            "M3843 הפרטים שנקלטו",
+            "M3844 שם העיר",
+            "M3845 שם הרחוב",
+            "M3846 מספר בית",
+            "M3847 כניסה",
+            "M3848 מיקוד",
+            "M3849 מספר דירה",
+            "M3850 שם איש הקשר למשלוח",
+            "M3851 טלפון איש הקשר",
+            "M3852 הערה למשלוח",
+            "M3853 משלוח נוסף בהצלחה לכתובת שהכנסתם",
+            "M3854 המערכת זיהתה שמספר הטלפון איתו התקשרתם רשום בכמה חשבונות במרכז הקניות, הינכם מועברים ל",
+            "M3855 למשתמש",
+            "M3856 אין פרטי כתובת בחשבונך, שלום ותודה",
+            "M3857 לכניסה לחנות הקישו 1, לשמיעת היסטוריית 10 קניות אחרונות שלך הקישו 2, לעריכת הפרטים בחש",
+            "M3858 תשלום כולל בסך",
+            "M3859 לשמיעת פירוט הקנייה המלאה הקישו 1, למעבר לקנייה הבאה הקישו 2 או המתינו, לקנייה הקודמת",
+            "M3860 סוף רשימת הקניות",
+            "M3861 בקנייה זו רכשתם",
+            "M3862 סך התשלום על המוצרים היה",
+            "M3863 נוסף תוספת תשלום בסך",
+            "M3864 עלות המשלוח היה",
+            "M3865 קיבלתם הנחה בסך",
+            "M3866 פירוט הקנייה",
+            "M3867 סך הכל למוצר זה",
+            "M3868 סוף רשימת המוצרים",
+            "M3869 שם המשתמש שלך הוא",
+            "M3870 לשמיעת הפרטים המעודכנים היום בחשבון הקישו 1, לשינוי סיסמת החשבון והגדרות אבטחה הקישו 2",
+            "M3871 שם פרטי",
+            "M3872 שם משפחה או שם העסק",
+            "M3873 כתובת אימייל",
+            "M3874 מספר טלפון",
+            "M3875 מספר טלפון בבית",
+            "M3876 מספר טלפון נוסף",
+            "M3877 מוגדר לבקש סיסמה לפני ביצוע קנייה",
+            "M3878 מוגדר לא לבקש סיסמה לפני ביצוע קניה",
+            "M3879 לשינוי הסיסמה הקישו 1, לשינוי הגדרת בקשת סיסמה לפני ביצוע קניייה הקישו 2, לשינוי הגדרת",
+            "M3880 נא בחרו סיסמה חדשה, הסיסמה צריכה להיות לפחות 6 ספרות, ולסיום הקישו סולמית, לביטול הקיש",
+            "M3881 שינוי הפרטים נקלט בהצלחה",
+            "M3882 שגיאה בשינוי הפרטים הינכם מוחזרים",
+            "M3883 להגדרה שלא יבקש סיסמה לפני ביצוע קנייה הקישו 1, להגדרה שכן יבקש סיסמה הקישו 2 לחזרה הק",
+            "M3884 לשינוי שם הפרטי הקישו 1, לשינוי שם המשפחה או שם העסק הקישו 2, לשינוי מספר הטלפון הקישו",
+            "M3885 האם תרצו שבכל קניה בטלפון תצטרכו להקיש את הסיסמה שבחרת, להגדרה שיבקש סיסמה הקישו 1, לה",
+            "M3886 משלוח לכתובת המעודכנת",
+            "M3887 בעיסקה זו תחויבו בסך",
+            "M3888 נקודות",
+            "M3889 לאישור הקישו 1 לחזרה הקישו 2",
+            "M3890 לסיום הקנייה ומעבר לתשלום ושמירה הקישו 1 או המתינו, לשמיעה חוזרת של המוצרים הקישו 2, ל",
+            "M3891 לתשלום ב",
+            "M3892 כרטיס אשראי",
+            "M3893 קבלת נתונים",
+            "M3894 מזומן",
+            "M3895 הקישו",
+            "M3896 שגיאה בהגדרות אמצעי התשלום",
+            "M3897 הינכם מועברים לתשלום בנקודות",
+            "M3898 האופצייה עדיין בבנייה נסו שוב מאוחר יותר",
+            "M3899 בכדי להיכנס לחנות נא הקישו את מספר החנות ובסיום סולמית",
+            "M4154 יש כיסאות שמורים על שמך",
+            "M4155 לשמיעת הכיסאות השמורים ומעבר לרכישה הקישו 1",
+            "M4156 לרכישת כיסאות אחרים הקישו 2",
+            "M4157 אנא בחרו את הכסא לרכישה",
+            "M4158 לרכישת כסא מספר..",
+            "M4159 הנמצא בשורה..",
+            "M4160 במחיר של...",
+            "M4161 הקישו..",
+            "M4162 שימו לב, הכסא שמור עד",
+            "M4163 לסיום ומעבר לתשלום הקישו 1 לבחירת מקום נוסף הקישו 2",
+            "M4164 אין מקום נוסף שמור על שמך",
+            "M4828 עד",
+            "M4829 היום",
+            "M4830 בעוד",
+            "M4831 שעות",
+            "M4832 מחר",
+            "M4833 תאריך",
+            "M4834 בשעה",
+            "M4835 ו",
+            "M4836 דקות",
+            "Folder: הטמעה בכל מודול",
+            "File: הגדרות כלליות.txt",
+            "עריכת הגדרות - הגדרות שיפעלו בכל השלוחות במערכת לפעמים נרצה להגדיר הגדרה שתפעל בכל המערכת, את ההגדרות האלו יש להגדיר בקובץ ivr שתחת השלוחה הראשית.",
+            "הודעות מערכת בכל מודול יש הודעות מערכת: הודעות מוקלטות שהוקלטו ע\"י חברת ימות המשיח והם ההודעות שמושמעות ברירת מחדל, ניתן להחליף את ההודעות להודעה משלכם.",
+            "ניתוב: כדי לאפשר שימוש יעיל במערכת בכל מודול ניתן להגדיר מעבר לשלוחה אחרת, או לניתוק השיחה, בסיום וכן במצבים נוספים לפי מה שמוגדר במודול.",
+            "הגדרות להטמעה בכל מודול בכל סוגי השלוחות ניתן להגדיר הגדרות שמיועדות להטמעה בכל מודול. הרשאות כניסה לשלוחה בכל סוגי השלוחות ניתן להגדיר הגבלת הרשאות כניסה: סיסמאות | הרשאות כניסה לטלפונים מסויימים| כניסה רק בזמנים מסויימים ועוד",
+            "הודעת ברוכים הבאים בכל אחת מסוגי השלוחות ניתן להעלות הודעת ברוכים הבאים - הודעה שתושמע מיד בכניסה לשלוחה M0000",
+            "שפת המערכת: language=he (עברית ברירת מחדל) language=en (אנגלית) language=de (יידיש) ועוד",
+            "תאריך עברי במערכת: המערכת טוענת את התאריך עברי בתחילת שיחה ולכן את ההגדרות הנוגעות לתאריך יש להגדיר רק בקובץ ivr",
+            "השמעת מיקום השלוחה בכניסה לשלוחה: mode_say_log=yes",
+            "דוח כניסה ויציאה משלוחות בקו: הנתונים המופיעים בדוח פרטי משתמש, שלוחה, תאריך, שעה וכו'",
+            "מונה כניסה לכל שלוחה: המערכת מעדכנת +1 לאותה שלוחה הלוג נמצא בתיקיית Log תחת התיקיה הראשית, בקובץ בשם LogCounters.ini",
+            "ביטול השמעת צליל חיוג בהתקשרות למערכת: no_ringing=yes",
+            "הגדרות גלובליות למנוע הקראת טקסט: voice=Elik_2100 / voice=Sivan / voice=Jacob ... rate=10 (מהירות)"
+        ].join('\n');
 
         /**
-         * -----------------------------------------------------------------
-         * ניהול מצב (State Management)
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 2. ניהול מצב גלובלי והגדרות
+         * ========================================================
          */
         const state = {
             token: localStorage.getItem('yemot_token') || null,
             systemNumber: localStorage.getItem('yemot_system') || null,
-            currentPath: '/',
-            editor: null,
             configs: {
-                gemini: localStorage.getItem('cfg_gemini') || '',
-                ghToken: localStorage.getItem('cfg_gh_token') || '',
-                ghRepo: localStorage.getItem('cfg_gh_repo') || '',
-                ghPath: localStorage.getItem('cfg_gh_path') || 'api',
-            }
+                gemini: localStorage.getItem('cfg_gemini_key') || ''
+            },
+            editor: null,
+            chatHistory: [
+                { role: "model", parts:[{ text: "שלום! אני מומחה הפיתוח שלך לימות המשיח. הוטמע בי ידע עצום (אלפי שורות של תיעוד).\nהאם ברצונך לפתח שלוחת API חדשה או לקבל הגדרות קובץ ext.ini לשלוחה רגילה?" }] }
+            ]
         };
 
-        // אתחול האפליקציה
+        const API_BASE_URL = "https://www.call2all.co.il/ym/api/";
+        let currentToken = state.token;
+        let mfaMethodsCache =[];
+
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-            populateMessagesTable();
             loadSettingsToUI();
             
             if (state.token) {
-                // המשתמש מחובר, נסה לבדוק אם הטוקן תקין
-                verifySession();
+                document.getElementById('login-overlay').style.display = 'none';
+                initMonaco();
+                switchTab('dashboard');
             } else {
-                // הצג מסך התחברות
                 document.getElementById('login-overlay').style.display = 'flex';
                 setTimeout(() => {
                     document.getElementById('login-overlay').style.opacity = '1';
@@ -846,143 +1877,200 @@ html {
             }
         });
 
-
         /**
-         * -----------------------------------------------------------------
-         * מערכת התחברות ו-API של ימות המשיח (MFA + Base Logic)
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 3. התחברות לחשבון ימות המשיח (כולל MFA)
+         * ========================================================
          */
-        
-        async function yemotApiCall(action, params = {}) {
-            params.token = state.token;
-            const queryParams = new URLSearchParams(params).toString();
-            const url = `https://www.call2all.co.il/ym/api/${action}?${queryParams}`;
-            
+        async function realApi(action, params = {}) {
+            const queryParams = new URLSearchParams(params);
+            const url = `${API_BASE_URL}${action}?${queryParams.toString()}`;
             try {
                 const response = await fetch(url);
+                if (!response.ok) throw new Error(`שגיאת רשת: ${response.status} ${response.statusText}`);
                 const data = await response.json();
                 return data;
             } catch (error) {
-                console.error(`API Error (${action}):`, error);
-                throw error;
+                return { responseStatus: "Exception", message: error.message };
             }
         }
 
         async function handleLogin() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
             const errDiv = document.getElementById('login-error');
             
-            if (!user || !pass) {
-                showLoginError('יש להזין מספר מערכת וסיסמה');
+            if (!username || !password) {
+                errDiv.innerText = 'יש להזין מספר מערכת וסיסמה';
+                errDiv.classList.remove('hidden');
                 return;
             }
 
-            showLoading(true, "מאמת פרטים מול ימות המשיח...");
+            showLoading(true, "מאמת פרטים...");
             errDiv.classList.add('hidden');
 
-            try {
-                const response = await fetch(`https://www.call2all.co.il/ym/api/Login?username=${user}&password=${pass}`);
-                const data = await response.json();
-                
+            const loginResponse = await realApi('Login', { username, password });
+            
+            if (loginResponse.responseStatus === "OK" && loginResponse.token) {
+                currentToken = loginResponse.token;
+                state.systemNumber = username;
+                await checkMfaStatus();
+            } else {
                 showLoading(false);
-
-                if (data.responseStatus === 'OK') {
-                    state.token = data.token;
-                    state.systemNumber = user;
-                    
-                    if (data.mfa === 'MFA_REQUIRE') {
-                        document.getElementById('loginPanel').classList.add('hidden');
-                        document.getElementById('mfaPanel').classList.remove('hidden');
-                        lucide.createIcons();
-                    } else {
-                        completeLogin(user, data.token);
-                    }
-                } else {
-                    showLoginError(data.message || 'שגיאת התחברות');
-                }
-            } catch (err) {
-                showLoading(false);
-                showLoginError('שגיאת תקשורת עם השרת');
+                errDiv.innerText = `ההתחברות נכשלה: ${loginResponse.message || 'טוקן לא התקבל'}`;
+                errDiv.classList.remove('hidden');
             }
         }
 
-        async function sendMfaCode(type) {
-            showLoading(true, "שולח קוד אימות...");
-            document.getElementById('mfa-error').classList.add('hidden');
-
-            try {
-                const response = await fetch(`https://www.call2all.co.il/ym/api/MFASession?token=${state.token}&action=sendMfa&mfaType=${type}`);
-                const data = await response.json();
-                
-                showLoading(false);
-                if (data.responseStatus === 'OK') {
-                    document.getElementById('codeValidation').classList.remove('hidden');
+        function analyzeMfaStatus(mfaStatus) {
+            if (mfaStatus.isPass) {
+                if (['INIT_WHITELIST_IPS', 'HAVE_ACTIVE_TRUST_TOKEN'].includes(mfaStatus.passReason)) {
+                    return 'NEEDS_HARD_MFA';
                 } else {
-                    showMfaError('שגיאה בשליחת הקוד: ' + (data.message || ''));
+                    return 'SUCCESS';
                 }
-            } catch (err) {
-                showLoading(false);
-                showMfaError('שגיאת תקשורת');
+            } else {
+                return 'NEEDS_MFA';
+            }
+        }
+
+        async function checkMfaStatus() {
+            const statusResponse = await realApi('MFASession', { token: currentToken, action: 'isPass' });
+            const nextStep = analyzeMfaStatus(statusResponse);
+
+            switch (nextStep) {
+                case 'SUCCESS':
+                    completeLogin();
+                    break;
+                case 'NEEDS_HARD_MFA':
+                    await getMfaMethods();
+                    break;
+                case 'NEEDS_MFA':
+                    const tryResponse = await realApi('MFASession', { token: currentToken, action: 'try' });
+                    if (analyzeMfaStatus(tryResponse) === 'SUCCESS') {
+                        completeLogin();
+                    } else {
+                        await getMfaMethods();
+                    }
+                    break;
+            }
+        }
+
+        async function getMfaMethods() {
+            const response = await realApi('MFASession', { token: currentToken, action: 'getMFAMethods' });
+            showLoading(false);
+            
+            if (response.mfaMethods && response.mfaMethods.length > 0) {
+                document.getElementById('loginPanel').classList.add('hidden');
+                document.getElementById('mfaPanel').classList.remove('hidden');
+                
+                mfaMethodsCache = response.mfaMethods;
+                const mfaMethodsSelect = document.getElementById('mfaMethods');
+                mfaMethodsSelect.innerHTML = mfaMethodsCache
+                    .map(m => `<option value="${m.ID}">${m.VALUE} (${m.NIKE})</option>`)
+                    .join('');
+                updateSendTypes();
+            } else {
+                const errDiv = document.getElementById('login-error');
+                errDiv.innerText = 'לא נמצאו שיטות אימות זמינות.';
+                errDiv.classList.remove('hidden');
+            }
+        }
+
+        function updateSendTypes() {
+            const mfaMethodsSelect = document.getElementById('mfaMethods');
+            const mfaSendTypeSelect = document.getElementById('mfaSendType');
+            const selectedMethod = mfaMethodsCache.find(m => m.ID == mfaMethodsSelect.value);
+            if (selectedMethod) {
+                mfaSendTypeSelect.innerHTML = selectedMethod.SEND_TYPE
+                    .map(type => `<option value="${type}">${type}</option>`)
+                    .join('');
+            }
+        }
+
+        async function handleSendCode() {
+            showLoading(true, "שולח קוד...");
+            const errDiv = document.getElementById('mfa-error');
+            errDiv.classList.add('hidden');
+
+            const mfaId = document.getElementById('mfaMethods').value;
+            const mfaSendType = document.getElementById('mfaSendType').value;
+            
+            const response = await realApi('MFASession', {
+                token: currentToken, action: 'sendMFA', mfaId, mfaSendType, lang: 'HE'
+            });
+
+            showLoading(false);
+            if (response.responseStatus === 'OK') {
+                document.getElementById('codeValidation').classList.remove('hidden');
+            } else {
+                errDiv.innerText = `שליחת הקוד נכשלה: ${response.message || ''}`;
+                errDiv.classList.remove('hidden');
             }
         }
 
         async function handleValidateCode() {
             const code = document.getElementById('mfaCodeInput').value;
+            const errDiv = document.getElementById('mfa-error');
+            
             if (!code) {
-                showMfaError('יש להזין קוד');
+                errDiv.innerText = 'יש להזין קוד.';
+                errDiv.classList.remove('hidden');
                 return;
             }
 
             showLoading(true, "מאמת קוד...");
-            try {
-                const response = await fetch(`https://www.call2all.co.il/ym/api/MFASession?token=${state.token}&action=validMFA&mfaCode=${code}&mfaRememberMe=false`);
-                const data = await response.json();
-                showLoading(false);
+            errDiv.classList.add('hidden');
 
-                if (data.mfa_valid_status === 'VALID') {
-                    completeLogin(state.systemNumber, state.token);
-                } else {
-                    showMfaError('קוד שגוי או פג תוקף');
-                }
-            } catch (err) {
-                showLoading(false);
-                showMfaError('שגיאת תקשורת');
+            const response = await realApi('MFASession', {
+                token: currentToken, action: 'validMFA', mfaCode: code, mfaRememberMe: false
+            });
+
+            showLoading(false);
+            if (response.mfa_valid_status === 'VALID') {
+                completeLogin();
+            } else {
+                errDiv.innerText = response.mfa_valid_status === 'OVERTRY' ? 
+                    "חרגת ממספר הניסיונות." : 
+                    `קוד שגוי. נותרו ${response.mfa_valid_left || '?'} ניסיונות.`;
+                errDiv.classList.remove('hidden');
             }
         }
 
-        function completeLogin(sysNum, token) {
-            localStorage.setItem('yemot_token', token);
-            localStorage.setItem('yemot_system', sysNum);
-            state.token = token;
-            state.systemNumber = sysNum;
+        function completeLogin() {
+            showLoading(false);
+            state.token = currentToken;
+            localStorage.setItem('yemot_token', state.token);
+            if(state.systemNumber) localStorage.setItem('yemot_system', state.systemNumber);
             
-            // עדכון UI
-            document.getElementById('sidebar-system-number').textContent = sysNum;
-            document.getElementById('dash-sys-num').textContent = sysNum;
+            document.getElementById('sidebar-system-number').textContent = state.systemNumber || "לא מוגדר";
             
-            // העלמת מסך ההתחברות באנימציה
             const overlay = document.getElementById('login-overlay');
             overlay.style.opacity = '0';
             setTimeout(() => {
                 overlay.style.display = 'none';
-                initMonaco(); // אתחול העורך רק אחרי כניסה
+                initMonaco();
                 switchTab('dashboard');
-                updateGlobalStatus('מערכת מוכנה', 'green');
             }, 500);
         }
 
-        async function verifySession() {
-            try {
-                const res = await yemotApiCall('GetSession');
-                if (res.responseStatus === 'OK') {
-                    completeLogin(state.systemNumber, state.token);
-                } else {
-                    logout();
-                }
-            } catch(e) {
-                logout();
-            }
+        function skipLogin() {
+            const overlay = document.getElementById('login-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                initMonaco();
+                switchTab('dashboard');
+            }, 500);
+        }
+
+        function resetLogin() {
+            document.getElementById('mfaPanel').classList.add('hidden');
+            document.getElementById('loginPanel').classList.remove('hidden');
+            document.getElementById('codeValidation').classList.add('hidden');
+            document.getElementById('mfaCodeInput').value = '';
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('mfa-error').classList.add('hidden');
         }
 
         function logout() {
@@ -991,7 +2079,6 @@ html {
             location.reload();
         }
 
-        // עזרי ממשק למסך התחברות
         function showLoading(show, text = "") {
             const loader = document.getElementById('loadingOverlay');
             if (show) {
@@ -1003,220 +2090,85 @@ html {
                 loader.classList.remove('flex');
             }
         }
-        function showLoginError(msg) {
-            const el = document.getElementById('login-error');
-            el.innerText = msg;
-            el.classList.remove('hidden');
-        }
-        function showMfaError(msg) {
-            const el = document.getElementById('mfa-error');
-            el.innerText = msg;
-            el.classList.remove('hidden');
-        }
-        function resetLogin() {
-            document.getElementById('mfaPanel').classList.add('hidden');
-            document.getElementById('loginPanel').classList.remove('hidden');
-            document.getElementById('codeValidation').classList.add('hidden');
-            document.getElementById('mfaCodeInput').value = '';
-            document.getElementById('login-error').classList.add('hidden');
-            document.getElementById('mfa-error').classList.add('hidden');
-        }
-
 
         /**
-         * -----------------------------------------------------------------
-         * ניהול טאבים וניווט במערכת (UI Manager)
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 4. מנהל ממשק המשתמש - Tabs
+         * ========================================================
          */
         function switchTab(tabId) {
-            // הסתר את כל הטאבים
-            document.querySelectorAll('main > div > section').forEach(sec => {
-                sec.classList.add('hidden');
-            });
-            // נקה אקטיביות מהתפריט הצדדי
+            document.querySelectorAll('main > div > section').forEach(sec => sec.classList.add('hidden'));
             document.querySelectorAll('.sidebar-item').forEach(item => {
-                item.classList.remove('active', 'text-white');
+                item.classList.remove('active', 'text-white', 'bg-blue-900/30');
                 item.classList.add('text-slate-300');
             });
 
-            // הפעל את הטאב הנבחר
             const targetSec = document.getElementById(`tab-${tabId}`);
             if(targetSec) targetSec.classList.remove('hidden');
             
             const targetBtn = document.getElementById(`tab-btn-${tabId}`);
             if(targetBtn) {
-                targetBtn.classList.add('active', 'text-white');
+                targetBtn.classList.add('active', 'text-white', 'bg-blue-900/30');
                 targetBtn.classList.remove('text-slate-300');
             }
 
-            // עדכון כותרת עליונה
             const titles = {
                 'dashboard': '<i data-lucide="layout-dashboard" class="text-blue-400"></i> לוח בקרה',
-                'lab': '<i data-lucide="flask-conical" class="text-purple-400"></i> מעבדת AI אוטונומית',
-                'files': '<i data-lucide="folder-tree" class="text-yellow-400"></i> סייר קבצים מתקדם',
-                'messages': '<i data-lucide="book-open" class="text-green-400"></i> מאגר הודעות (M1000)',
-                'settings': '<i data-lucide="settings" class="text-slate-400"></i> הגדרות וחיבורים'
+                'builder': '<i data-lucide="bot" class="text-blue-400"></i> צ\'אט בונה שלוחות (AI)',
+                'tts': '<i data-lucide="mic" class="text-purple-400"></i> מחולל קריינות (TTS)',
+                'settings': '<i data-lucide="settings" class="text-slate-400"></i> הגדרות AI'
             };
             document.getElementById('page-title').innerHTML = titles[tabId];
             lucide.createIcons();
-
-            // טעינת נתונים ספציפיים לטאב
-            if (tabId === 'files' && document.getElementById('file-list-container').children.length <= 1) {
-                loadFolder('/');
-            }
         }
-
-        function updateGlobalStatus(text, color) {
-            const badge = document.getElementById('global-status');
-            const colorMap = {
-                'green': 'bg-green-500/20 text-green-400 border-green-500/30',
-                'blue': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-                'purple': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-                'red': 'bg-red-500/20 text-red-400 border-red-500/30',
-            };
-            
-            badge.className = `px-4 py-1.5 rounded-full flex items-center gap-2 text-sm shadow-inner transition-colors duration-300 ${colorMap[color] || colorMap['blue']}`;
-            badge.innerHTML = `<i data-lucide="${color === 'green' ? 'check-circle' : 'activity'}" class="w-4 h-4"></i> <span>${text}</span>`;
-            lucide.createIcons();
-        }
-
 
         /**
-         * -----------------------------------------------------------------
-         * סייר קבצים (ימות המשיח) - לוגיקה
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 5. הגדרות ו-Modals
+         * ========================================================
          */
-        async function loadFolder(path) {
-            const container = document.getElementById('file-list-container');
-            container.innerHTML = `
-                <div class="flex flex-col items-center justify-center h-full text-slate-500">
-                    <div class="loader-ring mb-4"></div>
-                    <p>טוען תיקייה...</p>
-                </div>
-            `;
+        function loadSettingsToUI() {
+            document.getElementById('cfg-gemini-key').value = state.configs.gemini;
+        }
+
+        function saveSettings() {
+            state.configs.gemini = document.getElementById('cfg-gemini-key').value.trim();
+            localStorage.setItem('cfg_gemini_key', state.configs.gemini);
+            showModal('הגדרות נשמרו', 'מפתח ה-API נשמר בהצלחה.');
+        }
+
+        function showModal(title, bodyText) {
+            const modal = document.getElementById('global-modal');
+            const content = document.getElementById('modal-content');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerText = bodyText;
             
-            try {
-                const res = await yemotApiCall('GetIVR2Dir', { path: path });
-                state.currentPath = path;
-                updatePathDisplay(path);
-
-                if (res.responseStatus === 'OK' && res.files) {
-                    renderFiles(res.files);
-                } else {
-                    container.innerHTML = `<div class="p-4 text-red-400 text-center">שגיאה בטעינת התיקייה</div>`;
-                }
-            } catch (e) {
-                container.innerHTML = `<div class="p-4 text-red-400 text-center">שגיאת תקשורת</div>`;
-            }
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                content.classList.replace('scale-95', 'scale-100');
+            }, 10);
         }
 
-        function updatePathDisplay(path) {
-            const display = document.getElementById('current-path-display');
-            display.innerHTML = `
-                <i data-lucide="folder" class="w-4 h-4 text-blue-400"></i>
-                <span>${path}</span>
-            `;
-            lucide.createIcons();
+        function closeModal() {
+            const modal = document.getElementById('global-modal');
+            const content = document.getElementById('modal-content');
+            modal.style.opacity = '0';
+            content.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => modal.style.display = 'none', 300);
         }
-
-        function navigateUp() {
-            if (state.currentPath === '/') return;
-            const parts = state.currentPath.split('/').filter(p => p);
-            parts.pop();
-            const parent = '/' + parts.join('/');
-            loadFolder(parent || '/');
-        }
-
-        function renderFiles(files) {
-            const container = document.getElementById('file-list-container');
-            if (files.length === 0) {
-                container.innerHTML = `<div class="p-8 text-center text-slate-500">התיקייה ריקה</div>`;
-                return;
-            }
-
-            // מיון: תיקיות קודם, אח"כ קבצים אלפביתית
-            files.sort((a, b) => {
-                if(a.fileType === 'DIR' && b.fileType !== 'DIR') return -1;
-                if(a.fileType !== 'DIR' && b.fileType === 'DIR') return 1;
-                return a.name.localeCompare(b.name);
-            });
-
-            let html = '<div class="space-y-1">';
-            files.forEach(f => {
-                const isDir = f.fileType === 'DIR';
-                const icon = isDir ? 'folder' : (f.name.endsWith('.ini') ? 'settings' : (f.name.endsWith('.wav') ? 'volume-2' : 'file-text'));
-                const iconColor = isDir ? 'text-yellow-400 fill-yellow-400/20' : 'text-slate-400';
-                
-                html += `
-                    <div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer border border-transparent hover:border-white/10"
-                         onclick="${isDir ? `loadFolder('${state.currentPath === '/' ? '' : state.currentPath}/${f.name}')` : `downloadFile('${f.name}')`}">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="${icon}" class="w-5 h-5 ${iconColor}"></i>
-                            <span class="text-slate-200 font-medium">${f.name}</span>
-                        </div>
-                        <div class="flex items-center gap-4 text-xs text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                            ${!isDir ? `<span>${f.size || ''}</span>` : ''}
-                            <button class="p-1 hover:text-white" title="הורד/ערוך"><i data-lucide="download" class="w-4 h-4"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-            lucide.createIcons();
-        }
-
 
         /**
-         * -----------------------------------------------------------------
-         * מאגר מידע (Messages M1000)
-         * -----------------------------------------------------------------
-         */
-        function populateMessagesTable() {
-            const tbody = document.getElementById('messages-table-body');
-            let html = '';
-            IVR_MESSAGES.forEach(msg => {
-                html += `
-                    <tr class="msg-row">
-                        <td class="font-mono text-blue-400 font-bold msg-code">${msg.code}</td>
-                        <td class="msg-text">${msg.text}</td>
-                        <td class="text-center">
-                            <button onclick="copyToClipboard('${msg.code}')" class="p-1.5 bg-white/5 hover:bg-white/10 rounded-md text-slate-400 hover:text-white transition-colors" title="העתק קוד">
-                                <i data-lucide="copy" class="w-4 h-4"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-            tbody.innerHTML = html;
-        }
-
-        function filterMessages() {
-            const query = document.getElementById('msg-search').value.toLowerCase();
-            const rows = document.querySelectorAll('.msg-row');
-            rows.forEach(row => {
-                const text = row.querySelector('.msg-text').textContent.toLowerCase();
-                const code = row.querySelector('.msg-code').textContent.toLowerCase();
-                if (text.includes(query) || code.includes(query)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-
-        /**
-         * -----------------------------------------------------------------
-         * Monaco Editor Setup
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 6. עורך הקוד Monaco
+         * ========================================================
          */
         function initMonaco() {
-            if (state.editor) return; // כבר מאותחל
+            if (state.editor) return;
             require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
             require(['vs/editor/editor.main'], function() {
                 state.editor = monaco.editor.create(document.getElementById('monaco-editor-container'), {
-                    value: "// הקוד שייווצר על ידי ה-AI יופיע כאן\n// תוכל לערוך אותו ידנית לפני הפריסה",
+                    value: "// הקוד שייווצר על ידי ה-AI יופיע כאן\n",
                     language: 'javascript',
                     theme: 'vs-dark',
                     automaticLayout: true,
@@ -1232,281 +2184,303 @@ html {
 
         function copyEditorCode() {
             if(state.editor) {
-                copyToClipboard(state.editor.getValue());
-                showModal('הצלחה', 'הקוד הועתק ללוח', 'success');
+                const text = state.editor.getValue();
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showModal('הצלחה', 'הקוד הועתק ללוח');
             }
         }
 
-
         /**
-         * -----------------------------------------------------------------
-         * מעבדת ה-AI ותהליך פריסה אוטונומי
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 7. מערכת ה-Chat + API Generation (Gemini 2.5 Flash)
+         * ========================================================
          */
-        
-        async function startAutonomousDeployment() {
-            const prompt = document.getElementById('ai-prompt-input').value;
-            const targetFolder = document.getElementById('deploy-folder-target').value;
+        function updateChatUI() {
+            const container = document.getElementById('chat-history');
+            container.innerHTML = '';
+            
+            state.chatHistory.forEach(msg => {
+                if(msg.role === 'system') return; // לא מציגים פרומפט מערכת
 
-            if (!prompt) {
-                showModal('שגיאה', 'אנא תאר מה תרצה לבנות.', 'error');
+                const div = document.createElement('div');
+                div.className = `chat-bubble ${msg.role === 'user' ? 'chat-user' : 'chat-ai'}`;
+                
+                // טיפול בתצוגת טקסט מול קוד
+                let text = msg.parts[0].text;
+                // חיפוש בלוקים של קוד לצורך עיצוב (למרות שהקוד עצמו יעבור ל-Monaco)
+                text = text.replace(/```(.*?)(\n[\s\S]*?)```/g, function(match, lang, code) {
+                    return `<div class="code-block" dir="ltr">${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>`;
+                });
+                
+                // הפיכת ירידות שורה ל-<br> מחוץ לקוד
+                text = text.split('\n').join('<br>');
+                
+                div.innerHTML = text;
+                container.appendChild(div);
+            });
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function sendChatMessage() {
+            const inputEl = document.getElementById('ai-chat-input');
+            const text = inputEl.value.trim();
+            if (!text) return;
+            
+            if (!state.configs.gemini) {
+                showModal('שגיאה', 'יש להגדיר מפתח Gemini API בטאב ההגדרות.');
                 return;
             }
-            if (!state.configs.gemini || !state.configs.ghToken || !state.configs.ghRepo) {
-                showModal('חסרות הגדרות', 'חובה להגדיר מפתח Gemini ופרטי GitHub בלשונית ההגדרות.', 'warning');
-                switchTab('settings');
-                return;
-            }
 
-            // הפעלת מצב תהליך
-            document.getElementById('editor-wrapper').classList.remove('opacity-50', 'pointer-events-none');
-            document.getElementById('deployment-steps').classList.remove('hidden');
-            const btn = document.getElementById('btn-deploy');
-            btn.disabled = true;
-            btn.innerHTML = `<div class="loader-ring" style="width:20px;height:20px;"></div> <span>מעבד...</span>`;
+            const extensionType = document.querySelector('input[name="extensionType"]:checked').value;
+            
+            // הוספת הודעת המשתמש להיסטוריה
+            state.chatHistory.push({ role: "user", parts: [{ text: text }] });
+            inputEl.value = '';
+            updateChatUI();
+            
+            // הצגת אינדיקטור הקלדה
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-bubble chat-ai text-slate-400 italic';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerText = 'ה-AI מקליד...';
+            document.getElementById('chat-history').appendChild(typingDiv);
+            document.getElementById('chat-history').scrollTop = document.getElementById('chat-history').scrollHeight;
 
             try {
-                // שלב 1: כתיבת קוד באמצעות Gemini
-                setStepStatus(1, 'loading');
-                updateGlobalStatus('ה-AI כותב קוד...', 'purple');
-                const generatedCode = await callGeminiAPI(prompt);
-                state.editor.setValue(generatedCode);
-                setStepStatus(1, 'success');
-
-                // יצירת שם קובץ ייחודי
-                const filename = `ivr-${Date.now()}.js`;
-                const githubPath = `${state.configs.ghPath}/${filename}`.replace('//', '/');
-
-                // שלב 2: פריסה ל-GitHub (עובר ל-Vercel אוטומטית)
-                setStepStatus(2, 'loading');
-                updateGlobalStatus('דוחף קוד ל-GitHub...', 'blue');
-                await pushToGitHub(githubPath, generatedCode, `Auto-deploy from Yemot AI Studio: ${prompt.substring(0, 30)}...`);
-                setStepStatus(2, 'success');
-
-                // חישוב כתובת ה-Vercel
-                const username = state.configs.ghRepo.split('/')[0];
-                const repoName = state.configs.ghRepo.split('/')[1];
-                // Vercel routes /api/file.js to /api/file
-                const routePath = githubPath.replace('.js', '');
-                const vercelUrl = `https://${repoName}.vercel.app/${routePath}`;
-
-                // שלב 3: סימולציית המתנה ל-Vercel
-                setStepStatus(3, 'loading');
-                updateGlobalStatus('ממתין לפריסה ב-Vercel...', 'blue');
-                await new Promise(r => setTimeout(r, 4000)); // במציאות כדאי לבצע Polling ל-URL
-                setStepStatus(3, 'success');
-
-                // שלב 4: עדכון קובץ ext.ini בימות המשיח
-                if (targetFolder) {
-                    setStepStatus(4, 'loading');
-                    updateGlobalStatus('מעדכן שלוחה בימות המשיח...', 'blue');
-                    await updateYemotExtIni(targetFolder, vercelUrl);
-                    setStepStatus(4, 'success');
+                // פרומפט מערכת דינמי המשלב את מאגר הידע!
+                let sysPrompt = `אתה מומחה מפתח למערכות 'ימות המשיח'. אתה בונה שלוחות ופתרונות מותאמים אישית על בסיס התיעוד המצורף בלבד.\n`;
+                sysPrompt += `\n--- מאגר ידע (חוקי המערכת והודעות) ---\n${YEMOT_KNOWLEDGE_BASE}\n--------------------------------------\n`;
+                
+                if (extensionType === 'api') {
+                    sysPrompt += `המשימה שלך היא לכתוב קוד Node.js עבור שלוחת API (type=api). הקוד חייב להחזיר טקסט רגיל לימות המשיח עם פקודות תקניות כגון id_list_message, read, go_to_folder. עליך לספק את קוד ה-Node.js בתוך בלוק \`\`\`javascript בלבד. הסבר קצר על מה שהקוד עושה מחוץ לבלוק.`;
                 } else {
-                    setStepStatus(4, 'skipped'); // דילוג אם לא הוזנה שלוחה
+                    sysPrompt += `המשימה שלך היא לספק הגדרות עבור קובץ ext.ini של שלוחה רגילה (לא API). כתוב את ההגדרות הנדרשות בתוך בלוק \`\`\`ini בלבד. הסבר קצר מחוץ לבלוק.`;
                 }
 
-                // סיום בהצלחה
-                updateGlobalStatus('פריסה אוטונומית הושלמה!', 'green');
-                let dashCount = parseInt(document.getElementById('dash-deploy-count').innerText) || 0;
-                document.getElementById('dash-deploy-count').innerText = dashCount + 1;
+                // יצירת בקשה ל-Gemini
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${state.configs.gemini}`;
+                
+                // בניית היסטוריה לבקשה (ללא פרומפטי המערכת הישנים)
+                const apiHistory = state.chatHistory.filter(msg => msg.role !== 'system');
 
-                showModal('התהליך הושלם בהצלחה!', `
-                    <div class="space-y-4 text-right">
-                        <p class="text-green-400">הקוד נכתב, נשמר ב-GitHub ונפרס ל-Vercel.</p>
-                        <div class="bg-black/50 p-4 rounded-xl border border-white/10">
-                            <p class="text-xs text-slate-500 mb-1">כתובת ה-API החדשה שלך:</p>
-                            <p class="font-mono text-blue-400 text-sm break-all">${vercelUrl}</p>
-                        </div>
-                        ${targetFolder ? `<p class="text-slate-300">שלוחה <b>${targetFolder}</b> עודכנה בהצלחה ותפנה מעתה לכתובת זו.</p>` : `<p class="text-yellow-400 text-sm">לא הוזנה שלוחת יעד, לכן קובץ ה-ext.ini לא עודכן אוטומטית.</p>`}
-                    </div>
-                `, 'success');
+                const payload = {
+                    systemInstruction: { parts:[{ text: sysPrompt }] },
+                    contents: apiHistory,
+                    generationConfig: { temperature: 0.2 }
+                };
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.error?.message || "שגיאת שרת");
+                }
+
+                const data = await response.json();
+                const aiResponseText = data.candidates[0].content.parts[0].text;
+
+                // הוספה להיסטוריה שלנו
+                state.chatHistory.push({ role: "model", parts: [{ text: aiResponseText }] });
+                
+                // חילוץ הקוד והשמתו בעורך
+                const codeMatch = aiResponseText.match(/```(javascript|js|ini)\n([\s\S]*?)```/i);
+                if (codeMatch && codeMatch[2]) {
+                    state.editor.setValue(codeMatch[2].trim());
+                    state.editor.getModel().setLanguage(extensionType === 'api' ? 'javascript' : 'ini');
+                }
 
             } catch (err) {
-                console.error("Autonomous process failed:", err);
-                showModal('שגיאה בתהליך', err.message, 'error');
-                updateGlobalStatus('שגיאת פריסה', 'red');
+                console.error(err);
+                state.chatHistory.push({ role: "model", parts: [{ text: `❌ שגיאה בגישה ל-API: ${err.message}` }] });
             } finally {
-                btn.disabled = false;
-                btn.innerHTML = `<span>צור ופרוס</span><i data-lucide="wand-2" class="w-4 h-4"></i>`;
-                lucide.createIcons();
+                const typingInd = document.getElementById('typing-indicator');
+                if(typingInd) typingInd.remove();
+                updateChatUI();
             }
         }
-
-        // --- פונקציות עזר לתהליך האוטונומי ---
-
-        function setStepStatus(stepNum, status) {
-            const el = document.getElementById(`step-${stepNum}`);
-            const iconContainer = document.getElementById(`icon-${stepNum}`);
-            
-            el.className = 'glass-panel p-4 rounded-xl flex flex-col items-center text-center gap-2 transition-all';
-            
-            if (status === 'loading') {
-                el.classList.add('step-active');
-                iconContainer.innerHTML = `<div class="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>`;
-            } else if (status === 'success') {
-                el.classList.add('step-completed');
-                iconContainer.innerHTML = `<i data-lucide="check" class="w-6 h-6 text-green-500"></i>`;
-                iconContainer.classList.replace('border-white/10', 'border-green-500/50');
-            } else if (status === 'skipped') {
-                el.classList.add('opacity-50');
-                iconContainer.innerHTML = `<i data-lucide="minus" class="w-6 h-6 text-slate-500"></i>`;
-            }
-            lucide.createIcons();
-        }
-
-        async function callGeminiAPI(userPrompt) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${state.configs.gemini}`;
-            
-            const payload = {
-                contents: [{ role: "user", parts: [{ text: userPrompt }] }],
-                systemInstruction: { parts: [{ text: AI_SYSTEM_PROMPT }] },
-                generationConfig: { temperature: 0.2 }
-            };
-
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                const err = await response.json();
-                throw new Error(err.error?.message || "Gemini API Error");
-            }
-
-            const data = await response.json();
-            let code = data.candidates[0].content.parts[0].text;
-            
-            // ניקוי עטיפות markdown אם ה-AI הכניס אותן למרות ההוראות
-            code = code.replace(/^```(javascript|js|node)?\n/i, '').replace(/\n```$/i, '').trim();
-            return code;
-        }
-
-        async function pushToGitHub(path, content, message) {
-            const apiUrl = `https://api.github.com/repos/${state.configs.ghRepo}/contents/${path}`;
-            const token = state.configs.ghToken;
-            
-            // המרת תוכן ל-Base64 בטוח ב-UTF-8
-            const utf8Bytes = new TextEncoder().encode(content);
-            const base64Content = btoa(String.fromCharCode(...utf8Bytes));
-
-            const payload = {
-                message: message,
-                content: base64Content
-            };
-
-            const response = await fetch(apiUrl, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `token ${token}`,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/vnd.github.v3+json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                const err = await response.json();
-                throw new Error(`GitHub Error: ${err.message}`);
-            }
-
-            return await response.json();
-        }
-
-        async function updateYemotExtIni(folderPath, newApiUrl) {
-            const iniContent = `type=api\napi_link=${newApiUrl}\n`;
-            
-            // קריאה ל-API של ימות המשיח להעלאת קובץ טקסט
-            // UploadTextFile
-            const res = await yemotApiCall('UploadTextFile', {
-                path: `${folderPath}/ext.ini`,
-                text: iniContent
-            });
-
-            if (res.responseStatus !== 'OK') {
-                throw new Error('שגיאה בעדכון השלוחה בימות המשיח: ' + (res.message || ''));
-            }
-            return true;
-        }
-
 
         /**
-         * -----------------------------------------------------------------
-         * הגדרות ושרותים כלליים
-         * -----------------------------------------------------------------
+         * ========================================================
+         * 8. מחולל הקריינות TTS (Gemini 2.5 Flash TTS)
+         * ========================================================
          */
-        function loadSettingsToUI() {
-            document.getElementById('cfg-gemini').value = state.configs.gemini;
-            document.getElementById('cfg-gh-token').value = state.configs.ghToken;
-            document.getElementById('cfg-gh-repo').value = state.configs.ghRepo;
-            document.getElementById('cfg-gh-path').value = state.configs.ghPath;
+        // פונקציית עזר להמרת PCM ב-Base64 לקובץ WAV (מועתקת מהקובץ החיצוני)
+        function createWavBlob(pcmData) {
+            const numChannels = 1;
+            const sampleRate = 24000;
+            const bitsPerSample = 16;
+            const dataSize = pcmData.length;
+            const buffer = new ArrayBuffer(44 + dataSize);
+            const view = new DataView(buffer);
+
+            view.setString = function(offset, str) {
+                for (let i = 0; i < str.length; i++) {
+                    this.setUint8(offset + i, str.charCodeAt(i));
+                }
+            };
+
+            view.setString(0, 'RIFF');
+            view.setUint32(4, 36 + dataSize, true);
+            view.setString(8, 'WAVE');
+            view.setString(12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * numChannels * (bitsPerSample / 8), true);
+            view.setUint16(32, numChannels * (bitsPerSample / 8), true);
+            view.setUint16(34, bitsPerSample, true);
+            view.setString(36, 'data');
+            view.setUint32(40, dataSize, true);
+            new Uint8Array(buffer, 44).set(pcmData);
+
+            return new Blob([buffer], { type: 'audio/wav' });
         }
 
-        function saveSettings() {
-            state.configs.gemini = document.getElementById('cfg-gemini').value;
-            state.configs.ghToken = document.getElementById('cfg-gh-token').value;
-            state.configs.ghRepo = document.getElementById('cfg-gh-repo').value;
-            state.configs.ghPath = document.getElementById('cfg-gh-path').value;
+        let generatedWavBlob = null;
 
-            localStorage.setItem('cfg_gemini', state.configs.gemini);
-            localStorage.setItem('cfg_gh_token', state.configs.ghToken);
-            localStorage.setItem('cfg_gh_repo', state.configs.ghRepo);
-            localStorage.setItem('cfg_gh_path', state.configs.ghPath);
-
-            showModal('הגדרות נשמרו', 'ההגדרות נשמרו בהצלחה בדפדפן שלך.', 'success');
-        }
-
-        function showModal(title, bodyHTML, type = 'info') {
-            const modal = document.getElementById('global-modal');
-            const content = document.getElementById('modal-content');
-            const iconContainer = document.getElementById('modal-icon-container');
+        async function generateTTSAudio() {
+            const text = document.getElementById('tts-input-text').value.trim();
+            const voice = document.getElementById('tts-voice-select').value;
+            const btn = document.getElementById('btn-generate-tts');
+            const resultPanel = document.getElementById('tts-result-panel');
             
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-body').innerHTML = bodyHTML;
-            
-            // עיצוב לפי סוג
-            if(type === 'success') {
-                iconContainer.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 bg-green-500/20 text-green-500 shadow-[0_0_30px_rgba(34,197,94,0.3)]";
-                iconContainer.innerHTML = `<i data-lucide="check-circle" class="w-10 h-10"></i>`;
-                content.className = "glass-panel p-8 rounded-3xl max-w-md w-full text-center transform transition-transform border-t-4 border-t-green-500";
-            } else if (type === 'error') {
-                iconContainer.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 bg-red-500/20 text-red-500 shadow-[0_0_30px_rgba(239,68,68,0.3)]";
-                iconContainer.innerHTML = `<i data-lucide="alert-triangle" class="w-10 h-10"></i>`;
-                content.className = "glass-panel p-8 rounded-3xl max-w-md w-full text-center transform transition-transform border-t-4 border-t-red-500";
-            } else {
-                iconContainer.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 bg-blue-500/20 text-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.3)]";
-                iconContainer.innerHTML = `<i data-lucide="info" class="w-10 h-10"></i>`;
-                content.className = "glass-panel p-8 rounded-3xl max-w-md w-full text-center transform transition-transform border-t-4 border-t-blue-500";
+            if (!text) {
+                showModal('שגיאה', 'נא להזין טקסט לקריינות.');
+                return;
             }
-            
-            lucide.createIcons();
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                content.classList.replace('scale-95', 'scale-100');
-            }, 10);
+            if (!state.configs.gemini) {
+                showModal('שגיאה', 'יש להגדיר מפתח Gemini API בטאב ההגדרות.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = `<div class="loader-ring" style="width:20px;height:20px;"></div> <span>מייצר שמע...</span>`;
+            resultPanel.classList.add('hidden');
+            document.getElementById('tts-upload-status').innerText = '';
+
+            // מודל מיוחד התומך ביצירת אודיו כפי שצויין בקובץ הפודקאסט
+            const model = 'gemini-2.5-flash-preview-tts'; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${state.configs.gemini}`;
+
+            const body = {
+                "contents":[{"parts": [{ "text": text }] }],
+                "generationConfig": { 
+                    "responseModalities":["AUDIO"], 
+                    "speechConfig": {
+                        "voiceConfig": {
+                            "prebuiltVoiceConfig": {
+                                "voiceName": voice
+                            }
+                        }
+                    } 
+                }
+            };
+
+            try {
+                const res = await fetch(url, {
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify(body)
+                });
+                
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.error?.message || "שגיאת API");
+                }
+                
+                const data = await res.json();
+                const audioPart = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+
+                if (!audioPart) {
+                    throw new Error("לא התקבל מידע שמע מה-API.");
+                }
+
+                // המרה מ-Base64 ל-WAV
+                const b64 = audioPart.inlineData.data;
+                const pcmBytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+                generatedWavBlob = createWavBlob(pcmBytes);
+                const urlObj = URL.createObjectURL(generatedWavBlob);
+
+                // עדכון נגן והורדה
+                const audioPlayer = document.getElementById('tts-audio-player');
+                audioPlayer.src = urlObj;
+                
+                let filename = document.getElementById('tts-filename').value.trim() || 'MenuAudio';
+                if(!filename.toLowerCase().endsWith('.wav')) filename += '.wav';
+
+                const downloadLink = document.getElementById('tts-download-link');
+                downloadLink.href = urlObj;
+                downloadLink.download = filename;
+
+                // בדיקה אם יש לנו טוקן ימות המשיח להעלאה ישירה
+                const uploadBtn = document.getElementById('btn-upload-yemot');
+                if (state.token) {
+                    uploadBtn.disabled = false;
+                } else {
+                    uploadBtn.disabled = true;
+                    document.getElementById('tts-upload-status').innerText = 'העלאה לימות דורשת התחברות עם טוקן.';
+                }
+
+                resultPanel.classList.remove('hidden');
+
+            } catch (err) {
+                console.error(err);
+                showModal('שגיאת TTS', err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<span class="material-symbols-outlined">graphic_eq</span><span>צור קובץ שמע</span>`;
+            }
         }
 
-        function closeModal() {
-            const modal = document.getElementById('global-modal');
-            const content = document.getElementById('modal-content');
+        async function uploadWavToYemot() {
+            if (!generatedWavBlob || !state.token) return;
             
-            modal.style.opacity = '0';
-            content.classList.replace('scale-100', 'scale-95');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
+            let filename = document.getElementById('tts-filename').value.trim() || 'MenuAudio';
+            if(!filename.toLowerCase().endsWith('.wav')) filename += '.wav';
+
+            // פתיחת מודאל לקבלת נתיב יעד בתוך ימות
+            const targetPath = prompt("לאיזו שלוחה ברצונך להעלות את הקובץ? (למשל: /1/2)", "/");
+            if(targetPath === null) return; // בוטל
+
+            const statusEl = document.getElementById('tts-upload-status');
+            statusEl.innerText = 'מעלה קובץ לשרתי ימות המשיח...';
+            
+            try {
+                // שימוש ב-API של ימות המשיח להעלאת קובץ
+                // נדרש Multipart Form Data
+                const formData = new FormData();
+                formData.append('token', state.token);
+                formData.append('path', `ivr2:${targetPath}/${filename}`.replace(/\/\//g, '/'));
+                formData.append('file', generatedWavBlob, filename);
+
+                const response = await fetch(`${API_BASE_URL}UploadFile`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (data.responseStatus === 'OK') {
+                    statusEl.innerText = 'הקובץ הועלה בהצלחה!';
+                    statusEl.className = 'mt-3 text-sm text-center text-green-400 font-bold';
+                } else {
+                    throw new Error(data.message || 'שגיאת שרת');
+                }
+            } catch (err) {
+                statusEl.innerText = `שגיאה: ${err.message}`;
+                statusEl.className = 'mt-3 text-sm text-center text-red-400';
+            }
         }
 
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        }
     </script>
 </body>
 </html>
